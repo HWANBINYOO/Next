@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Nhead from "../components/Nhead";
 
-export default function Home({ results }) {
+export default function Home({ data }) {
   return (
     <div className="container">
       <Nhead title="Home" />
-      {results?.map((movie) => (
+      {data?.map((movie) => (
         <div className="movie" key={movie.id}>
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
           <h4>{movie.original_title}</h4>
@@ -20,7 +20,9 @@ export default function Home({ results }) {
           padding: 20px;
           gap: 20px;
         }
-
+        .movie {
+          cursor: pointer;
+        }
         .movie img {
           display: flex;
           justify-content: center;
@@ -42,12 +44,7 @@ export default function Home({ results }) {
 }
 
 export async function getServerSideProps() {
-  const { results } = await (
-    await fetch(`http://localhost:3000/api/movies`)
-  ).json();
-  return {
-    props: {
-      results,
-    },
-  };
+  const res = await fetch(`http://localhost:3000/api/movies`);
+  const data = await res.json();
+  return { props: { data } };
 }
