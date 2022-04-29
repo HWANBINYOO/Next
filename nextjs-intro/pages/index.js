@@ -1,14 +1,23 @@
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import Nhead from "../components/Nhead";
 
 export default function Home({ data }) {
+  const router = useRouter();
+  const onClick = () => {
+    router.push(`/movies/${id}`);
+  };
   return (
     <div className="container">
       <Nhead title="Home" />
       {data?.map((movie) => (
-        <div className="movie" key={movie.id}>
+        <div onClick={() => onClick(movie.id)} className="movie" key={movie.id}>
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
-          <h4>{movie.original_title}</h4>
+          <h4>
+            <Link href={`movies/${movie.id}`} key={movie.id}>
+              <a>{movie.original_title}</a>
+            </Link>
+          </h4>
         </div>
       ))}
       <style jsx>{`
