@@ -4,16 +4,8 @@ import Nhead from "../components/Nhead";
 
 export default function Home({ data }) {
   const router = useRouter();
-  const onClick = (id) => {
-    router.push(
-      {
-        pathname: `/movies/${id}`,
-        query: {
-          title,
-        },
-      },
-      `/movies/${id}`
-    );
+  const onClick = (id, title) => {
+    router.push(`/movies/${title}/${id}`);
   };
   return (
     <div className="container">
@@ -22,15 +14,7 @@ export default function Home({ data }) {
         <div onClick={() => onClick(movie.id)} className="movie" key={movie.id}>
           <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
           <h4>
-            <Link
-              href={{
-                pathname: `/movies/${moive.id}`,
-                query: {
-                  title: movie.original_title,
-                },
-              }}
-              as={movie.id}
-            >
+            <Link href={`/movies/${movie.original_title}/${moive.id}`}>
               <a>{movie.original_title}</a>
             </Link>
           </h4>
