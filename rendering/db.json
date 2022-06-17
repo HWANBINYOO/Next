@@ -1,0 +1,33 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "products 1",
+      "price":1000,
+      "description":"Description 1"
+
+    },
+    {
+      "id": 2,
+      "title": "products 2",
+      "price":2000,
+      "description":"Description 2"
+    },
+    {
+      "id": 3,
+      "title": "products 3",
+      "price":2500,
+      "description":"Description 3"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

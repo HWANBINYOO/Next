@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serve-json" :"json-server --watch db.json --port 4000"
   },
   "dependencies": {
+    "json-server": "^0.17.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0"
