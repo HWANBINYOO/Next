@@ -2,8 +2,8 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
-      <footer className="text-gray-600 body-font">
-        <div className="bg-gray-100">
+      <footer className="body-font">
+        <div>
           <div className="container flex flex-col items-center px-5 py-6 mx-auto sm:flex-row">
             <Link href="/">
               <a className="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
@@ -12,21 +12,13 @@ export default function Footer() {
             </Link>
             <p className="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0">
               © 2020 Tailblocks —
-              <a
-                href="https://twitter.com/knyttneve"
-                rel="noopener noreferrer"
-                className="ml-1 text-gray-600"
-                target="_blank"
-              >
-                @knyttneve
-              </a>
             </p>
             <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
               <a className="text-gray-500">
                 <svg
                   fill="currentColor"
-                  strokelinecap="round"
-                  strokelinejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
@@ -37,8 +29,8 @@ export default function Footer() {
               <a className="ml-3 text-gray-500">
                 <svg
                   fill="currentColor"
-                  strokelinecap="round"
-                  strokelinejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
@@ -50,8 +42,8 @@ export default function Footer() {
                 <svg
                   fill="none"
                   stroke="currentColor"
-                  strokelinecap="round"
-                  strokelinejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="2"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
@@ -64,8 +56,8 @@ export default function Footer() {
                 <svg
                   fill="currentColor"
                   stroke="currentColor"
-                  strokelinecap="round"
-                  strokelinejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                   strokeWidth="0"
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
