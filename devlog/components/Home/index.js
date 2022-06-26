@@ -21,10 +21,10 @@ export default function Home() {
         <Image src={carImg} />
       </S.HomeImgsWapper>
       <S.LoginWapper>
-        <Link href="user/login">
+        <Link href="/user/login">
           <a>Login</a>
         </Link>
-        <Link href="user/resistor">
+        <Link href="/user/resister">
           <a>Signup</a>
         </Link>
       </S.LoginWapper>

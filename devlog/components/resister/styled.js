@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const LoginWapper = styled.div`
   padding-top: 7vh;
+
   width: 80%;
   margin: 0 auto;
   display: flex;
@@ -21,12 +22,11 @@ export const LoginTitle = styled.span`
 export const InputsWapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 10vh;
+  justify-content: space-between;
   height: 50vh;
 `;
 
-export const LoginInput = styled.div`
+export const SignupInput = styled.div`
   width: 80%;
   height: 15vh;
   display: flex;
@@ -39,7 +39,6 @@ export const LoginInput = styled.div`
   input {
     font-family: "SuncheonB";
     width: 60%;
-    /* height: 10vh; */
     display: flex;
     align-items: center;
     justify-content: center;
