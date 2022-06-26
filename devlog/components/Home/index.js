@@ -1,5 +1,6 @@
 import * as S from "./styled";
 import Image from "next/image";
+import Link from "next/link";
 import manImg from "../../public/Img/dhd.webp";
 import mandarinImg from "../../public/Img/2977.jpg";
 import songImg from "../../public/Img/song.png";
@@ -10,7 +11,7 @@ import carImg from "../../public/Img/car.webp";
 export default function Home() {
   return (
     <S.HomeWapper>
-      <h1>블로그 홈페이지</h1>
+      <S.Title>Devlog</S.Title>
       <S.HomeImgsWapper>
         <Image src={manImg} />
         <Image src={mandarinImg} />
@@ -19,6 +20,14 @@ export default function Home() {
         <Image src={bolwingImg} />
         <Image src={carImg} />
       </S.HomeImgsWapper>
+      <S.LoginWapper>
+        <Link href="user/login">
+          <a>Login</a>
+        </Link>
+        <Link href="user/resistor">
+          <a>Signup</a>
+        </Link>
+      </S.LoginWapper>
     </S.HomeWapper>
   );
 }
