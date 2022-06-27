@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
 
-export const BlogIn = styled.div`
+export const BlogInWapper = styled.div`
   width: 100vw;
   height: 80vh;
-  /* border: 1px black solid; */
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,11 +13,9 @@ export const BlogIn = styled.div`
 
 export const TextBox = styled.div`
   width: 90%;
-  /* height: 50%; */
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
-  /* border: 1px black solid; */
   text-align: center;
 `;
 
@@ -28,16 +24,8 @@ export const Title = styled.span`
   height: 30px;
   font-size: 3rem;
   font-weight: bold;
-  /* border: 1px black solid; */
   text-align: center;
   padding: 3rem 0;
-  margin: 0 auto;
-`;
-
-export const Img = styled.img`
-  width: 40%;
-  border-radius: 5px;
-  /* height: 50%; */
   margin: 0 auto;
 `;
 
@@ -45,7 +33,6 @@ export const desc = styled.div`
   width: 50%;
   height: 210px;
   font-size: 1.5rem;
-  /* border: 1px black solid; */
   padding-top: 5rem;
   margin: 0 auto;
 `;
@@ -81,14 +68,12 @@ export const BlogButtonBox = styled.div`
 `;
 
 export const Button = styled.button`
-  /* display: none; */
   z-index: -10;
   width: 4rem;
   height: 1.3rem;
   background-color: ${(props) => props.backgroundColor};
   outline: none;
   border-radius: 10px;
-  /* border: 1px black solid; */
   border: none;
   font-size: 0.3rem;
 `;

@@ -47,49 +47,47 @@ const BlogIn = ({ blogIndata }) => {
   };
 
   return (
-    <>
-      <S.BlogIndata>
-        <S.BlogButtonBox>
-          <S.Button
-            onClick={(e) => redirect(`/boardadd`)}
-            style={{ backgroundColor: "#aeddff" }}
-          >
-            +
-          </S.Button>
-
-          <S.Button
-            onClick={DelectBlog}
-            style={{
-              backgroundColor: "rgb(255, 157, 149)",
-              display: DelectDisplay ? "block" : "none",
-            }}
-          >
-            x
-          </S.Button>
-        </S.BlogButtonBox>
-        <S.Title>{blogIndata.title}</S.Title>
-        <S.NameDate>
-          <S.Name>
-            {blogIndata.user_name} · {blogIndata.date}
-          </S.Name>
-        </S.NameDate>
-        <S.TextBox>
-          <S.Img src={Blogrl} />
-          <S.desc>{blogIndata.content}</S.desc>
-        </S.TextBox>
-        <S.ProfileWapper
-          onClick={(e) => redirect(`/profile/${blogIndata.user_id}`)}
+    <S.BlogInWapper>
+      <S.BlogButtonBox>
+        <S.Button
+          onClick={(e) => redirect(`/boardadd`)}
+          style={{ backgroundColor: "#aeddff" }}
         >
-          {profileImg ? (
-            <S.ProfileImg src={profileImg} />
-          ) : (
-            <S.ProfileImg src={profilenoneImg} />
-          )}
-          <S.ProfileName>{blogIndata.user_name}</S.ProfileName>
-        </S.ProfileWapper>
-        <Footer />
-      </S.BlogIndata>
-    </>
+          +
+        </S.Button>
+
+        <S.Button
+          onClick={DelectBlog}
+          style={{
+            backgroundColor: "rgb(255, 157, 149)",
+            display: DelectDisplay ? "block" : "none",
+          }}
+        >
+          x
+        </S.Button>
+      </S.BlogButtonBox>
+      <S.Title>{blogIndata.title}</S.Title>
+      <S.NameDate>
+        <S.Name>
+          {blogIndata.user_name} · {blogIndata.date}
+        </S.Name>
+      </S.NameDate>
+      <S.TextBox>
+        <Image src={Blogrl} width={`40%`} />
+        <S.desc>{blogIndata.content}</S.desc>
+      </S.TextBox>
+      <S.ProfileWapper
+        onClick={(e) => redirect(`/profile/${blogIndata.user_id}`)}
+      >
+        {profileImg ? (
+          <S.ProfileImg src={profileImg} />
+        ) : (
+          <S.ProfileImg src={profilenoneImg} />
+        )}
+        <S.ProfileName>{blogIndata.user_name}</S.ProfileName>
+      </S.ProfileWapper>
+      <Footer />
+    </S.BlogInWapper>
   );
 };
 
