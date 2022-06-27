@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const BlogInWapper = styled.div`
+export const BoardInWapper = styled.div`
   width: 100vw;
   height: 80vh;
   display: flex;
@@ -42,7 +42,7 @@ export const date = styled.div`
   color: gray;
 `;
 
-export const BlogButtonBox = styled.div`
+export const BoardButtonBox = styled.div`
   width: max-content;
   height: max-content;
   position: fixed;

@@ -13,24 +13,26 @@ export default function BoardItem({
 }) {
   const router = useRouter();
   const redirect = (url) => router.push(url);
+  const [boardImg, setboardImg] = useState();
+  const [profileImg, setProfileImg] = useState();
 
   useEffect(() => {
-    async function getblog() {
+    async function getboard() {
       try {
-        const respone = await customAxios.get(`/board_image/${board_id}`);
-        setBlogImg(respone.data);
+        const respone = await customAxios.get(`board_image/${board_id}`);
+        setboardImg(respone.data);
         const respone2 = await customAxios.get(`user_image/${user_id}`);
         setProfileImg(respone2.data);
       } catch (e) {
         console.error(e.message);
       }
     }
-    getblog();
+    getboard();
   }, []);
 
   return (
-    <S.BlogItem onClick={(e) => redirect(`/board/${board_id}`)}>
-      <S.Image src={blogImg} />
+    <S.BoardItem onClick={(e) => redirect(`/board/${board_id}`)}>
+      <S.Image src={boardImg} />
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
@@ -48,6 +50,6 @@ export default function BoardItem({
           <S.date>{date}</S.date>
         </S.ItemBottom>
       </S.TextBox>
-    </S.BlogItem>
+    </S.BoardItem>
   );
 }
