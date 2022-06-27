@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import whiteImg from "../../public/Img/white.png";
 
-const BlogAdd = () => {
+const BoardAdd = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getUTCMonth() + 1;
@@ -58,7 +58,7 @@ const BlogAdd = () => {
   };
 
   return (
-    <S.BlogAddWapper>
+    <S.BoardAddWapper>
       <S.Box>
         <S.InputBox>
           <textarea
@@ -75,14 +75,14 @@ const BlogAdd = () => {
           />
         </S.DescInputBox>
       </S.Box>
-      <S.BlogAddImgWapper>
-        <S.BlogImg>
+      <S.BoardAddImgWapper>
+        <S.BoardImg>
           {file ? (
             <Image src={imgBase64} />
           ) : (
             <Image width={90} height={100} src={whiteImg} />
           )}
-        </S.BlogImg>
+        </S.BoardImg>
         <form
           name="files"
           method="post"
@@ -98,12 +98,12 @@ const BlogAdd = () => {
           <label htmlFor="change_img">변경</label>
           {/* <button type="submit">제출하기</button> */}
         </form>
-      </S.BlogAddImgWapper>
+      </S.BoardAddImgWapper>
 
       <S.Today>{`${year}년 ${month}월 ${day}일 ${dayOfWeek}요일`}</S.Today>
       <S.Button onClick={onSubmit}>올리기</S.Button>
-    </S.BlogAddWapper>
+    </S.BoardAddWapper>
   );
 };
 
-export default BlogAdd;
+export default BoardAdd;

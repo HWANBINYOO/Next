@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const BlogAddWapper = styled.div`
+export const BoardAddWapper = styled.div`
   width: 100vw;
   height: 80vh;
   padding-top: 2rem;
@@ -61,7 +61,7 @@ export const DescInputBox = styled.div`
   }
 `;
 
-export const BlogImg = styled.div`
+export const BoardImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@ export const BlogImg = styled.div`
     border: 1px solid black;
   }
 `;
-export const BlogAddImgWapper = styled.div`
+export const BoardAddImgWapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
