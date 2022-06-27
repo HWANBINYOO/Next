@@ -34,14 +34,6 @@ export const IntrudeceWapper = styled.div`
   justify-content: center;
 `;
 
-// export const IntrudeceImg = styled.span`
-//   width: 400px;
-//   height: 400px;
-//   cursor: pointer;
-//   border-radius: 10px;
-//   object-fit: cover;
-// `;
-
 export const About = styled.div`
   width: 100%;
   height: 80vh;
@@ -120,6 +112,6 @@ export const decs = styled.div`
   margin: auto 0;
 
   p {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 `;

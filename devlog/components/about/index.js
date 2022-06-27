@@ -3,8 +3,7 @@ import * as S from "./styled";
 import Image from "next/image";
 import catImg from "../../public/Img/cat.jpg";
 import penguinImg from "../../public/Img/penguin.jpg";
-import greernImg from "../../public/Img/geern.jpg";
-import oneImg from "../../public/Img/cat.jpg";
+import oneImg from "../../public/Img/geern.jpg";
 import twoImg from "../../public/Img/kot.jpg";
 import threeImg from "../../public/Img/kot.jpg";
 import fourImg from "../../public/Img/11.jpg";
@@ -42,7 +41,7 @@ export default function About() {
       </S.IntrudeceWapper>
       <S.AboutContents>
         <S.AboutContent>
-          <Image width={200} height={200} src={greernImg} />
+          <Image width={200} height={200} src={oneImg} />
           <S.decs>
             <p>제가 제일 좋아하는 과일</p>
             <p>청포도</p>
