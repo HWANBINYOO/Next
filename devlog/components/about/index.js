@@ -1,22 +1,24 @@
 import * as S from "./styled";
 // import Link from "next/link";
 import Image from "next/image";
-import carImg from "../../public/Img/car.webp";
-import penguin from "../../public/Img/penguin.jpg";
-// import oneImg from ;
-// import threeImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/kot.jpg";
-// import fourImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/11.jpg";
-// import fiveImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/bikeman.jpg";
-// import sixImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/song.png";
-// import sevenImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/bolwing.jpg";
-// import eightImg from "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/piano.jpg";
+import catImg from "../../public/Img/cat.jpg";
+import penguinImg from "../../public/Img/penguin.jpg";
+import greernImg from "../../public/Img/geern.jpg";
+import oneImg from "../../public/Img/cat.jpg";
+import twoImg from "../../public/Img/kot.jpg";
+import threeImg from "../../public/Img/kot.jpg";
+import fourImg from "../../public/Img/11.jpg";
+import fiveImg from "../../public/Img/bikeman.jpg";
+import sixImg from "../../public/Img/song.png";
+import sevenImg from "../../public/Img/bolwing.jpg";
+import eightImg from "../../public/Img/piano.jpg";
 
 export default function About() {
   return (
     <S.AboutWapper>
       <S.IntrudeceWapper>
         <S.Intrudece>
-          <Image src={carImg} width={`40%`} height={400} />
+          <Image src={catImg} width={300} height={400} />
           <p>김성길</p>
           안녕하세요 서버 공부하는 김성길입니다
           <br />
@@ -27,7 +29,7 @@ export default function About() {
           성길tv 구독 좋아요
         </S.Intrudece>
         <S.Intrudece>
-          <Image src={penguin} width={`40%`} height={400} />
+          <Image src={penguinImg} width={300} height={400} />
           <p>유환빈</p>
           안녕하세요
           <br />
@@ -40,19 +42,13 @@ export default function About() {
       </S.IntrudeceWapper>
       <S.AboutContents>
         <S.AboutContent>
-          <Image
-            width={200}
-            height={200}
-            src={
-              "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/geern.jpg"
-            }
-          />
+          <Image width={200} height={200} src={greernImg} />
           <S.decs>
             <p>제가 제일 좋아하는 과일</p>
             <p>청포도</p>
           </S.decs>
         </S.AboutContent>
-        {/* <S.AboutContent>
+        <S.AboutContent>
           <Image width={200} src={twoImg} />
           <S.decs>
             <p>제가 제일 좋아하는 과일</p>
@@ -104,7 +100,7 @@ export default function About() {
             <p>주로 클래식곡 쳐요</p>
             <p>리스트 사랑의꿈까지 칠줄알아요</p>
           </S.decs>
-        </S.AboutContent> */}
+        </S.AboutContent>
       </S.AboutContents>
     </S.AboutWapper>
   );

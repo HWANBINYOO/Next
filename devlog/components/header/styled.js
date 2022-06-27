@@ -34,8 +34,8 @@ export const HeaderRIght = styled.div`
 `;
 
 export const ProfileImg = styled.span`
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
   border-radius: 50%;
   object-fit: cover;
@@ -50,7 +50,7 @@ export const LogoutButton = styled.button`
   background-color: black;
   color: white;
   width: 70px;
-  height: 30px;
+  height: 35px;
   border: none;
   border-radius: 5px;
   font-size: 1rem;

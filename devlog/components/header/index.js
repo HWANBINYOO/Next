@@ -13,7 +13,7 @@ export default function Header() {
         </Link>
         <S.HeaderRIght>
           <S.ProfileImg>
-            <Image src={ProfileImg} width={30} height={30} />
+            <Image src={ProfileImg} />
           </S.ProfileImg>
           <S.LogoutButton>Logout</S.LogoutButton>
         </S.HeaderRIght>

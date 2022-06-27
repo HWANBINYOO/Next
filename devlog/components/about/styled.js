@@ -28,9 +28,19 @@ export const AboutWapper = styled.div`
 
 export const IntrudeceWapper = styled.div`
   width: 100%;
+  height: max-content;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
 `;
+
+// export const IntrudeceImg = styled.span`
+//   width: 400px;
+//   height: 400px;
+//   cursor: pointer;
+//   border-radius: 10px;
+//   object-fit: cover;
+// `;
 
 export const About = styled.div`
   width: 100%;
