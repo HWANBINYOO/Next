@@ -1,24 +1,28 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import catImg from "../../public/Img/cat.jpg";
+import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./Styled";
 
-export default function BoardItem() {
+export default function BoardItem({
+  user_name,
+  date,
+  title,
+  content,
+  board_id,
+  user_id,
+}) {
   const router = useRouter();
-  //   const board_id = router.query.boardId;
-  //   const redirect = (url) => router.push(url);
+  const redirect = (url) => router.push(url);
 
   useEffect(() => {
     async function getblog() {
       try {
-        const { data } = await customAxios.get(`/board_image/${board_id}`);
+        const respone = await customAxios.get(`/board_image/${board_id}`);
         setBlogImg(respone.data);
-        const respone2 = await myProfileImgReqeuset(user_id);
+        const respone2 = await customAxios.get(`user_image/${user_id}`);
         setProfileImg(respone2.data);
       } catch (e) {
-        const { data } = e.response;
-        console.error(data.message);
-        console.error("data : ", data);
+        console.error(e.message);
       }
     }
     getblog();
@@ -36,7 +40,7 @@ export default function BoardItem() {
               {profileImg ? (
                 <Image width={20} height={20} src={profileImg} />
               ) : (
-                <Image width={20} height={20} src={catImg} />
+                <Image width={20} height={20} src={profilenoneImg} />
               )}
             </S.MemberImg>
             <S.MemberId>{user_name}</S.MemberId>
