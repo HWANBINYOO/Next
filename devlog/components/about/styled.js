@@ -17,12 +17,12 @@ export const AboutWapper = styled.div`
 
   &::-webkit-scrollbar-thumb {
     height: 20%; /* 스크롤바의 길이 */
-    background: #d195ff; /* 스크롤바의 색상 */
+    background: #c8abc5; /* 스크롤바의 색상 */
 
     border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
-    background-color: #f1dcff; /*스크롤바 뒷 배경 색상*/
+    background-color: #e4d4e2; /*스크롤바 뒷 배경 색상*/
   }
 `;
 

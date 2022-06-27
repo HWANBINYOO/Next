@@ -1,49 +1,96 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
-import catImg from "../../public/Img/cat.jpg";
+import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./Styled";
 
-export default function BoardItem() {
+export async function getStaticProps() {
   const router = useRouter();
-  //   const board_id = router.query.boardId;
-  //   const redirect = (url) => router.push(url);
+  const board_id = router.query.board_id;
+  try {
+    const response = await customAxios.get(`/board/${board_id}`);
+    const blogIndata = response.data;
+  } catch (e) {
+    console.error(e.message);
+  }
+  return {
+    props: { blogIndata },
+  };
+}
+
+const BlogIn = ({ blogIndata }) => {
+  const [Blogrl, setBlogurl] = useState();
+  const [DelectDisplay, setDelectDisplay] = useState(false);
+  const [profileImg, setProfileImg] = useState();
+  const router = useRouter();
+  const board_id = router.query.board_id;
+  const redirect = (url) => router.push(url);
 
   useEffect(() => {
-    async function getblog() {
-      try {
-        const { data } = await customAxios.get(`/board_image/${board_id}`);
-        setBlogImg(respone.data);
-        const respone2 = await myProfileImgReqeuset(user_id);
-        setProfileImg(respone2.data);
-      } catch (e) {
-        const { data } = e.response;
-        console.error(data.message);
-        console.error("data : ", data);
+    async function GetBlogImg() {
+      const res = await customAxios.get(`/board_image/${board_id}`);
+      setBlogurl(res.data);
+      const res2 = await customAxios.get(`user_image/${blogIndata.user_id}`);
+      setProfileImg(res2.data);
+      const respone2 = await customAxios.get(`/user_name`);
+
+      if (respone2.data.user_id === blogIndata.user_id) {
+        setDelectDisplay(true);
+      } else {
+        setDelectDisplay(false);
       }
     }
-    getblog();
+    GetBlogImg();
   }, []);
 
+  const DelectBlog = async () => {
+    await customAxios.delete(`/delete/${board_id}`);
+  };
+
   return (
-    <S.BlogItem onClick={(e) => redirect(`/board/${board_id}`)}>
-      <S.Image src={blogImg} />
-      <S.TextBox>
-        <S.Title>{title}</S.Title>
-        <S.desc>{content}</S.desc>
-        <S.ItemBottom>
-          <S.BottomLeft>
-            <S.MemberImg onClick={(e) => redirect(`/profile/${user_id}`)}>
-              {profileImg ? (
-                <Image width={20} height={20} src={profileImg} />
-              ) : (
-                <Image width={20} height={20} src={catImg} />
-              )}
-            </S.MemberImg>
-            <S.MemberId>{user_name}</S.MemberId>
-          </S.BottomLeft>
-          <S.date>{date}</S.date>
-        </S.ItemBottom>
-      </S.TextBox>
-    </S.BlogItem>
+    <>
+      <S.BlogIndata>
+        <S.BlogButtonBox>
+          <S.Button
+            onClick={(e) => redirect(`/boardadd`)}
+            style={{ backgroundColor: "#aeddff" }}
+          >
+            +
+          </S.Button>
+
+          <S.Button
+            onClick={DelectBlog}
+            style={{
+              backgroundColor: "rgb(255, 157, 149)",
+              display: DelectDisplay ? "block" : "none",
+            }}
+          >
+            x
+          </S.Button>
+        </S.BlogButtonBox>
+        <S.Title>{blogIndata.title}</S.Title>
+        <S.NameDate>
+          <S.Name>
+            {blogIndata.user_name} · {blogIndata.date}
+          </S.Name>
+        </S.NameDate>
+        <S.TextBox>
+          <S.Img src={Blogrl} />
+          <S.desc>{blogIndata.content}</S.desc>
+        </S.TextBox>
+        <S.ProfileWapper
+          onClick={(e) => redirect(`/profile/${blogIndata.user_id}`)}
+        >
+          {profileImg ? (
+            <S.ProfileImg src={profileImg} />
+          ) : (
+            <S.ProfileImg src={profilenoneImg} />
+          )}
+          <S.ProfileName>{blogIndata.user_name}</S.ProfileName>
+        </S.ProfileWapper>
+        <Footer />
+      </S.BlogIndata>
+    </>
   );
-}
+};
+
+export default BlogIn;
