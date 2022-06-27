@@ -13,12 +13,12 @@ export const BlogWapper = styled.div`
 
   &::-webkit-scrollbar-thumb {
     height: 20%; /* 스크롤바의 길이 */
-    background: #ff9d95; /* 스크롤바의 색상 */
+    background: #9cdbdf; /* 스크롤바의 색상 */
 
     border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
-    background-color: #ffedd9; /*스크롤바 뒷 배경 색상*/
+    background-color: #cafaff; /*스크롤바 뒷 배경 색상*/
   }
 `;
 

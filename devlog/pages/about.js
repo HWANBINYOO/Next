@@ -5,7 +5,7 @@ import Header from "../components/header";
 function HomePage() {
   return (
     <>
-      <Header />
+      <Header HeaderColor={"purple"} />
       <About />
     </>
   );

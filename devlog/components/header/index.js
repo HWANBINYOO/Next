@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import ProfileImg from "../../public/Img/profile.png";
 
-export default function Header() {
+export default function Header({ HeaderColor }) {
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
@@ -18,24 +18,25 @@ export default function Header() {
           <S.LogoutButton>Logout</S.LogoutButton>
         </S.HeaderRIght>
       </S.HeaderTopWapper>
-
       <S.HeaderBottomWapper>
         <Link href="/board">
           <S.HeaderMenu
-          // style={{
-          //   backgroundColor: `${HeaderColor === "red" ? "#ff9d95" : "white"}`,
-          // }}
+            style={{
+              backgroundColor: `${
+                HeaderColor === "skyblue" ? "#cafaff" : "white"
+              }`,
+            }}
           >
             Blog
           </S.HeaderMenu>
         </Link>
         <Link href="/about">
           <S.HeaderMenu
-          // style={{
-          //   backgroundColor: `${
-          //     HeaderColor === "purple" ? "#c8abc5" : "white"
-          //   }`,
-          // }}
+            style={{
+              backgroundColor: `${
+                HeaderColor === "purple" ? "#f1dcff" : "white"
+              }`,
+            }}
           >
             About
           </S.HeaderMenu>

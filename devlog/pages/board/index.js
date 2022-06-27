@@ -4,7 +4,7 @@ import Header from "../../components/header";
 export default function BoardPage() {
   return (
     <>
-      <Header />
+      <Header HeaderColor={"skyblue"} />
       <Board />
     </>
   );

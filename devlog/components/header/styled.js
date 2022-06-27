@@ -13,7 +13,6 @@ export const HeaderWapper = styled.div`
 // export const Title = styled.p``;
 
 export const HeaderTopWapper = styled.div`
-  background-color: aliceblue;
   width: 100%;
   height: 15vh;
   display: flex;
@@ -85,5 +84,4 @@ export const HeaderMenu = styled.span`
 
   font-size: 1.5rem;
   transition: all ease 0.5s 0s;
-  background-color: #cafaff;
 `;
