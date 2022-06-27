@@ -1,6 +1,7 @@
 import * as S from "./styled";
 import Link from "next/link";
 import Image from "next/image";
+import ProfileImg from "../../public/Img/profile.png";
 
 export default function Header() {
   return (
@@ -11,7 +12,9 @@ export default function Header() {
           <a>DevLog </a>
         </Link>
         <S.HeaderRIght>
-          <Image />
+          <S.ProfileImg>
+            <Image src={ProfileImg} width={30} height={30} />
+          </S.ProfileImg>
           <S.LogoutButton>Logout</S.LogoutButton>
         </S.HeaderRIght>
       </S.HeaderTopWapper>
@@ -26,7 +29,7 @@ export default function Header() {
             Blog
           </S.HeaderMenu>
         </Link>
-        <Link href="/About">
+        <Link href="/about">
           <S.HeaderMenu
           // style={{
           //   backgroundColor: `${
