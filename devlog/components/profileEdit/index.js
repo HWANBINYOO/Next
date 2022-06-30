@@ -3,14 +3,8 @@ import { customAxios } from "../../Libs/CustomAxois";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import * as S from "./Styled";
-import {
-  myProfileImgReqeuset,
-  profileimgUpdateReqeuset,
-  profileUpdageReqeuset,
-} from "../../Api/member";
 
-const ProfileEdit = () => {
-  const navigate = useNavigate();
+export default function ProfileEdit() {
   const [Name, setName] = useState("");
   const [userId, setUserId] = useState("");
   const [PassWord, setPassWord] = useState("");
@@ -28,7 +22,7 @@ const ProfileEdit = () => {
       const { data } = await customAxios.get("user_name");
       setName(data.name);
       setUserId(data.user_id);
-      const res = await myProfileImgReqeuset(data.user_id);
+      const res = await customAxios.get(`user_image/${data.user_id}`);
       setimgurl(res?.data);
     }
     Getprofile();
@@ -55,7 +49,20 @@ const ProfileEdit = () => {
   //수정사항 서버로보내기 (profile사진포함)
   const onClickImg = async (event) => {
     event.preventDefault();
-    await profileimgUpdateReqeuset(file);
+    let formData = new FormData();
+    formData.append("file", file);
+    try {
+      await customAxios.patch(MemberController.updateProfileimg(), formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("수정되었습니다!");
+    } catch (e) {
+      const { data } = e.response;
+      console.error("data : ", data);
+      toast.error(data.message);
+    }
     setmodalDisplay(false);
   };
 
@@ -111,6 +118,8 @@ const ProfileEdit = () => {
               )
             ) : (
               <Image
+                width={160}
+                height={160}
                 src={
                   "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/profile.png"
                 }
@@ -176,6 +185,4 @@ const ProfileEdit = () => {
       </S.Profile>
     </>
   );
-};
-
-export default ProfileEdit;
+}
