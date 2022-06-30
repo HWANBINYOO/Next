@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["s3.ap-northeast-2.amazonaws.com"],
+    domains: ["devlogfront.s3.ap-northeast-2.amazonaws.com"],
   },
   env: {
     EXP: process.env.EXP,
