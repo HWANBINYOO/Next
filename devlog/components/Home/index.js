@@ -13,12 +13,12 @@ export default function Home() {
     <S.HomeWapper>
       <S.Title>Devlog</S.Title>
       <S.HomeImgsWapper>
-        <Image src={manImg} />
-        <Image src={mandarinImg} />
-        <Image src={songImg} />
-        <Image src={pianoImg} />
-        <Image src={bolwingImg} />
-        <Image src={carImg} />
+        <Image src={manImg} objectFit="cover" />
+        <Image src={mandarinImg} objectFit="cover" />
+        <Image src={songImg} objectFit="cover" />
+        <Image src={pianoImg} objectFit="cover" />
+        <Image src={bolwingImg} objectFit="cover" />
+        <Image src={carImg} objectFit="cover" />
       </S.HomeImgsWapper>
       <S.LoginWapper>
         <Link href="/user/login">

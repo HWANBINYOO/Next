@@ -14,16 +14,26 @@ export const Title = styled.p`
 `;
 
 export const HomeImgsWapper = styled.div`
-  width: 850px;
+  width: 40vw;
   display: grid;
+  height: 60vh;
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, minmax(100px, auto));
+  grid-template-rows: repeat(2, minmax(100px, auto));
   transition: all ease 0.2s 0s;
+
+  .imgWaooer {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export const LoginWapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
   gap: 20px;
 
   a {
