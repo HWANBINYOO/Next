@@ -45,6 +45,7 @@ export const EmptyWapper = styled.div`
 `;
 
 export const LogoutButton = styled.button`
+  cursor: pointer;
   font-family: "GangwonEduSaeeum_OTFMediumA";
   background-color: black;
   color: white;

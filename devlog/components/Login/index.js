@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import CustomAxois from "../../lib/CustomAxois";
 
 export default function Login() {
   const [Email, setEmail] = useState("");
@@ -12,22 +13,25 @@ export default function Login() {
 
   const onLogin = async () => {
     try {
-      const { data } = await customAxios.post("user/login", {
+      const { data } = await CustomAxois.post("/user/login", {
         email: Email,
         password: PassWord,
       });
       console.log(data);
+      localStorage.setItem("Blog_accessToken", data.accessToken);
+      localStorage.setItem("Blog_refreshToken", data.refreshToken);
 
-      setCookie("AccessToken", data.accessToken, {
-        path: "/accessToken",
-        secure: true,
-        sameSite: "none",
-      });
-      setCookie("RefreshToken", data.refreshToken, {
-        path: "/refreshToken",
-        secure: true,
-        sameSite: "none",
-      });
+      // setCookie("AccessToken", data.accessToken, {
+      //   path: "/accessToken",
+      //   secure: true,
+      //   sameSite: "none",
+      // });
+      // setCookie("RefreshToken", data.refreshToken, {
+      //   path: "/refreshToken",
+      //   secure: true,
+      //   sameSite: "none",
+      // });
+      log(로그인);
       router.push("/");
     } catch (e) {
       console.error(e.message);

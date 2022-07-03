@@ -2,8 +2,19 @@ import * as S from "./styled";
 import Link from "next/link";
 import Image from "next/image";
 import ProfileImg from "../../public/Img/profile.png";
+import { useRouter } from "next/router";
 
 export default function Header({ HeaderColor }) {
+  const router = useRouter();
+
+  const Logout = () => {
+    localStorage.removeItem("Blog_accessToken");
+    localStorage.removeItem("Blog_refreshToken");
+    console.log("로그아웃 되었습니다!");
+    router.push("/");
+    location.reload();
+  };
+
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
@@ -15,7 +26,7 @@ export default function Header({ HeaderColor }) {
           <S.ProfileImg>
             <Image src={ProfileImg} />
           </S.ProfileImg>
-          <S.LogoutButton>Logout</S.LogoutButton>
+          <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
         </S.HeaderRIght>
       </S.HeaderTopWapper>
       <S.HeaderBottomWapper>
