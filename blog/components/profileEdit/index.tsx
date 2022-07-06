@@ -113,9 +113,19 @@ export default function ProfileEdit() {
           <S.ProfileImg>
             {imgurl ? (
               imgBase64 ? (
-                <Image width={160} height={160} src={imgBase64} />
+                <Image
+                  width={160}
+                  height={160}
+                  src={imgBase64}
+                  alt="profileEdit 이미지"
+                />
               ) : (
-                <Image width={160} height={160} src={imgurl} />
+                <Image
+                  width={160}
+                  height={160}
+                  src={imgurl}
+                  alt="profileEdit 이미지"
+                />
               )
             ) : (
               <Image

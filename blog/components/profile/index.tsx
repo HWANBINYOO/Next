@@ -39,7 +39,12 @@ export default function Profile({ user_id }: { user_id: string | number }) {
         <S.ProfileImpormation>
           <S.ProfileImg>
             {profile?.url ? (
-              <Image src={profile?.url} width={230} height={230} />
+              <Image
+                src={profile?.url}
+                width={230}
+                height={230}
+                alt="profile 이미지"
+              />
             ) : (
               <Image
                 width={230}
@@ -47,6 +52,7 @@ export default function Profile({ user_id }: { user_id: string | number }) {
                 src={
                   "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/profile.png"
                 }
+                alt="profile 이미지"
               />
             )}
           </S.ProfileImg>

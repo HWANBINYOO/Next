@@ -77,7 +77,7 @@ const BoardIn = ({ boardIndata }: { boardIndata: any }) => {
         </S.Name>
       </S.NameDate>
       <S.TextBox>
-        <Image src={Boardrl ?? ""} width={`40%`} />
+        <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" />
         <S.desc>{boardIndata.content}</S.desc>
       </S.TextBox>
       <S.ProfileWapper
@@ -88,6 +88,7 @@ const BoardIn = ({ boardIndata }: { boardIndata: any }) => {
           width={150}
           height={150}
           objectFit="cover"
+          alt="profile 이미지"
         />
         <S.ProfileName>{boardIndata.user_name}</S.ProfileName>
       </S.ProfileWapper>

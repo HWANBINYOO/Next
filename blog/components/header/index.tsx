@@ -42,7 +42,12 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
         </Link>
         <S.HeaderRIght>
           <S.ProfileImg onClick={() => redirect(`/profile/${userId}`)}>
-            <Image src={profileImg} width={35} height={35} />
+            <Image
+              src={profileImg}
+              width={35}
+              height={35}
+              alt="프로필 이미지"
+            />
           </S.ProfileImg>
           <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
         </S.HeaderRIght>

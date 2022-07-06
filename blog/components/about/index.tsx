@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import * as S from "./styled";
 import Link from "next/link";
 import Image from "next/image";
@@ -18,7 +17,7 @@ export default function About() {
     <S.AboutWapper>
       <S.IntrudeceWapper>
         <S.Intrudece>
-          <Image src={catImg} width={300} height={400} />
+          <Image src={catImg} width={300} height={400} alt="about 이미지" />
           <p>김성길</p>
           안녕하세요 서버 공부하는 김성길입니다
           <br />
@@ -29,7 +28,7 @@ export default function About() {
           성길tv 구독 좋아요
         </S.Intrudece>
         <S.Intrudece>
-          <Image src={penguinImg} width={300} height={400} />
+          <Image src={penguinImg} width={300} height={400} alt="about 이미지" />
           <p>유환빈</p>
           안녕하세요
           <br />
@@ -42,14 +41,14 @@ export default function About() {
       </S.IntrudeceWapper>
       <S.AboutContents>
         <S.AboutContent>
-          <Image width={200} height={200} src={oneImg} />
+          <Image width={200} height={200} src={oneImg} alt="about 이미지" />
           <S.decs>
             <p>제가 제일 좋아하는 과일</p>
             <p>청포도</p>
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={twoImg} />
+          <Image width={200} src={twoImg} alt="about 이미지" />
           <S.decs>
             <p>제가 제일 좋아하는 과일</p>
             <p>귤</p>
@@ -57,14 +56,14 @@ export default function About() {
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={threeImg} />
+          <Image width={200} src={threeImg} alt="about 이미지" />
           <S.decs>
             <p>제가 좋아하는 음식</p>
             <p>떡볶이</p>
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={fourImg} />
+          <Image width={200} src={fourImg} alt="about 이미지" />
           <S.decs>
             <p>제가 좋아하는 음식</p>
             <p>초밥</p>
@@ -72,7 +71,7 @@ export default function About() {
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={fiveImg} />
+          <Image width={200} src={fiveImg} alt="about 이미지" />
           <S.decs>
             <p>제가 좋아하는 취미</p>
             <p>자전거</p>
@@ -80,21 +79,21 @@ export default function About() {
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={sixImg} />
+          <Image width={200} src={sixImg} alt="about 이미지" />
           <S.decs>
             <p>음악감상이 취미</p>
             <p>주로 팝송을 들어요</p>
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={sevenImg} />
+          <Image width={200} src={sevenImg} alt="about 이미지" />
           <S.decs>
             <p>볼링치는걸 좋아해요</p>
             <p>100점은 그냥 넘기죠</p>
           </S.decs>
         </S.AboutContent>
         <S.AboutContent>
-          <Image width={200} src={eightImg} />
+          <Image width={200} src={eightImg} alt="about 이미지" />
           <S.decs>
             <p>치아노치기가 취미</p>
             <p>주로 클래식곡 쳐요</p>
