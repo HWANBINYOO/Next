@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "./Styled";
-import { customAxios } from "../../lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import whiteImg from "../../public/Img/white.png";

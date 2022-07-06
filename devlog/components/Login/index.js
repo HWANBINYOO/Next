@@ -1,14 +1,12 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
-import CustomAxois from "../../lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 
 export default function Login() {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
-  const [cookies, setCookie] = useCookies(["AccessToken", "RefreshToken"]);
   const router = useRouter();
 
   const onLogin = async () => {
@@ -17,22 +15,10 @@ export default function Login() {
         email: Email,
         password: PassWord,
       });
-      console.log(data);
-      localStorage.setItem("Blog_accessToken", data.accessToken);
-      localStorage.setItem("Blog_refreshToken", data.refreshToken);
-
-      // setCookie("AccessToken", data.accessToken, {
-      //   path: "/accessToken",
-      //   secure: true,
-      //   sameSite: "none",
-      // });
-      // setCookie("RefreshToken", data.refreshToken, {
-      //   path: "/refreshToken",
-      //   secure: true,
-      //   sameSite: "none",
-      // });
-      log(로그인);
-      router.push("/");
+      Storage.setItem("Blog_accessToken", data.accessToken);
+      Storage.setItem("Blog_refreshToken", data.refreshToken);
+      console.log(로그인);
+      router.push("/board");
     } catch (e) {
       console.error(e.message);
     }
