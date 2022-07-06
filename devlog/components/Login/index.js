@@ -2,7 +2,7 @@ import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import axios from "axios";
 
 export default function Login() {
   const [Email, setEmail] = useState("");
@@ -11,13 +11,17 @@ export default function Login() {
 
   const onLogin = async () => {
     try {
-      const { data } = await CustomAxois.post("/user/login", {
-        email: Email,
-        password: PassWord,
-      });
-      Storage.setItem("Blog_accessToken", data.accessToken);
-      Storage.setItem("Blog_refreshToken", data.refreshToken);
-      console.log(로그인);
+      const { data } = await axios.post(
+        `https://server.dev-log.kr/user/login`,
+        {
+          email: Email,
+          password: PassWord,
+        }
+      );
+      window.localStorage.setItem("Blog_accessToken", data.accessToken);
+      window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
+      // Storage.setItem("Blog_accessToken", data.accessToken);
+      // Storage.setItem("Blog_refreshToken", data.refreshToken);
       router.push("/board");
     } catch (e) {
       console.error(e.message);

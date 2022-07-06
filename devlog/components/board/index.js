@@ -3,32 +3,25 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Animation from "./animation";
 import CustomAxois from "../../utils/lib/CustomAxois";
-import { useCookies } from "react-cookie";
 
 export default function Board() {
   const router = useRouter();
   const redirect = (url) => router.push(url);
   const [Blogs, setBlogs] = useState();
-  const [cookies, setCookie] = useCookies(["AccessToken", "RefreshToken"]);
 
-  // useEffect(() => {
-  //   async function getblog() {
-  //     console.log(localStorage.getItem("Blog_accessToken"));
-  //     try {
-  //       const { data } = await CustomAxois.get(`/board`, {
-  //         headers: {
-  //           Authorization: cookies.AccessToken,
-  //           RefreshToken: cookies.RefreshToken,
-  //         },
-  //       });
-  //       setBlogs(data.blogs);
-  //       console.log(data.id);
-  //     } catch (e) {
-  //       console.error(e.message);
-  //     }
-  //   }
-  //   getblog();
-  // }, []);
+  useEffect(() => {
+    async function getblog() {
+      console.log(window.localStorage.getItem("Blog_accessToken"));
+      try {
+        const { data } = await CustomAxois.get(`/board`);
+        console.log(data);
+        setBlogs(data.blogs);
+      } catch (e) {
+        console.error(e.message);
+      }
+    }
+    getblog();
+  }, []);
 
   return (
     <S.BlogWapper>
@@ -60,21 +53,15 @@ export default function Board() {
   );
 }
 
-export async function getStaticProps() {
-  const [cookies, setCookie] = useCookies(["AccessToken", "RefreshToken"]);
-  try {
-    const { data } = await CustomAxois.get(`/board`, {
-      headers: {
-        Authorization: cookies.AccessToken,
-        RefreshToken: cookies.RefreshToken,
-      },
-    });
-    console.log(cookies.AccessToken);
-    console.log(data);
-  } catch (e) {
-    console.error(e.message);
-  }
-  return {
-    props: { data },
-  };
-}
+// export async function getStaticProps() {
+//   try {
+//     const { data } = await CustomAxois.get(`/board`);
+//     console.log(cookies.AccessToken);
+//     console.log(data);
+//   } catch (e) {
+//     console.error(e.message);
+//   }
+//   return {
+//     props: { data },
+//   };
+// }
