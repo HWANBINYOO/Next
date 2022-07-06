@@ -3,9 +3,27 @@ import Link from "next/link";
 import Image from "next/image";
 import ProfileImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
+import CustomAxois from "../../../devlog/utils/lib/CustomAxois";
+import { useEffect, useState } from "react";
 
-export default function Header({ HeaderColor }) {
+export default function Header({ HeaderColor }: { HeaderColor: string }) {
+  const [userId, setUserid] = useState("");
+  const [profileImg, setprofileImg] = useState("");
   const router = useRouter();
+  const redirect = (url: string) => router.push(url);
+
+  useEffect(() => {
+    async function Getprofile() {
+      try {
+        const respone = await CustomAxois.get("user_name");
+        setUserid(respone.data.user_id);
+        setprofileImg(respone.data.url);
+      } catch (e: any) {
+        console.error(e.message);
+      }
+    }
+    Getprofile();
+  }, []);
 
   const Logout = () => {
     localStorage.removeItem("Blog_accessToken");
@@ -23,8 +41,8 @@ export default function Header({ HeaderColor }) {
           <a>DevLog </a>
         </Link>
         <S.HeaderRIght>
-          <S.ProfileImg>
-            <Image src={ProfileImg} />
+          <S.ProfileImg onClick={() => redirect(`/profile/${userId}`)}>
+            <Image src={profileImg} width={35} height={35} />
           </S.ProfileImg>
           <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
         </S.HeaderRIght>

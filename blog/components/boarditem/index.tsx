@@ -42,7 +42,7 @@ const BoardItem: React.FC<BlogType> = ({
       }
     }
     getboard();
-  }, []);
+  }, [board_id, user_id]);
 
   return (
     <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
@@ -53,12 +53,11 @@ const BoardItem: React.FC<BlogType> = ({
         <S.ItemBottom>
           <S.BottomLeft>
             <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}>
-              {profileImg ? (
-                <Image width={20} height={20} src={profileImg} />
-              ) : (
-                // <Image width={20} height={20} src={profilenoneImg} />
-                <h1>d</h1>
-              )}
+              {/* <Image
+                width={20}
+                height={20}
+                src={profileImg ?? profilenoneImg}
+              /> */}
             </S.MemberImg>
             <S.MemberId>{user_name}</S.MemberId>
           </S.BottomLeft>
