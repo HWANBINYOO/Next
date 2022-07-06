@@ -1,15 +1,14 @@
 import * as S from "./styled";
 import { useEffect, useState } from "react";
-import { useRouter } from "../../node_modules/next/router";
+import { useRouter } from "next/router";
 import Animation from "./animation";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import BoardItem from "../boarditem/index";
-import { BlogType } from "../../types/BlogType";
 
 export default function Board() {
   const router = useRouter();
   const redirect = (url) => router.push(url);
-  const [Blogs, setBlogs] = useState<BlogType>();
+  const [Blogs, setBlogs] = useState();
 
   useEffect(() => {
     async function getblog() {

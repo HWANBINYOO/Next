@@ -16,12 +16,16 @@
     "module": "esnext",
     // "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "resolveJsonModule": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "components/board/animation.js",
+    "components/board/styled.js",
+    "components/board/index.js"
   ],
   "exclude": [
     "node_modules"

@@ -35,7 +35,7 @@ const BoardItem = ({ user_name, date, title, content, board_id, user_id }) => {
 
   return (
     <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
-      <S.Image src={boardImg} />
+      <Image src={boardImg} />
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
@@ -45,7 +45,8 @@ const BoardItem = ({ user_name, date, title, content, board_id, user_id }) => {
               {profileImg ? (
                 <Image width={20} height={20} src={profileImg} />
               ) : (
-                <Image width={20} height={20} src={profilenoneImg} />
+                // <Image width={20} height={20} src={profilenoneImg} />
+                <h1>d</h1>
               )}
             </S.MemberImg>
             <S.MemberId>{user_name}</S.MemberId>

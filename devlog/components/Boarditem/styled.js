@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const BlogItem = styled.div`
+export const BoardItem = styled.div`
   width: 300px;
   height: 440px;
   display: flex;
