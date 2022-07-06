@@ -1,14 +1,15 @@
 import * as S from "./styled";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "../../node_modules/next/router";
 import Animation from "./animation";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import BoardItem from "../boarditem/index";
+import { BlogType } from "../../types/BlogType";
 
 export default function Board() {
   const router = useRouter();
   const redirect = (url) => router.push(url);
-  const [Blogs, setBlogs] = useState();
+  const [Blogs, setBlogs] = useState<BlogType>();
 
   useEffect(() => {
     async function getblog() {
@@ -19,7 +20,7 @@ export default function Board() {
             Authorization: window.localStorage.getItem("Blog_accessToken"),
           },
         });
-        console.log(data);
+        console.log(data.blogs);
         setBlogs(data.blogs);
       } catch (e) {
         console.error(e.message);

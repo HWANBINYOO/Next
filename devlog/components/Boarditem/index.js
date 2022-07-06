@@ -1,17 +1,11 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
-import * as S from "./Styled";
+import * as S from "./styled";
 import { useState, useEffect } from "react";
+import CustomAxois from "../../utils/lib/CustomAxois";
 
-export default function BoardItem({
-  user_name,
-  date,
-  title,
-  content,
-  board_id,
-  user_id,
-}) {
+const BoardItem = ({ user_name, date, title, content, board_id, user_id }) => {
   const router = useRouter();
   const redirect = (url) => router.push(url);
   const [boardImg, setboardImg] = useState("");
@@ -20,13 +14,13 @@ export default function BoardItem({
   useEffect(() => {
     async function getboard() {
       try {
-        const respone = await customAxios.get(`board_image/${board_id}`, {
+        const respone = await CustomAxois.get(`board_image/${board_id}`, {
           headers: {
             Authorization: window.localStorage.getItem("Blog_accessToken"),
           },
         });
         setboardImg(respone.data);
-        const respone2 = await customAxios.get(`user_image/${user_id}`, {
+        const respone2 = await CustomAxois.get(`user_image/${user_id}`, {
           headers: {
             Authorization: window.localStorage.getItem("Blog_accessToken"),
           },
@@ -40,14 +34,14 @@ export default function BoardItem({
   }, []);
 
   return (
-    <S.BoardItem onClick={(e) => redirect(`/board/${board_id}`)}>
+    <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
       <S.Image src={boardImg} />
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
         <S.ItemBottom>
           <S.BottomLeft>
-            <S.MemberImg onClick={(e) => redirect(`/profile/${user_id}`)}>
+            <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}>
               {profileImg ? (
                 <Image width={20} height={20} src={profileImg} />
               ) : (
@@ -61,4 +55,6 @@ export default function BoardItem({
       </S.TextBox>
     </S.BoardItem>
   );
-}
+};
+
+export default BoardItem;

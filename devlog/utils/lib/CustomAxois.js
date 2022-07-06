@@ -24,9 +24,9 @@ import Storage from "../storage";
 
 const customAxios = axios.create({
   baseURL: "https://server.dev-log.kr/",
-  headers: {
-    Authorization: Storage.getItem("Blog_accessToken") ?? "",
-  },
+  // headers: {
+  //   Authorization: Storage.getItem("Blog_accessToken") ?? "",
+  // },
 });
 
 export default customAxios;

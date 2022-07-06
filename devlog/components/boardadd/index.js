@@ -45,7 +45,7 @@ const BoardAdd = () => {
     formData.append("content", desc);
     formData.append("date", `${year}-${month}-${day}`);
     try {
-      await customAxios.post("/board/write", formData, {
+      await CustomAxois.post("/board/write", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
