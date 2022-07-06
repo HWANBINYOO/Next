@@ -4,11 +4,12 @@ import { useRouter } from "next/router";
 import Animation from "./animation";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import BoardItem from "../boarditem/index";
+import { BlogType } from "../../types";
 
 export default function Board() {
   const router = useRouter();
-  const redirect = (url) => router.push(url);
-  const [Blogs, setBlogs] = useState();
+  const redirect = (url: string) => router.push(url);
+  const [Blogs, setBlogs] = useState<BlogType[]>();
 
   useEffect(() => {
     async function getblog() {
@@ -16,12 +17,13 @@ export default function Board() {
       try {
         const { data } = await CustomAxois.get(`/board`, {
           headers: {
-            Authorization: window.localStorage.getItem("Blog_accessToken"),
+            Authorization:
+              window.localStorage.getItem("Blog_accessToken") ?? "",
           },
         });
         console.log(data.blogs);
         setBlogs(data.blogs);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e.message);
       }
     }

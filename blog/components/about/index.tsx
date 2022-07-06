@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import * as S from "./styled";
 import Link from "next/link";
 import Image from "next/image";

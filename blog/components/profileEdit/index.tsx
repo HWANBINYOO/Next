@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
-import { customAxios } from "../../Libs/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import * as S from "./styled";
@@ -15,20 +16,20 @@ export default function ProfileEdit() {
   const [imgurl, setimgurl] = useState(""); //url
   const [modalDisplay, setmodalDisplay] = useState(false);
   const router = useRouter();
-  const redirect = (url) => router.push(url);
+  const redirect = (url: any) => router.push(url);
 
   useEffect(() => {
     async function Getprofile() {
-      const { data } = await customAxios.get("user_name");
+      const { data } = await CustomAxois.get("user_name");
       setName(data.name);
       setUserId(data.user_id);
-      const res = await customAxios.get(`user_image/${data.user_id}`);
+      const res = await CustomAxois.get(`user_image/${data.user_id}`);
       setimgurl(res?.data);
     }
     Getprofile();
   }, []);
 
-  const handleChangeFile = (event) => {
+  const handleChangeFile = (event: any) => {
     event.preventDefault();
     let reader = new FileReader();
     reader.onloadend = () => {
@@ -47,26 +48,26 @@ export default function ProfileEdit() {
   };
 
   //수정사항 서버로보내기 (profile사진포함)
-  const onClickImg = async (event) => {
+  const onClickImg = async (event: any) => {
     event.preventDefault();
     let formData = new FormData();
     formData.append("file", file);
     try {
-      await customAxios.patch(MemberController.updateProfileimg(), formData, {
+      await CustomAxois.patch(`/user/update`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
       console.log("수정되었습니다!");
-    } catch (e) {
+    } catch (e: any) {
       const { data } = e.response;
       console.error("data : ", data);
-      toast.error(data.message);
+      console.log(data.message);
     }
     setmodalDisplay(false);
   };
 
-  const onClick = async (event) => {
+  const onClick = async (event: any) => {
     event.preventDefault();
 
     if (PassWord != "" && ChangePassWord == "" && PassWordAgain == "") {
@@ -84,7 +85,7 @@ export default function ProfileEdit() {
     ) {
       return console.log("이름을 입력하지 않았어요!");
     }
-    profileUpdageReqeuset(Name, PassWord, ChangePassWord);
+    // profileUpdageReqeuset(Name, PassWord, ChangePassWord);
     setTimeout(() => {
       redirect(`/profile/${userId}`);
     }, 500);

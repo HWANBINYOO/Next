@@ -1,13 +1,22 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import { useState, useEffect } from "react";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../../devlog/utils/lib/CustomAxois";
+import { BlogType } from "../../types";
 
-const BoardItem = ({ user_name, date, title, content, board_id, user_id }) => {
+const BoardItem: React.FC<BlogType> = ({
+  user_name,
+  date,
+  title,
+  content,
+  board_id,
+  user_id,
+}) => {
   const router = useRouter();
-  const redirect = (url) => router.push(url);
+  const redirect = (url: string) => router.push(url);
   const [boardImg, setboardImg] = useState("");
   const [profileImg, setProfileImg] = useState("");
 
@@ -16,17 +25,19 @@ const BoardItem = ({ user_name, date, title, content, board_id, user_id }) => {
       try {
         const respone = await CustomAxois.get(`board_image/${board_id}`, {
           headers: {
-            Authorization: window.localStorage.getItem("Blog_accessToken"),
+            Authorization:
+              window.localStorage.getItem("Blog_accessToken") ?? "",
           },
         });
         setboardImg(respone.data);
         const respone2 = await CustomAxois.get(`user_image/${user_id}`, {
           headers: {
-            Authorization: window.localStorage.getItem("Blog_accessToken"),
+            Authorization:
+              window.localStorage.getItem("Blog_accessToken") ?? "",
           },
         });
         setProfileImg(respone2.data);
-      } catch (e) {
+      } catch (e: any) {
         console.error(e.message);
       }
     }

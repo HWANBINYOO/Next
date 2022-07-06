@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const BoardInWapper = styled.div`
   width: 100vw;
@@ -71,7 +71,6 @@ export const Button = styled.button`
   z-index: -10;
   width: 4rem;
   height: 1.3rem;
-  background-color: ${(props) => props.backgroundColor};
   outline: none;
   border-radius: 10px;
   border: none;

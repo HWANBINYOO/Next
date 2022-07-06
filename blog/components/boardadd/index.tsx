@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxois";
@@ -13,14 +14,14 @@ const BoardAdd = () => {
   const week = ["일", "월", "화", "수", "목", "금", "토"];
   const dayOfWeek = week[date.getDay()];
   const router = useRouter();
-  const redirect = (url) => router.push(url);
+  const redirect = (url: string) => router.push(url);
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(""); //파일
   const [imgBase64, setImgBase64] = useState(""); // 파일 base64
 
-  const handleChangeFile = (e) => {
+  const handleChangeFile = (e: any) => {
     e.preventDefault();
     let reader = new FileReader();
 
@@ -37,7 +38,7 @@ const BoardAdd = () => {
     }
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", file);
@@ -50,9 +51,9 @@ const BoardAdd = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("추가됐습니다!");
+      console.log("추가됐습니다!");
       redirect("/board");
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message);
     }
   };

@@ -2,6 +2,7 @@ import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import CustomAxois from "../../utils/lib/CustomAxois";
 
 export default function Register() {
   const [Email, setEmail] = useState("");
@@ -11,18 +12,24 @@ export default function Register() {
 
   const onSignup = async () => {
     try {
+      const emailRegex =
+        /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      const PassWordPegex = /(?=.*\d{1,50}).{4,50}$/;
       if (Email === "") return console.log("이메일이 입력되지 않았어요!");
-      else if (PassWord === "")
+      else if (!emailRegex.test(Email)) {
+        return console.log("이메일 형식이 잘못됐어요!");
+      } else if (PassWord === "") {
         return console.log("패스워드가 입력되지 않았어요!");
-      else if (PassWord !== PassWordCheck)
-        return console.log("패스워드가 일치하지 않아요");
-      const { data } = await customAxios.post("user/resister", {
+      } else if (!PassWordPegex.test(PassWord)) {
+        return console.log("패스워드가 4자리 이상이려야해요!(숫자포함)");
+      }
+      const { data }: any = await CustomAxois.post("user/resister", {
         email: Email,
         password: PassWord,
       });
       console.log(data);
       router.push("/login");
-    } catch (e) {
+    } catch (e: any) {
       console.log(e.message);
     }
   };

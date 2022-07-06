@@ -1,24 +1,26 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
-import { customAxios } from "../../lib/CustomAxois";
-import BlogItem from "../BlogItem/BlogItem";
+import CustomAxois from "../../utils/lib/CustomAxois";
+import Boarditem from "../boarditem/index";
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import Image from "next/image";
+import { BlogType, ProfileType } from "../../types";
 
-export default function Profile({ user_id }) {
-  const [profile, SetProfile] = useState();
-  const [Blogs, setBlogs] = useState();
+export default function Profile({ user_id }: { user_id: string | number }) {
+  const [profile, SetProfile] = useState<ProfileType>();
+  const [Blogs, setBlogs] = useState<BlogType[]>();
   const [my, setmy] = useState(false);
   const router = useRouter();
-  const redirect = (url) => router.push(url);
+  const redirect = (url: string) => router.push(url);
 
   useEffect(() => {
     async function Getprofile() {
-      const res = await customAxios.get(`/user_profile/${user_id}`);
+      const res = await CustomAxois.get(`/user_profile/${user_id}`);
       console.log(res);
-      const res2 = await customAxios.get(`/boards/${user_id}`);
+      const res2 = await CustomAxois.get(`/boards/${user_id}`);
       console.log(res2);
-      const { data } = await customAxios.get("user_name");
+      const { data } = await CustomAxois.get("user_name");
       if (data.user_id == user_id) setmy(true);
       SetProfile(res?.data);
       setBlogs(res2?.data.blogs);
@@ -27,7 +29,7 @@ export default function Profile({ user_id }) {
     Getprofile();
   }, []);
 
-  function sortObject(a, b) {
+  function sortObject(a: any, b: any) {
     return b.board_id - a.board_id;
   }
 
@@ -64,8 +66,8 @@ export default function Profile({ user_id }) {
         </S.ProfileImpormation>
         <S.Hr />
         <S.uploadBlogs>
-          {Blogs.sort(sortObject).map((item, index) => (
-            <BlogItem
+          {Blogs?.sort(sortObject).map((item, index) => (
+            <Boarditem
               key={index}
               board_id={item.board_id}
               user_id={item.user_id}
@@ -76,7 +78,6 @@ export default function Profile({ user_id }) {
             />
           ))}
         </S.uploadBlogs>
-        <Footer />
       </S.Profile>
     </>
   );

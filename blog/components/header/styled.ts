@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
 export const HeaderWapper = styled.div`
   width: 100%;
