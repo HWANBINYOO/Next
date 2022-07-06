@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../lib/CustomAxois";
 import BlogItem from "../BlogItem/BlogItem";
 import { useRouter } from "next/router";
-import * as S from "./Styled";
+import * as S from "./styled";
 import Image from "next/image";
 
 export default function Profile({ user_id }) {

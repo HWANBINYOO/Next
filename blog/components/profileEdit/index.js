@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { customAxios } from "../../Libs/CustomAxois";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import * as S from "./Styled";
+import * as S from "./styled";
 
 export default function ProfileEdit() {
   const [Name, setName] = useState("");

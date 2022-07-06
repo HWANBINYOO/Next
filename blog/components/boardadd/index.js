@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as S from "./Styled";
+import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import Image from "next/image";
 import { useRouter } from "next/router";

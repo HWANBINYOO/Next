@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
-import * as S from "./Styled";
+import * as S from "./styled";
 
 export async function getStaticProps() {
   const router = useRouter();
