@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./Styled";
+import { useState, useEffect } from "react";
 
 export default function BoardItem({
   user_name,
@@ -13,15 +14,23 @@ export default function BoardItem({
 }) {
   const router = useRouter();
   const redirect = (url) => router.push(url);
-  const [boardImg, setboardImg] = useState();
-  const [profileImg, setProfileImg] = useState();
+  const [boardImg, setboardImg] = useState("");
+  const [profileImg, setProfileImg] = useState("");
 
   useEffect(() => {
     async function getboard() {
       try {
-        const respone = await customAxios.get(`board_image/${board_id}`);
+        const respone = await customAxios.get(`board_image/${board_id}`, {
+          headers: {
+            Authorization: window.localStorage.getItem("Blog_accessToken"),
+          },
+        });
         setboardImg(respone.data);
-        const respone2 = await customAxios.get(`user_image/${user_id}`);
+        const respone2 = await customAxios.get(`user_image/${user_id}`, {
+          headers: {
+            Authorization: window.localStorage.getItem("Blog_accessToken"),
+          },
+        });
         setProfileImg(respone2.data);
       } catch (e) {
         console.error(e.message);

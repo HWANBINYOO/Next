@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Animation from "./animation";
 import CustomAxois from "../../utils/lib/CustomAxois";
+import BoardItem from "../boarditem/index";
 
 export default function Board() {
   const router = useRouter();
@@ -13,7 +14,11 @@ export default function Board() {
     async function getblog() {
       console.log(window.localStorage.getItem("Blog_accessToken"));
       try {
-        const { data } = await CustomAxois.get(`/board`);
+        const { data } = await CustomAxois.get(`/board`, {
+          headers: {
+            Authorization: window.localStorage.getItem("Blog_accessToken"),
+          },
+        });
         console.log(data);
         setBlogs(data.blogs);
       } catch (e) {
@@ -33,7 +38,7 @@ export default function Board() {
       <S.BLogWarpper>
         {Blogs ? (
           Blogs.map((item, index) => (
-            <BlogItem
+            <BoardItem
               key={index}
               board_id={item.board_id}
               user_id={item.user_id}

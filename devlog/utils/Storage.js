@@ -1,14 +1,14 @@
 export default class Storage {
   static setItem(key, value) {
-    localStorage.setItem(key, value);
+    window.localStorage.setItem(key, value);
   }
 
   static getItem(key) {
-    return localStorage.getItem(key);
+    window.localStorage.getItem(key);
   }
 
   static removeItem(key) {
-    localStorage.removeItem(key);
+    window.localStorage.removeItem(key);
   }
 }
 

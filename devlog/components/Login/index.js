@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Storage from "../../utils/storage";
 
 export default function Login() {
   const [Email, setEmail] = useState("");
@@ -18,10 +19,10 @@ export default function Login() {
           password: PassWord,
         }
       );
-      window.localStorage.setItem("Blog_accessToken", data.accessToken);
-      window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
-      // Storage.setItem("Blog_accessToken", data.accessToken);
-      // Storage.setItem("Blog_refreshToken", data.refreshToken);
+      Storage.setItem("Blog_accessToken", data.accessToken);
+      Storage.setItem("Blog_refreshToken", data.refreshToken);
+      // window.localStorage.setItem("Blog_accessToken", data.accessToken);
+      // window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
       router.push("/board");
     } catch (e) {
       console.error(e.message);
