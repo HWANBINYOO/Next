@@ -7,7 +7,7 @@ import * as S from "./styled";
 import Image from "next/image";
 import { BlogType, ProfileType } from "../../types";
 
-export default function Profile({ user_id }: { user_id: string | number }) {
+export default function Profile({ user_id }: { user_id: string }) {
   const [profile, SetProfile] = useState<ProfileType>();
   const [Blogs, setBlogs] = useState<BlogType[]>();
   const [my, setmy] = useState(false);

@@ -1,4 +1,4 @@
-import Register from "../../../components/resister";
+import Register from "../../../components/resister/index";
 
 export default function ResisterPage() {
   return (
