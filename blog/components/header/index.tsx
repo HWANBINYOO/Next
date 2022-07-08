@@ -44,8 +44,8 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
           <S.ProfileImg onClick={() => redirect(`/profile/${userId}`)}>
             <Image
               src={profileImg}
-              width={35}
-              height={35}
+              // width={35}
+              // height={35}
               alt="프로필 이미지"
             />
           </S.ProfileImg>
