@@ -1,29 +1,15 @@
 export default class Storage {
-  static setItem(key: string, value: string) {
-    window.localStorage.setItem(key, value);
+  public static get(key: string): string | null {
+    let item = null;
+    if (typeof window !== "undefined") {
+      item = localStorage.getItem(key);
+    }
+    return item;
   }
-
-  static getItem(key: string) {
-    window.localStorage.getItem(key);
+  public static set(key: string, value: string): void {
+    localStorage.setItem(key, value);
   }
-
-  static removeItem(key: string) {
-    window.localStorage.removeItem(key);
+  public static remove(key: string): void {
+    localStorage.removeItem(key);
   }
 }
-
-// export default class Storage {
-//    static get(key) {
-//     let item = null;
-//     if (typeof window !== "undefined") {
-//       item = localStorage.getItem(key);
-//     }
-//     return item;
-//   }
-//    static set(key: string, value: string) {
-//     localStorage.setItem(key, value);
-//   }
-//    static remove(key: string): void {
-//     localStorage.removeItem(key);
-//   }
-// }

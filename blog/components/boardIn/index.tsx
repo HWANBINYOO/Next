@@ -26,8 +26,8 @@ const BoardIn = ({
   boardIndata,
   board_id,
 }: {
-  boardIndata: BlogType;
-  board_id: any;
+  boardIndata?: BlogType;
+  board_id?: string | string[];
 }) => {
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
@@ -37,23 +37,11 @@ const BoardIn = ({
 
   useEffect(() => {
     async function GetBoardImg() {
-      const res = await CustomAxois.get(`/board_image/${board_id}`, {
-        headers: {
-          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
-        },
-      });
+      const res = await CustomAxois.get(`/board_image/${board_id}`);
       setBoardurl(res.data);
-      const res2 = await CustomAxois.get(`user_image/${boardIndata?.user_id}`, {
-        headers: {
-          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
-        },
-      });
+      const res2 = await CustomAxois.get(`user_image/${boardIndata?.user_id}`);
       setProfileImg(res2.data);
-      const respone2 = await CustomAxois.get(`/user_name`, {
-        headers: {
-          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
-        },
-      });
+      const respone2 = await CustomAxois.get(`/user_name`);
 
       if (respone2.data.user_id === boardIndata?.user_id) {
         setDelectDisplay(true);
@@ -65,11 +53,7 @@ const BoardIn = ({
   }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${board_id}`, {
-      headers: {
-        Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
-      },
-    });
+    await CustomAxois.delete(`/delete/${board_id}`);
   };
 
   return (

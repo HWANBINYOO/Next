@@ -15,12 +15,7 @@ export default function Board() {
     async function getblog() {
       console.log(window.localStorage.getItem("Blog_accessToken"));
       try {
-        const { data } = await CustomAxois.get(`/board`, {
-          headers: {
-            Authorization:
-              window.localStorage.getItem("Blog_accessToken") ?? "",
-          },
-        });
+        const { data } = await CustomAxois.get(`/board`);
         console.log(data.blogs);
         setBlogs(data.blogs);
       } catch (e: any) {

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import BoardIn from "../../components/boardIn";
+import Header from "../../components/header";
 import { BlogType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxois";
 
@@ -32,6 +33,7 @@ export default function BoardInPage() {
 
   return (
     <>
+      <Header HeaderColor={"skyblue"} />
       <BoardIn boardIndata={blogIn} board_id={board_id} />
     </>
   );
