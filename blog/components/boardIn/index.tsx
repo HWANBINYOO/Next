@@ -6,6 +6,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
+import { BlogType } from "../../types";
 
 // export async function getStaticProps() {
 //   const router = useRouter();
@@ -25,7 +26,7 @@ const BoardIn = ({
   boardIndata,
   board_id,
 }: {
-  boardIndata: any;
+  boardIndata: BlogType;
   board_id: any;
 }) => {
   const [Boardrl, setBoardurl] = useState();
@@ -42,7 +43,7 @@ const BoardIn = ({
         },
       });
       setBoardurl(res.data);
-      const res2 = await CustomAxois.get(`user_image/${boardIndata.user_id}`, {
+      const res2 = await CustomAxois.get(`user_image/${boardIndata?.user_id}`, {
         headers: {
           Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
         },
@@ -54,7 +55,7 @@ const BoardIn = ({
         },
       });
 
-      if (respone2.data.user_id === boardIndata.user_id) {
+      if (respone2.data.user_id === boardIndata?.user_id) {
         setDelectDisplay(true);
       } else {
         setDelectDisplay(false);
@@ -91,18 +92,18 @@ const BoardIn = ({
           x
         </S.Button>
       </S.BoardButtonBox>
-      <S.Title>{boardIndata.title}</S.Title>
+      <S.Title>{boardIndata?.title}</S.Title>
       <S.NameDate>
         <S.Name>
-          {boardIndata.user_name} · {boardIndata.date}
+          {boardIndata?.user_name} · {boardIndata?.date}
         </S.Name>
       </S.NameDate>
       <S.TextBox>
-        <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" />
-        <S.desc>{boardIndata.content}</S.desc>
+        {/* <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" /> */}
+        <S.desc>{boardIndata?.content}</S.desc>
       </S.TextBox>
       <S.ProfileWapper
-        onClick={(e) => redirect(`/profile/${boardIndata.user_id}`)}
+        onClick={(e) => redirect(`/profile/${boardIndata?.user_id}`)}
       >
         {/* <Image
           src={profileImg ?? profilenoneImg}
@@ -111,7 +112,7 @@ const BoardIn = ({
           objectFit="cover"
           alt="profile 이미지"
         /> */}
-        <S.ProfileName>{boardIndata.user_name}</S.ProfileName>
+        <S.ProfileName>{boardIndata?.user_name}</S.ProfileName>
       </S.ProfileWapper>
     </S.BoardInWapper>
   );

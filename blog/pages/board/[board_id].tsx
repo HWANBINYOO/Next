@@ -24,8 +24,7 @@ export default function BoardInPage() {
         });
         setBlogIn(response.data);
       } catch (e: any) {
-        const { data } = e.response;
-        console.error("data : ", data);
+        console.error(e);
       }
     }
     getblogIn();
