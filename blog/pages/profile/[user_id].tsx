@@ -1,6 +1,6 @@
-import Header from "../../../components/header";
+import Header from "../../components/header";
 import { useRouter } from "next/router";
-import Profile from "../../../components/profile";
+import Profile from "../../components/profile";
 
 export default function ProfilePage() {
   const router = useRouter();
