@@ -111,7 +111,7 @@ export default function ProfileEdit() {
 
         <S.ProfileImgEdit>
           <S.ProfileImg>
-            {imgurl ? (
+            {/* {imgurl ? (
               imgBase64 ? (
                 <Image
                   width={160}
@@ -135,7 +135,7 @@ export default function ProfileEdit() {
                   "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/profile.png"
                 }
               />
-            )}
+            )} */}
           </S.ProfileImg>
           <form name="files" method="patch" onSubmit={onClickImg}>
             <input

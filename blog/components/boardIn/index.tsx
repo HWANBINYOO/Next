@@ -21,21 +21,38 @@ import { useEffect, useState } from "react";
 //   };
 // }
 
-const BoardIn = ({ boardIndata }: { boardIndata: any }) => {
+const BoardIn = ({
+  boardIndata,
+  board_id,
+}: {
+  boardIndata: any;
+  board_id: any;
+}) => {
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const router = useRouter();
-  const board_id = router.query.board_id;
   const redirect = (url: string) => router.push(url);
 
   useEffect(() => {
     async function GetBoardImg() {
-      const res = await CustomAxois.get(`/board_image/${board_id}`);
+      const res = await CustomAxois.get(`/board_image/${board_id}`, {
+        headers: {
+          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
+        },
+      });
       setBoardurl(res.data);
-      const res2 = await CustomAxois.get(`user_image/${boardIndata.user_id}`);
+      const res2 = await CustomAxois.get(`user_image/${boardIndata.user_id}`, {
+        headers: {
+          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
+        },
+      });
       setProfileImg(res2.data);
-      const respone2 = await CustomAxois.get(`/user_name`);
+      const respone2 = await CustomAxois.get(`/user_name`, {
+        headers: {
+          Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
+        },
+      });
 
       if (respone2.data.user_id === boardIndata.user_id) {
         setDelectDisplay(true);
@@ -47,7 +64,11 @@ const BoardIn = ({ boardIndata }: { boardIndata: any }) => {
   }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${board_id}`);
+    await CustomAxois.delete(`/delete/${board_id}`, {
+      headers: {
+        Authorization: window.localStorage.getItem("Blog_accessToken") ?? "",
+      },
+    });
   };
 
   return (
@@ -83,13 +104,13 @@ const BoardIn = ({ boardIndata }: { boardIndata: any }) => {
       <S.ProfileWapper
         onClick={(e) => redirect(`/profile/${boardIndata.user_id}`)}
       >
-        <Image
+        {/* <Image
           src={profileImg ?? profilenoneImg}
           width={150}
           height={150}
           objectFit="cover"
           alt="profile 이미지"
-        />
+        /> */}
         <S.ProfileName>{boardIndata.user_name}</S.ProfileName>
       </S.ProfileWapper>
     </S.BoardInWapper>

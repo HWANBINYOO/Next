@@ -38,7 +38,7 @@ export default function Profile({ user_id }: { user_id: string }) {
       <S.Profile>
         <S.ProfileImpormation>
           <S.ProfileImg>
-            {profile?.url ? (
+            {/* {profile?.url ? (
               <Image
                 src={profile?.url}
                 width={230}
@@ -54,7 +54,7 @@ export default function Profile({ user_id }: { user_id: string }) {
                 }
                 alt="profile 이미지"
               />
-            )}
+            )} */}
           </S.ProfileImg>
           <S.User>
             <S.EditGO>

@@ -29,7 +29,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
     localStorage.removeItem("Blog_accessToken");
     localStorage.removeItem("Blog_refreshToken");
     console.log("로그아웃 되었습니다!");
-    router.push("/");
+    window.location.replace("/user/login");
     location.reload();
   };
 
@@ -42,12 +42,12 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
         </Link>
         <S.HeaderRIght>
           <S.ProfileImg onClick={() => redirect(`/profile/${userId}`)}>
-            <Image
+            {/* <Image
               src={profileImg}
-              // width={35}
-              // height={35}
+              width={35}
+              height={35}
               alt="프로필 이미지"
-            />
+            /> */}
           </S.ProfileImg>
           <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
         </S.HeaderRIght>
