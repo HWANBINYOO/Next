@@ -37,6 +37,7 @@ const BoardItem: React.FC<BlogType> = ({
           },
         });
         setProfileImg(respone2.data);
+        console.log(respone2.data);
       } catch (e: any) {
         console.error(e.message);
       }
@@ -46,25 +47,25 @@ const BoardItem: React.FC<BlogType> = ({
 
   return (
     <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
-      {/* <Image
+      <Image
         src={boardImg}
         alt="게시글 이미지"
         width={100}
         height={310}
         objectFit="cover"
-      /> */}
+      />
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
         <S.ItemBottom>
           <S.BottomLeft>
             <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}>
-              {/* <Image
+              <Image
                 width={20}
                 height={20}
-                src={profileImg ?? profilenoneImg}
+                src={profileImg || profilenoneImg}
                 alt="프로필 이미지"
-              /> */}
+              />
             </S.MemberImg>
             <S.MemberId>{user_name}</S.MemberId>
           </S.BottomLeft>
