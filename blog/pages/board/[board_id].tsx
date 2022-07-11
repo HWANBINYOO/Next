@@ -4,6 +4,7 @@ import BoardIn from "../../components/boardIn";
 import Header from "../../components/header";
 import { BlogType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxois";
+import Storage from "../../utils/Storage";
 
 export default function BoardInPage() {
   const router = useRouter();
@@ -17,12 +18,7 @@ export default function BoardInPage() {
   useEffect(() => {
     async function getblogIn() {
       try {
-        const response = await CustomAxois.get(`/board/${board_id}`, {
-          headers: {
-            Authorization:
-              window.localStorage.getItem("Blog_accessToken") ?? "",
-          },
-        });
+        const response = await CustomAxois.get(`/board/${board_id}`);
         setBlogIn(response.data);
       } catch (e: any) {
         console.error(e);
@@ -38,3 +34,24 @@ export default function BoardInPage() {
     </>
   );
 }
+
+// export async function getServerSideProps({ query }: { query: any }) {
+//   const { board_id } = query;
+//   try {
+//     const { data } = await CustomAxois.get(`/board/${board_id}`, {
+//       headers: {
+//         Authorization: Storage.get("Blog_accessToken") ?? "",
+//       },
+//     });
+//     console.log(data);
+
+//     if (data) {
+//       const blogs = data.blogs;
+//       return { props: { blogs } };
+//     }
+//     return { props: {} };
+//   } catch (error) {
+//     console.log(error);
+//     return { props: {} };
+//   }
+// }

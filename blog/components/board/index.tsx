@@ -6,6 +6,21 @@ import CustomAxois from "../../utils/lib/CustomAxois";
 import BoardItem from "../boarditem/index";
 import { BlogType } from "../../types";
 
+// export async function getServerSideProps() {
+//   try {
+//     const { data } = await CustomAxois.get(`/board`);
+
+//     if (data) {
+//       const blogs = data.blogs;
+//       return { props: { blogs } };
+//     }
+//     return { props: {} };
+//   } catch (error) {
+//     console.log(error);
+//     return { props: {} };
+//   }
+// }
+
 export default function Board() {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
@@ -54,16 +69,3 @@ export default function Board() {
     </S.BlogWapper>
   );
 }
-
-// export async function getStaticProps() {
-//   try {
-//     const { data } = await CustomAxois.get(`/board`);
-//     console.log(cookies.AccessToken);
-//     console.log(data);
-//   } catch (e) {
-//     console.error(e.message);
-//   }
-//   return {
-//     props: { data },
-//   };
-// }

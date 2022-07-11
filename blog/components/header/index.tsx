@@ -15,7 +15,8 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   useEffect(() => {
     async function Getprofile() {
       try {
-        const respone = await CustomAxois.get("user_name");
+        const respone = await CustomAxois.get("/user_name");
+        console.log(respone.data.user_id);
         setUserid(respone.data.user_id);
         setprofileImg(respone.data.url);
       } catch (e: any) {
