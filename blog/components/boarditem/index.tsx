@@ -23,21 +23,11 @@ const BoardItem: React.FC<BlogType> = ({
   useEffect(() => {
     async function getboard() {
       try {
-        const respone = await CustomAxois.get(`board_image/${board_id}`, {
-          headers: {
-            Authorization:
-              window.localStorage.getItem("Blog_accessToken") ?? "",
-          },
-        });
+        const respone = await CustomAxois.get(`board_image/${board_id}`);
+        console.log(respone.data);
         setboardImg(respone.data);
-        const respone2 = await CustomAxois.get(`user_image/${user_id}`, {
-          headers: {
-            Authorization:
-              window.localStorage.getItem("Blog_accessToken") ?? "",
-          },
-        });
+        const respone2 = await CustomAxois.get(`user_image/${user_id}`);
         setProfileImg(respone2.data);
-        console.log(respone2.data);
       } catch (e: any) {
         console.error(e.message);
       }
@@ -47,25 +37,37 @@ const BoardItem: React.FC<BlogType> = ({
 
   return (
     <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
-      <Image
-        src={boardImg}
+      {
+        boardImg ? 
+        <Image
+        src={boardImg }
         alt="게시글 이미지"
         width={100}
         height={310}
         objectFit="cover"
-      />
+      /> : <p>Loading..</p>
+      }
+     
       <S.TextBox>
         <S.Title>{title}</S.Title>
         <S.desc>{content}</S.desc>
         <S.ItemBottom>
           <S.BottomLeft>
             <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}>
-              <Image
+              {
+                profileImg ?
+                <Image
                 width={20}
                 height={20}
-                src={profileImg || profilenoneImg}
+                src={profileImg}
                 alt="프로필 이미지"
-              />
+                /> :  <Image
+                width={20}
+                height={20}
+                src={profilenoneImg}
+                alt="프로필 이미지"
+                />
+              }
             </S.MemberImg>
             <S.MemberId>{user_name}</S.MemberId>
           </S.BottomLeft>

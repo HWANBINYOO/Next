@@ -4,6 +4,7 @@ const nextConfig = {
   images: {
     domains: ["devlog-s3-bucket.s3.ap-northeast-2.amazonaws.com"],
   },
+  format: ["image/png", "images/webp", "image/jpeg"],
 };
 
 module.exports = nextConfig;

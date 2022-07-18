@@ -19,6 +19,7 @@ export default function BoardInPage() {
     async function getblogIn() {
       try {
         const response = await CustomAxois.get(`/board/${board_id}`);
+        console.log(response.data);
         setBlogIn(response.data);
       } catch (e: any) {
         console.error(e);
