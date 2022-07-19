@@ -89,11 +89,10 @@ const BoardIn = ({
           (
             <Image src={Boardrl} width={`40%`} alt="boardIn 이미지" /> 
           ): (
-            <Image src={whiteImg} width={`40%`} alt="boardIn 이미지" /> 
+            <Image src={whiteImg} width={"40%"} alt="로딩 이미지" /> 
           )
         }
-        <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" />
-        <S.desc>{boardIndata?.content}</S.desc>
+      <S.desc>{boardIndata?.content}</S.desc>
       </S.TextBox>
       <S.ProfileWapper
         onClick={(e) => redirect(`/profile/${boardIndata?.user_id}`)}

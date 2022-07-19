@@ -42,9 +42,15 @@ const BoardAdd = () => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", file);
-    formData.append("title", title);
-    formData.append("content", desc);
-    formData.append("date", `${year}-${month}-${day}`);
+    let boardDto = {
+      title: title,
+      content: desc,
+      date: `${year}-${month}-${day}`,
+    };
+    formData.append(
+      "boardDto",
+      new Blob([JSON.stringify(boardDto)], { type: "application/json" })
+    );
     try {
       await CustomAxois.post("/board/write", formData, {
         headers: {
@@ -78,11 +84,11 @@ const BoardAdd = () => {
       </S.Box>
       <S.BoardAddImgWapper>
         <S.BoardImg>
-          {file ? (
-            <Image src={imgBase64} />
+          {/* {file ? (
+            <Image src={imgBase64 ?? whiteImg} />
           ) : (
             <Image width={90} height={100} src={whiteImg} alt="board 이미지" />
-          )}
+          )} */}
         </S.BoardImg>
         <form
           name="files"
