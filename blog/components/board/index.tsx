@@ -32,7 +32,7 @@ export default function Board() {
       try {
         const { data } = await CustomAxois.get(`/board`);
         console.log(data.blogs);
-        setBlogs(data.blogs);
+        setBlogs(data.blogs); 
       } catch (e: any) {
         console.error(e.message);
       }

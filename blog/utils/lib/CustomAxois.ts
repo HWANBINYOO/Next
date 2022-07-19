@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import Storage from "../Storage";
 
 // const CustomAxois = () => {
@@ -22,14 +22,14 @@ import Storage from "../Storage";
 // };
 // export default CustomAxois;
 
-const customAxios = axios.create({
+const CustomAxois = axios.create({
   baseURL: "https://server.dev-log.kr/",
   headers: {
     Authorization: Storage.get("Blog_accessToken") ?? "",
   },
 });
 
-export default customAxios;
+export default CustomAxois;
 
 // const RequestApi = async (p: AxiosRequestConfig) => {
 //   try {

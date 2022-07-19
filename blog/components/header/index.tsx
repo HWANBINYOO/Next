@@ -1,9 +1,9 @@
 import * as S from "./styled";
 import Link from "next/link";
 import Image from "next/image";
-import ProfileImg from "../../public/Img/profile.png";
+import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
-import CustomAxois from "../../../devlog/utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
 
 export default function Header({ HeaderColor }: { HeaderColor: string }) {
@@ -24,7 +24,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
       }
     }
     Getprofile();
-  }, []);
+  }, [router.query]);
 
   const Logout = () => {
     localStorage.removeItem("Blog_accessToken");
@@ -42,13 +42,22 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
           <a>DevLog </a>
         </Link>
         <S.HeaderRIght>
-          <S.ProfileImg onClick={() => redirect(`/profile/${userId}`)}>
-            {/* <Image
+          <S.ProfileImg onClick={() => redirect(`/profile/${1}`)}>
+            {
+              profileImg ?
+              <Image
               src={profileImg}
               width={35}
               height={35}
               alt="프로필 이미지"
-            /> */}
+              /> : 
+              <Image
+              src={profilenoneImg}
+              width={35}
+              height={35}
+              alt="프로필 이미지"
+              />
+            }
           </S.ProfileImg>
           <S.LogoutButton onClick={Logout}>Logout</S.LogoutButton>
         </S.HeaderRIght>

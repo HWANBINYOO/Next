@@ -7,6 +7,7 @@ import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
 import { BlogType } from "../../types";
+import whiteImg from "../../public/Img/white.png"
 
 // export async function getStaticProps() {
 //   const router = useRouter();
@@ -83,19 +84,37 @@ const BoardIn = ({
         </S.Name>
       </S.NameDate>
       <S.TextBox>
-        {/* <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" /> */}
+        {
+          Boardrl ? 
+          (
+            <Image src={Boardrl} width={`40%`} alt="boardIn 이미지" /> 
+          ): (
+            <Image src={whiteImg} width={`40%`} alt="boardIn 이미지" /> 
+          )
+        }
+        <Image src={Boardrl ?? ""} width={`40%`} alt="boardIn 이미지" />
         <S.desc>{boardIndata?.content}</S.desc>
       </S.TextBox>
       <S.ProfileWapper
         onClick={(e) => redirect(`/profile/${boardIndata?.user_id}`)}
       >
-        {/* <Image
+        {
+          profileImg ?
+          <Image
           src={profileImg ?? profilenoneImg}
           width={150}
           height={150}
           objectFit="cover"
           alt="profile 이미지"
-        /> */}
+        /> :
+        <Image
+        src={profilenoneImg}
+        width={150}
+        height={150}
+        objectFit="cover"
+        alt="profile 이미지"
+        />
+      }
         <S.ProfileName>{boardIndata?.user_name}</S.ProfileName>
       </S.ProfileWapper>
     </S.BoardInWapper>

@@ -6,24 +6,27 @@ import { useRouter } from "next/router";
 import * as S from "./styled";
 import Image from "next/image";
 import { BlogType, ProfileType } from "../../types";
+import profilenoneImg from "../../public/Img/profile.png";
 
-export default function Profile({ user_id }: { user_id: string }) {
+
+export default function Profile() {
   const [profile, SetProfile] = useState<ProfileType>();
   const [Blogs, setBlogs] = useState<BlogType[]>();
   const [my, setmy] = useState(false);
   const router = useRouter();
+  const user_id = router.query.user_id;
   const redirect = (url: string) => router.push(url);
 
   useEffect(() => {
     async function Getprofile() {
-      const res = await CustomAxois.get(`/user_profile/${user_id}`);
+      const res = await CustomAxois.get(`user_profile/${user_id}`);
       console.log(res);
-      const res2 = await CustomAxois.get(`/boards/${user_id}`);
+      const res2 = await CustomAxois.get(`boards/${user_id}`);
       console.log(res2);
       const { data } = await CustomAxois.get("user_name");
       if (data.user_id == user_id) setmy(true);
       SetProfile(res?.data);
-      setBlogs(res2?.data.blogs);
+      setBlogs(res2?.data.blogs); 
     }
 
     Getprofile();
@@ -38,7 +41,7 @@ export default function Profile({ user_id }: { user_id: string }) {
       <S.Profile>
         <S.ProfileImpormation>
           <S.ProfileImg>
-            {/* {profile?.url ? (
+            {profile?.url ? (
               <Image
                 src={profile?.url}
                 width={230}
@@ -50,16 +53,15 @@ export default function Profile({ user_id }: { user_id: string }) {
                 width={230}
                 height={230}
                 src={
-                  "https://devlogfront.s3.ap-northeast-2.amazonaws.com/Img/profile.png"
+                  profilenoneImg
                 }
                 alt="profile 이미지"
               />
-            )} */}
+            )}
           </S.ProfileImg>
           <S.User>
             <S.EditGO>
               <S.UserName>{profile?.name}</S.UserName>
-              <S.UserName></S.UserName>
               {my ? (
                 <S.GOEdit onClick={() => redirect("/profile/Edit")}>
                   프로필 편집

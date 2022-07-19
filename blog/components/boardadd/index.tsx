@@ -78,11 +78,11 @@ const BoardAdd = () => {
       </S.Box>
       <S.BoardAddImgWapper>
         <S.BoardImg>
-          {/* {file ? (
+          {file ? (
             <Image src={imgBase64} />
           ) : (
             <Image width={90} height={100} src={whiteImg} alt="board 이미지" />
-          )} */}
+          )}
         </S.BoardImg>
         <form
           name="files"

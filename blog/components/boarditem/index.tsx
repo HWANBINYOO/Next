@@ -4,7 +4,7 @@ import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import { useState, useEffect } from "react";
-import CustomAxois from "../../../devlog/utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 import { BlogType } from "../../types";
 
 const BoardItem: React.FC<BlogType> = ({
@@ -61,6 +61,7 @@ const BoardItem: React.FC<BlogType> = ({
                 height={20}
                 src={profileImg}
                 alt="프로필 이미지"
+                objectFit="cover"
                 /> :  <Image
                 width={20}
                 height={20}
