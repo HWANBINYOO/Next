@@ -17,8 +17,14 @@ export default function BoardInPage() {
 
   useEffect(() => {
     async function getblogIn() {
+      console.log(Storage.get("Blog_accessToken") ?? "");
+      console.log(window.localStorage.getItem("Blog_accessToken"));      
       try {
-        const response = await CustomAxois.get(`/board/${board_id}`);
+        const response = await CustomAxois.get(`/board/${board_id}`,{
+          headers: {
+            Authorization: Storage.get("Blog_accessToken") ?? "",
+          },
+        });
         console.log(response.data);
         setBlogIn(response.data);
       } catch (e: any) {

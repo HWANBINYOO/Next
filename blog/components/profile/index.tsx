@@ -20,9 +20,7 @@ export default function Profile() {
   useEffect(() => {
     async function Getprofile() {
       const res = await CustomAxois.get(`user_profile/${user_id}`);
-      console.log(res);
       const res2 = await CustomAxois.get(`boards/${user_id}`);
-      console.log(res2);
       const { data } = await CustomAxois.get("user_name");
       if (data.user_id == user_id) setmy(true);
       SetProfile(res?.data);
