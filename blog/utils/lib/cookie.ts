@@ -2,7 +2,7 @@ import CustomAxois from "./CustomAxois";
 import { GetServerSidePropsContext } from "next";
 
 const Cookie = async (ctx: GetServerSidePropsContext) => {
-  let accessToken = ctx.req.cookies["accessToken"];
+  let accessToken = ctx.req.cookies["accessToken"] ;
   const refreshToken = ctx.req.cookies["refreshToken"];
   let cookies: string[] | undefined;
 
@@ -12,7 +12,6 @@ const Cookie = async (ctx: GetServerSidePropsContext) => {
       {},
       { headers: { cookie: `refreshToken=${refreshToken};` } }
     );
-
     cookies = res.headers["set-cookie"];
     accessToken = res.data.accessToken;
   } else {

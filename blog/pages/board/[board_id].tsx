@@ -1,8 +1,10 @@
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import BoardIn from "../../components/boardIn";
 import Header from "../../components/header";
 import { BlogType } from "../../types";
+import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import Storage from "../../utils/Storage";
 
@@ -42,12 +44,14 @@ export default function BoardInPage() {
   );
 }
 
-export async function getServerSideProps({ query }: { query: any }) {
-  const { board_id } = query;
+export const  getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { board_id } = ctx.query;
+  const { accessToken } = await Cookie(ctx);
+
   try {
     const { data } = await CustomAxois.get(`/board/${board_id}`, {
       headers: {
-        Authorization: Storage.get("Blog_accessToken") ?? "",
+        Authorization: accessToken ?? "",
       },
     });
     console.log(data);
