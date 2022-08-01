@@ -42,23 +42,23 @@ export default function BoardInPage() {
   );
 }
 
-// export async function getServerSideProps({ query }: { query: any }) {
-//   const { board_id } = query;
-//   try {
-//     const { data } = await CustomAxois.get(`/board/${board_id}`, {
-//       headers: {
-//         Authorization: Storage.get("Blog_accessToken") ?? "",
-//       },
-//     });
-//     console.log(data);
+export async function getServerSideProps({ query }: { query: any }) {
+  const { board_id } = query;
+  try {
+    const { data } = await CustomAxois.get(`/board/${board_id}`, {
+      headers: {
+        Authorization: Storage.get("Blog_accessToken") ?? "",
+      },
+    });
+    console.log(data);
 
-//     if (data) {
-//       const blogs = data.blogs;
-//       return { props: { blogs } };
-//     }
-//     return { props: {} };
-//   } catch (error) {
-//     console.log(error);
-//     return { props: {} };
-//   }
-// }
+    if (data) {
+      const blogs = data.blogs;
+      return { props: { blogs } };
+    }
+    return { props: {} };
+  } catch (error) {
+    console.log(error);
+    return { props: {} };
+  }
+}

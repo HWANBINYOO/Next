@@ -1,7 +1,7 @@
 import CustomAxois from "./CustomAxois";
 import { GetServerSidePropsContext } from "next";
 
-const userCheck = async (ctx: GetServerSidePropsContext) => {
+const Cookie = async (ctx: GetServerSidePropsContext) => {
   let accessToken = ctx.req.cookies["accessToken"];
   const refreshToken = ctx.req.cookies["refreshToken"];
   let cookies: string[] | undefined;
@@ -24,4 +24,4 @@ const userCheck = async (ctx: GetServerSidePropsContext) => {
   return { cookies, accessToken };
 };
 
-export default userCheck;
+export default Cookie;

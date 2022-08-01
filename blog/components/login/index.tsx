@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
@@ -5,7 +6,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 // import Storage from "../../utils/storage";
 
-export default function Login() {
+export default function Login(req: NextApiRequest, res: NextApiResponse) {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
   const router = useRouter();
@@ -19,6 +20,11 @@ export default function Login() {
           password: PassWord,
         }
       );
+      const Blog_accessToken = data.accessToken;
+      const Blog_refreshToken = data.refreshToken;
+      res.setHeader('Set-Cookie', `${Blog_accessToken}`);
+      res.setHeader('Set-Cookie', `${Blog_accessToken}`);
+
       // Storage.setItem("Blog_accessToken", data.accessToken);
       // Storage.setItem("Blog_refreshToken", data.refreshToken);
       window.localStorage.setItem("Blog_accessToken", data.accessToken);
