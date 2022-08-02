@@ -8,38 +8,34 @@ import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import Storage from "../../utils/Storage";
 
-export default function BoardInPage() {
+export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   const router = useRouter();
   const { board_id } = router.query;
-  const [blogIn, setBlogIn] = useState<BlogType>();
-
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
-  useEffect(() => {
-    async function getblogIn() {
-      console.log(Storage.get("Blog_accessToken") ?? "");
-      console.log(window.localStorage.getItem("Blog_accessToken"));      
-      try {
-        const response = await CustomAxois.get(`/board/${board_id}`,{
-          headers: {
-            Authorization: Storage.get("Blog_accessToken") ?? "",
-          },
-        });
-        console.log(response.data);
-        setBlogIn(response.data);
-      } catch (e: any) {
-        console.error(e);
-      }
-    }
-    getblogIn();
-  }, []);
-
+  // useEffect(() => {
+  //   async function getblogIn() {
+  //     console.log(Storage.get("Blog_accessToken") ?? "");
+  //     console.log(window.localStorage.getItem("Blog_accessToken"));      
+  //     try {
+  //       const response = await CustomAxois.get(`/board/${board_id}`,{
+  //         headers: {
+  //           Authorization: Storage.get("Blog_accessToken") ?? "",
+  //         },
+  //       });
+  //       console.log(response.data);
+  //       setBlogIn(response.data);
+  //     } catch (e: any) {
+  //       console.error(e);
+  //     }
+  //   }
+  //   getblogIn();
+  // }, []);
   return (
     <>
       <Header HeaderColor={"skyblue"} />
-      <BoardIn boardIndata={blogIn} board_id={board_id} />
+      <BoardIn boardIndata={blogInData} board_id={board_id} />
     </>
   );
 }
@@ -54,11 +50,9 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
         Authorization: accessToken ?? "",
       },
     });
-    console.log(data);
-
     if (data) {
-      const blogs = data.blogs;
-      return { props: { blogs } };
+      const blogIndata = data;
+      return { props: { blogIndata } };
     }
     return { props: {} };
   } catch (error) {

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-// import Storage from "../../utils/storage";
 
 export default function Login(req: NextApiRequest, res: NextApiResponse) {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
   const router = useRouter();
+  const AccessToKenTime = 60000 * 3;  //3분
+  const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
 
   const onLogin = async () => {
     try {
@@ -20,15 +21,15 @@ export default function Login(req: NextApiRequest, res: NextApiResponse) {
           password: PassWord,
         }
       );
+
       const Blog_accessToken = data.accessToken;
       const Blog_refreshToken = data.refreshToken;
-      res.setHeader('Set-Cookie', `${Blog_accessToken}`);
-      res.setHeader('Set-Cookie', `${Blog_accessToken}`);
-
+      res.setHeader('Blog_accessToken', `${Blog_accessToken}; maxAge = ${AccessToKenTime};`);
+      res.setHeader('Blog_refreshToken', `${Blog_refreshToken} maxAge = ${RefreshTokenTime};`);
       // Storage.setItem("Blog_accessToken", data.accessToken);
       // Storage.setItem("Blog_refreshToken", data.refreshToken);
-      window.localStorage.setItem("Blog_accessToken", data.accessToken);
-      window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
+      // window.localStorage.setItem("Blog_accessToken", data.accessToken);
+      // window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
       router.push("/board");
     } catch (e: any) {
       console.error(e.message);
