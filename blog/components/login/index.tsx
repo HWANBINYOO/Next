@@ -24,8 +24,8 @@ export default function Login(req: NextApiRequest, res: NextApiResponse) {
 
       const Blog_accessToken = data.accessToken;
       const Blog_refreshToken = data.refreshToken;
-      res.setHeader('Blog_accessToken', `${Blog_accessToken}; maxAge = ${AccessToKenTime};`);
-      res.setHeader('Blog_refreshToken', `${Blog_refreshToken} maxAge = ${RefreshTokenTime};`);
+      res.setHeader('Blog_accessToken', `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
+      res.setHeader('Blog_refreshToken', `${Blog_refreshToken} maxAge=${RefreshTokenTime};`);
       // Storage.setItem("Blog_accessToken", data.accessToken);
       // Storage.setItem("Blog_refreshToken", data.refreshToken);
       // window.localStorage.setItem("Blog_accessToken", data.accessToken);

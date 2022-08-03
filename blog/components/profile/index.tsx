@@ -9,8 +9,8 @@ import { BlogType, ProfileType } from "../../types";
 import profilenoneImg from "../../public/Img/profile.png";
 
 
-export default function Profile() {
-  const [profile, SetProfile] = useState<ProfileType>();
+export default function Profile({ProfileData} : {ProfileData? : ProfileType}) {
+  const [profile, SetProfile] = useState(ProfileData);
   const [Blogs, setBlogs] = useState<BlogType[]>();
   const [my, setmy] = useState(false);
   const router = useRouter();
@@ -19,11 +19,11 @@ export default function Profile() {
 
   useEffect(() => {
     async function Getprofile() {
-      const res = await CustomAxois.get(`user_profile/${user_id}`);
+      // const res = await CustomAxois.get(`user_profile/${user_id}`);
       const res2 = await CustomAxois.get(`boards/${user_id}`);
       const { data } = await CustomAxois.get("user_name");
       if (data.user_id == user_id) setmy(true);
-      SetProfile(res?.data);
+      // SetProfile(res?.data);
       setBlogs(res2?.data.blogs); 
     }
 

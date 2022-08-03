@@ -1,12 +1,10 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import BoardIn from "../../components/boardIn";
 import Header from "../../components/header";
 import { BlogType } from "../../types";
 import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
-import Storage from "../../utils/Storage";
 
 export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   const router = useRouter();
