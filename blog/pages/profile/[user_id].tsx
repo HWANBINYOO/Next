@@ -17,7 +17,7 @@ export default function ProfilePage({ProfileData} : {ProfileData : ProfileType})
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
   const { accessToken } = await Cookie(ctx);
-
+  
   try {
     const { data } = await CustomAxois.get(`/user_profile/${user_id}`, {
       headers: {
