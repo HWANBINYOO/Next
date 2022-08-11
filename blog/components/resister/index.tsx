@@ -9,6 +9,8 @@ export default function Register() {
   const [PassWord, setPassWord] = useState("");
   const [Name, setName] = useState("");
   const router = useRouter();
+  const redirect = (url: string) => router.push(url);
+
 
   const onSignup = async () => {
     try {
@@ -23,14 +25,16 @@ export default function Register() {
       } else if (!PassWordPegex.test(PassWord)) {
         return console.log("패스워드가 4자리 이상이려야해요!(숫자포함)");
       }
-      const { data }: any = await CustomAxois.post("user/resister", {
+      const { data }: any = await CustomAxois.post("user/register", {
+        name: Name,
         email: Email,
         password: PassWord,
       });
       console.log(data);
-      router.push("/login");
+      redirect("/user/login");
     } catch (e: any) {
-      console.log(e.message);
+      const { data } = e.response;
+      console.error("data : ", data);
     }
   };
 
