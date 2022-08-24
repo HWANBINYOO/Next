@@ -1,41 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next'
 import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { emailState, passwordState } from '../../utils/recoil/state';
 
-export default function Login({setHeaderName}:{setHeaderName :any}) {
-  const [Email, setEmail] = useState("");
-  const [PassWord, setPassWord] = useState("");
-  const router = useRouter();
-  // const AccessToKenTime = 60000 * 3;  //3분
-  // const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
+export default function Login() {
+  const [InputEmail, setInputEmail] = useState("");         //Eamil input value
+  const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
+
+  const [,setEmail] = useRecoilState(emailState);
+  const [,setPassword] = useRecoilState<string>(passwordState);
 
   const onLogin = async () => {
-    try {
-      const { data } = await axios.post(
-        `https://server.dev-log.kr/user/login`,
-        {
-          email: Email,
-          password: PassWord,
-        }
-      );
-
-      const Blog_accessToken = data.accessToken;
-      const Blog_refreshToken = data.refreshToken;
-      setHeaderName(Blog_accessToken);
-      setHeaderName(Blog_refreshToken);
-      // res.setHeader('Blog_accessToken', `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
-      // res.setHeader('Blog_refreshToken', `${Blog_refreshToken} maxAge=${RefreshTokenTime};`);
-      // Storage.setItem("Blog_accessToken", data.accessToken);
-      // Storage.setItem("Blog_refreshToken", data.refreshToken);
-      // window.localStorage.setItem("Blog_accessToken", data.accessToken);
-      // window.localStorage.setItem("Blog_refreshToken", data.refreshToken);
-      router.push("/board");
-    } catch (e: any) {
-      console.error(e.message);
-    }
+    setEmail(InputEmail);
+    setPassword(InputPassWord);
   };
 
   return (
@@ -47,7 +27,7 @@ export default function Login({setHeaderName}:{setHeaderName :any}) {
         <S.LoginInput>
           <p>Email</p>
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setInputEmail(e.target.value)}
             placeholder="Email을 입력하세요"
           />
         </S.LoginInput>
@@ -55,7 +35,7 @@ export default function Login({setHeaderName}:{setHeaderName :any}) {
           <p>PassWord</p>
           <input
             type="password"
-            onChange={(e) => setPassWord(e.target.value)}
+            onChange={(e) => setInputPassWord(e.target.value)}
             placeholder="PassWord을 입력하세요"
           />
         </S.LoginInput>
