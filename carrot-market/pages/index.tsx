@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-      <div className="bg-slate-400 py-20 px-10 grid gap-10  ">
+      <div className="bg-slate-400 py-20 px-10 grid gap-10  min-h-screen">
         <div className='bg-white p-6  rounded-3xl shadow-xl'>
 
           <span className='font-semibold text-3xl'>Select Item</span>
@@ -53,8 +53,36 @@ const Home: NextPage = () => {
           </div>
         </div>
         </div>
-        <div className='bg-white p-10 rounded-2xl shadow-xl'></div>
-        <div className='bg-white p-10 rounded-2xl shadow-xl'></div>
+        <div className='bg-white p-6 rounded-2xl shadow-xl'>
+          <div className='flex justify-between items-center'>
+            <span>⬅️</span>
+            <div className='space-x-3'>
+              <span>✨ 4.9</span>
+              <span className='shadow-xl p-2 rounded-md'>❤️</span>
+            </div>
+          </div>
+            <div className='bg-zinc-400 h-72 mb-5'/>
+            <div className='flex flex-col'>
+              <span className='font-medium text-xl'>Swoon Lounge</span>
+              <span className='text-xs text-gray-500'>Chair</span>
+              <div className='mt-3 mb-5 flex justify-between items-center'>
+                <div>
+                  <input type="radio" />
+                  <input type="radio" />
+                  <input type="radio" />
+                </div>
+                <div className='flex items-center space-x-5'>
+                  <button className='p-1.5 rounded-lg bg-blue-200 flex justify-center items-center aspect-square w-8 text-gray-500'>-</button>
+                  <button>1</button>
+                  <button className='p-1.5 rounded-lg bg-blue-200 flex justify-center items-center aspect-square w-8 text-gray-500'>+</button>
+                </div>
+              </div>
+              <div className='flex justify-between items-center'>
+                <span className='font-medium text-2xl'>$460</span>
+                <button className='bg-blue-500 py-2 px-8 text-center text-xs text-white rounded-lg'>Add to cart</button>
+              </div>
+            </div>
+        </div>
       </div>
     )
   }
