@@ -10,8 +10,8 @@ export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsCo
   const router = useRouter();
   const AccessToKenTime = 60000 * 3;  //3분
   const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
-  const [email,setEmail] = useRecoilState(emailState); 
-  const [password,setPassword] = useRecoilState<string>(passwordState);
+  const [email] = useRecoilState(emailState); 
+  const [password] = useRecoilState<string>(passwordState);
 
  useEffect(()=>{
   async function a(){
