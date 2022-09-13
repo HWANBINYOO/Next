@@ -21,7 +21,7 @@ const ChatDetail: NextPage = () => {
             <p>미쳤어</p>
         </div>
       </div>
-      <div className="fixed w-full mx-auto max-w-md bottom-0 inset-x-0">
+      <div className="fixed py-2 w-full mx-auto max-w-md bottom-0 inset-x-0">
         <div className="flex relative items-center">
           <input type="text" className="shadow-sm rounded-full w-full border-gray-300 focus:ring-orange-500 focus:outline-none pr-12 focus:border-orange-500"/>
           <div className="absolute inset-y-0 flex py-1.5 pr-1.5 right-0">
