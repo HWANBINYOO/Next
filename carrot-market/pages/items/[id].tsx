@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
+import Layout from "../../components/layout";
 
 const ItemDetail: NextPage = () => {
   return (
+    <Layout canGoBack>
     <div className="px-4 py-10">
       <div className="mb-8">
         <div className="h-96 bg-slate-300" />
@@ -60,6 +62,7 @@ const ItemDetail: NextPage = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 
