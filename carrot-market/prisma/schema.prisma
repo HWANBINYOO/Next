@@ -18,4 +18,5 @@ model User{
   name   String
   avatar String?
   createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
