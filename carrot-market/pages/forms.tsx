@@ -12,18 +12,33 @@ interface LoginForm {
     username: string;
     password: string;
     email:    string;
+    errors?:  string;
 }
 
 export default function Forms(){
-    const { register , handleSubmit , formState: { errors } ,} = useForm<LoginForm>({
+    const { 
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+        setError,
+        setValue,
+        reset,
+        resetField,
+    } = useForm<LoginForm>({
         mode:"onChange"
     });
     const onValid = (data:LoginForm) => {
         console.log("im valid bby");
+        // setError("username" , {message:"Taken username"});
+        // reset();
+        resetField("password");
     };
     const onInvalid = (errors : FieldErrors)  => {
         console.log(errors);
     };
+    console.log(watch("email"));
+    
     return (
         <form onSubmit={handleSubmit(onValid , onInvalid)}>
             <input {...register("username" , {required:"Username is required", minLength : {
@@ -43,9 +58,10 @@ export default function Forms(){
                 placeholder="Email"
                 // className={`${Boolean(errors.email) ? "border-red-500" : ""}`}
             />
-            {errors.email?.message}
+            {errors.username?.message}
             <input {...register("password" , {required:"Password is required", })} type="password" placeholder="password"  />
             <input type="submit" value="Create Account" />
+            {errors.errors?.message}
         </form>
     )
 }
