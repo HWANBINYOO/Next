@@ -17,9 +17,10 @@ export default function Enter() {
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {reset(); setMethod("email")};
   const onPhoneClick = () => {reset(); setMethod("phone")};
-  const onValid = (data:EnterForm) => {
-    enter(data); 
+  const onValid = (vaildForm:EnterForm) => {
+    enter(vaildForm); 
   };
+  console.log(loading, data, error);
   return (
     <div className="mt-16 px-4">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
