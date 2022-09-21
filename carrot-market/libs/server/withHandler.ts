@@ -1,9 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler , NextApiRequest, NextApiResponse } from "next";
 
 export default function withHandler(
     method: "GET" | "POST" | "DELETE" ,
-    fn: (req:NextApiRequest, res:NextApiResponse) => void
-    ){
+    fn: NextApiHandler,
+    ): NextApiHandler {
     return async function(req:NextApiRequest, res:NextApiResponse){
         if(req.method !== method){
             return res.status(405).end();
