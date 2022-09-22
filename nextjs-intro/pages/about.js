@@ -1,4 +1,4 @@
-import Nhead from "../components/Nhead";
+import Nhead from "@components/Nhead";
 
 export default function Prnguin() {
   return (

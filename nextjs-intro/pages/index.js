@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Nhead from "../components/Nhead";
+import Nhead from "@components/Nhead";
 
 export default function Home({ data }) {
   const router = useRouter();

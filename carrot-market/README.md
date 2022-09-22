@@ -1,14 +1,13 @@
 # Carrot Matket
 
 //database create
-pscale database create carrot-market --region ap-northeast 
+pscale database create carrot-market --region ap-northeast
 
 //database connect
-pscale connect carrot-market 
-
+pscale connect carrot-market
 
 //database push
-npx prisma db push 
+npx prisma db push
 
 //PrismaClient create
 npx prisma generate
@@ -16,27 +15,37 @@ npx prisma generate
 //데이터베이스 관리자
 npx prisma studio
 
+### Prisma
 
-Prisma
 - nodejs, typescript의 ORM
-ORM은 typescript와 데이터베이스 사이의 다리 역할
-우선 schema.prisma에 데이터의 모양을 알려주어야 함
-Prisma가 타입을 알고 있으면 client를 생성해줌
-client를 통해 타입스크립트로 데이터베이스와 직접 상호작용
+  ORM은 typescript와 데이터베이스 사이의 다리 역할
+  우선 schema.prisma에 데이터의 모양을 알려주어야 함
+  Prisma가 타입을 알고 있으면 client를 생성해줌
+  client를 통해 타입스크립트로 데이터베이스와 직접 상호작용
 
-Prisma 셋업 (Typescript + MySQL)
+### Prisma 셋업 (Typescript + MySQL)
+
 - npx prisma init
-    - schema.prisma라는 파일과 프로젝트 루트에 .env 파일을 포함하는 prisma라는 새 디렉토리를 생성
+  - schema.prisma라는 파일과 프로젝트 루트에 .env 파일을 포함하는 prisma라는 새 디렉토리를 생성
 
-PlanetScale
+### PlanetScale
+
 - MySQL과 호환되는 Serverless 데이터베이스 플랫폼
 
+### Prisma Client
 
-Prisma Client
 - TypeScript 및 Node.js용 직관적인 데이터베이스 클라이언트
-Prisma Client는 생각하는 방식으로 구성하고 앱에 맞춤화된 유형으로 Prisma 스키마에서 자동 생성되는 쿼리 빌더입니다.
+  Prisma Client는 생각하는 방식으로 구성하고 앱에 맞춤화된 유형으로 Prisma 스키마에서 자동 생성되는 쿼리 빌더입니다.
 
-API Routes
+### API Routes
+
 - client.ts 는 당연하게도 front에서 import하여 사용할 수 없음 (보안에 심각한 문제)
-따라서 front(브라우져)가 아닌 서버가 필요
-pages 경로에 api 폴더를 생성함으로써 api서버가 생성됨
+  따라서 front(브라우져)가 아닌 서버가 필요
+  pages 경로에 api 폴더를 생성함으로써 api서버가 생성됨
+
+### Twilio
+
+- 전화 걸기 및 받기, 문자 메시지 보내기 및 받기, 웹 서비스 API를 사용하여 기타 커뮤니케이션 기능 수행을 위한 프로그래밍 가능한 커뮤니케이션 도구를 제공합니다.
+
+// dngh0825@gmail.com
+// youbin20050825!!

@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Hero from "../components/home/hero";
-import Layout from "../components/layout";
+import Hero from "@components/home/hero";
+import Layout from "@components/layout";
 
 export default function Home() {
   return (

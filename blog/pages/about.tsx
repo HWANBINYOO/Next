@@ -1,5 +1,5 @@
-import About from "../components/about";
-import Header from "../components/header";
+import About from "@components/about";
+import Header from "@components/header";
 
 function HomePage() {
   return (

@@ -1,5 +1,5 @@
-import Board from "../../components/board";
-import Header from "../../components/header";
+import Board from "@components/board";
+import Header from "@components/header";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import {BlogType } from "../../types/BlogType"
 import Cookie from "../../utils/lib/cookie";

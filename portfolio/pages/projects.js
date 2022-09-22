@@ -1,5 +1,5 @@
-import Layout from "../components/layout";
-import ProjectItem from "../components/projects/project-item";
+import Layout from "@components/layout";
+import ProjectItem from "@components/projects/project-item";
 import { TOKEN, DATABASE_ID } from "../config";
 
 export default function Project({ projects }) {

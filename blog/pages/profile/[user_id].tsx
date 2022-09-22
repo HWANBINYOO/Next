@@ -1,5 +1,5 @@
-import Header from "../../components/header";
-import Profile from "../../components/profile";
+import Header from "@components/header";
+import Profile from "@components/profile";
 import { GetServerSideProps } from "next";
 import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";

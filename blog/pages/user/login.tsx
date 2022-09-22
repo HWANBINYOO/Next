@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, NextApiResponse } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Login from "../../components/login";
+import Login from "@components/login";
 import { emailState, passwordState } from "../../utils/recoil/state";
 
 export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsContext) {

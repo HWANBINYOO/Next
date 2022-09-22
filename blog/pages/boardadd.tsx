@@ -1,5 +1,5 @@
-import BoardAdd from "../components/boardadd";
-import Header from "../components/header";
+import BoardAdd from "@components/boardadd";
+import Header from "@components/header";
 
 function BoardAddPage() {
   return (

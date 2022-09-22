@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import BoardIn from "../../components/boardIn";
-import Header from "../../components/header";
+import BoardIn from "@components/boardIn";
+import Header from "@components/header";
 import { BlogType } from "../../types";
 import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
