@@ -1,4 +1,4 @@
-import { cls } from "@libs/server/utils";
+import { cls } from "@libs/client/utils";
 
 interface ButtonProps {
   large?: boolean;

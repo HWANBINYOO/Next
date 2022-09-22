@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cls } from "@libs/server/utils";
+import { cls } from "@libs/client/utils";
 import Button from "@components/button";
 import Input from "@components/input";
 import { useForm } from "react-hook-form";
