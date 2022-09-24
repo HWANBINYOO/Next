@@ -24,9 +24,10 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
             body: JSON.stringify(data),
         })
         .then((response) => response.json().catch(() => {}))
-        .then((data) => setSate((prev) => ({ ...prev, data })))
-        .catch((error) => setSate((prev) => ({ ...prev, error })))
-        .finally(() => setSate((prev) => ({ ...prev , loading:false})));
+        .then((data) => setSate((prev) => ({ ...prev, data, loading: false })))
+        .catch((error) =>
+          setSate((prev) => ({ ...prev, error, loading: false }))
+        );
     }
     return[mutation , {...state}];
 }
