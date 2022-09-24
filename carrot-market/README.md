@@ -49,3 +49,10 @@ npx prisma studio
 
 // dngh0825@gmail.com
 // youbin20050825!!
+
+### Iron session
+
+- 데이터를 저장하기 위해 서명되고 암호화된 쿠키를 사용하는 Node.js stateless session 유틸리티.
+
+- req.session.save()
+  세션 데이터를 암호화하고 쿠키를 설정합니다.
