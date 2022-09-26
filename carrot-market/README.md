@@ -35,7 +35,7 @@ npx prisma studio
 ### Prisma Client
 
 - TypeScript 및 Node.js용 직관적인 데이터베이스 클라이언트
-  Prisma Client는 생각하는 방식으로 구성하고 앱에 맞춤화된 유형으로 Prisma 스키마에서 자동 생성되는 쿼리 빌더입니다.
+  Prisma Client는 생각하는 방식으로 구성하고 앱에 맞춤화된 유형으로 Prisma 스키마에서 자동 생성되는 쿼리 빌더
 
 ### API Routes
 
@@ -45,14 +45,20 @@ npx prisma studio
 
 ### Twilio
 
-- 전화 걸기 및 받기, 문자 메시지 보내기 및 받기, 웹 서비스 API를 사용하여 기타 커뮤니케이션 기능 수행을 위한 프로그래밍 가능한 커뮤니케이션 도구를 제공합니다.
+- 전화 걸기 및 받기, 문자 메시지 보내기 및 받기, 웹 서비스 API를 사용하여 기타 커뮤니케이션 기능 수행을 위한 프로그래밍 가능한 커뮤니케이션 도구를 제공
 
 // dngh0825@gmail.com
 // youbin20050825!!
 
 ### Iron session
 
-- 데이터를 저장하기 위해 서명되고 암호화된 쿠키를 사용하는 Node.js stateless session 유틸리티.
+- 데이터를 저장하기 위해 서명되고 암호화된 쿠키를 사용하는 Node.js stateless session 유틸리티
 
 - req.session.save()
-  세션 데이터를 암호화하고 쿠키를 설정합니다.
+  세션 데이터를 암호화하고 쿠키를 설정
+
+### NextAuth.js
+
+- Next.js에서 Authentication 구현을 도와주는 패키지
+  간단한 인증은 매우 간단하게 처리가능
+  npm i next-auth
