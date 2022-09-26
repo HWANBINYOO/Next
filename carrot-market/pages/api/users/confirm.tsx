@@ -27,4 +27,6 @@ async function handler(
   return res.status(200).json({ ok: true });
 }
 
-export default withApiSession(withHandler("POST", handler));
+export default withApiSession(
+  withHandler({method: "POST",handler,})
+);
