@@ -13,7 +13,7 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
         loading:false,
         data:undefined,
         error:undefined,
-    })
+    });
     function mutation(data?:any){
         setSate((prev) => ({ ...prev,loading:true}));
         fetch(url, {

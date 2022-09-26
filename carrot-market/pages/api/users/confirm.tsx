@@ -1,4 +1,3 @@
-import { withIronSessionApiRoute } from "iron-session/next";
 import { NextApiRequest, NextApiResponse } from "next";
 import withHandler, { ResponseType } from "@libs/server/withHandler";
 import client from "@libs/server/client";
@@ -14,8 +13,8 @@ async function handler(
       payload: token,
     },
   });
-  if (!foundToken) return res.status(404).end();  // 토큰이 없으면 404
-  req.session.user = {                            // 토큰이 있으면
+  if (!foundToken) return res.status(401).end(); 
+  req.session.user = {
     id: foundToken.userId,
   };
   await req.session.save(); // session 저장
@@ -24,6 +23,8 @@ async function handler(
       userId: foundToken.userId,
     },
   });
+
+  return res.status(200).json({ ok: true });
 }
 
 export default withApiSession(withHandler("POST", handler));
