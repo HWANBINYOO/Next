@@ -23,17 +23,18 @@ interface UploadProductMutation {
 const Upload: NextPage = () => {
   const router = useRouter();
   const {register , handleSubmit } = useForm<UploadProductForm>();
-  const [uploadProduct , { loading , data}] = useMutation<UploadProductMutation>("/api/priducts");
-  const onValid = (data:UploadProductForm) => {
-    if(!loading) return;
+  const [uploadProduct , { loading , data}] = 
+    useMutation<UploadProductMutation>("/api/products");
+  const onValid = (data: UploadProductForm) => {
+    if(loading) return;
     uploadProduct(data);
-  }
+  };
   useEffect(() => {
     if(data?.ok){
         router.push(`/products/${data.product.id}`);
     }
   },[data, router]);
-  return (
+  return (  
     <Layout canGoBack title="Upload Product">
     <form className="p-4 space-y-4" onSubmit={handleSubmit(onValid)}>
       <div>
@@ -71,7 +72,11 @@ const Upload: NextPage = () => {
           type="text"
           kind="price"
         />
-        <TextArea register={register("description" , {required:true})} name="description" label="Description" required />
+        <TextArea 
+          register={register("description" , {required:true})} 
+          name="description" 
+          label="Description" 
+          required />
         <Button text={loading? "Loading..." : "Upload item"} />
       </form>
     </Layout>
