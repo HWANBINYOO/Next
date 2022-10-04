@@ -33,7 +33,7 @@ async function handler(
             contains: word,
         },
     })); 
-    const relatedProucts = await client.product.findMany({
+    const relatedProducts = await client.product.findMany({
         where: {
             OR: terms,  // 하나 이상의 조건이 true를 반환해야 합니다.
             AND: {      // 모든 조건이 true를 반환해야 합니다.
@@ -43,7 +43,7 @@ async function handler(
             },
         },
     });
-    res.json({ok:true, product, relatedProucts});
+    res.json({ok:true, product, relatedProducts});
 }
 
 export default withApiSession(
