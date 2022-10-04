@@ -24,13 +24,26 @@ async function handler(
                     id:true,
                     name: true,
                     avatar: true,
-                }
-            }
+                },
+            },
         },
     });
-    console.log(product);
-    res.json({ok:true, product});
-    
+    const terms = product?.name.split(" ").map(word => ({
+        name: {
+            contains: word,
+        },
+    })); 
+    const relatedProucts = await client.product.findMany({
+        where: {
+            OR: terms,  // 하나 이상의 조건이 true를 반환해야 합니다.
+            AND: {      // 모든 조건이 true를 반환해야 합니다.
+                id: {
+                    not: product?.id,
+                },
+            },
+        },
+    });
+    res.json({ok:true, product, relatedProucts});
 }
 
 export default withApiSession(
