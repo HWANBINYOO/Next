@@ -22,6 +22,7 @@ model User {
   updateAt  DateTime  @updatedAt
   tokens    Token[]
   Products  Product[]
+  Fav       Fav[]
 }
 
 model Token {
@@ -43,4 +44,15 @@ model Product {
   name        String
   price       Int
   description String   @db.MediumText
+  Favs        Fav[]
+}
+
+model Fav {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  userId    Int
+  productId Int
 }
