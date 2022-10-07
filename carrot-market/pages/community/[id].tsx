@@ -6,7 +6,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import { User , Post , Answer} from "@prisma/client";
 
-interface AnswerWithUser extends Answer{
+interface AnswerWithUser extends Answer {
   user:User;
 }
 
@@ -26,7 +26,9 @@ interface CommunityPostResponse {
 
 const CommunityPostDetail: NextPage = () => {
   const router = useRouter();
-  const {data , error} = useSWR<CommunityPostResponse>(router.query.id ? `/api/posts/${router.query.id}`: null);
+  const {data , error} = useSWR<CommunityPostResponse>(
+    router.query.id ? `/api/posts/${router.query.id}`: null
+  );
   console.log(data);
   return (
     <Layout canGoBack>
@@ -97,7 +99,7 @@ const CommunityPostDetail: NextPage = () => {
                 {answer.user.name}
               </span>
               <span className="text-xs text-gray-500 block ">
-                {answer.createAt}
+                {answer.createdAt}
               </span>
               <p className="text-gray-700 mt-2">{answer.answer}</p>
             </div>

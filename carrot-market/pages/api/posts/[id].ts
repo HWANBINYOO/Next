@@ -37,7 +37,7 @@ const post =  await client.post.findUnique({
         },
         _count: {
             select: {
-                answers: true,
+                answers:true,
                 wondering:true,
             },
         },

@@ -21,10 +21,10 @@ model User {
   createdAt DateTime    @default(now())
   updateAt  DateTime    @updatedAt
   tokens    Token[]
-  Products  Product[]
-  Fav       Fav[]
-  Posts     Post[]
-  Answers   Answer[]
+  products  Product[]
+  fav       Fav[]
+  posts     Post[]
+  answers   Answer[]
   Wondering Wondering[]
 }
 
@@ -67,8 +67,8 @@ model Post {
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   question  String      @db.MediumText
-  Answers   Answer[]
-  Wondering Wondering[]
+  answers   Answer[]
+  wondering Wondering[]
 }
 
 model Answer {
@@ -79,7 +79,7 @@ model Answer {
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
-  anwer     String   @db.MediumText
+  answer    String   @db.MediumText
 }
 
 model Wondering {
