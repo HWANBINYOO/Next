@@ -21,9 +21,21 @@ const post =  await client.post.create({
         },
     },
 });
+const isWondering = Boolean(
+    await client.wondering.findFirst({
+        where: {
+            postId:Number(id),
+            userId: user?.id,
+        },
+        select: {
+            id: true,
+        },
+    })
+)
   res.json({
     ok: true,
     post,
+    isWondering,
   });
 }
 
