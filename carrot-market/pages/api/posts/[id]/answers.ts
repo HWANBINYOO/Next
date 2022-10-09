@@ -8,23 +8,28 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
 const {
-    body: { question},
-    session: {user},
+    query: {id},
+    session:{user},
+    body: { answer },
 } = req;
-const post =  await client.post.create({
+const newAnswer = await client.answer.create({
     data: {
-        question,
-        user:{
-            connect: {
-                id:user?.id,
-            },
+      user: {
+        connect: {
+          id: user?.id,
         },
+      },
+      post: {
+        connect: {
+          id: Number(id),
+        },
+      },
+      answer,
     },
-});
-
+  });
   res.json({
     ok: true,
-    post,
+    answer: newAnswer,
   });
 }
 
