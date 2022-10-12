@@ -32,6 +32,8 @@ if(req.method === "POST"){
 if(req.method === "GET"){
     const { query: {latitude, longitude},
     } = req;
+    if (!latitude || !longitude) return res.status(400).json({ ok: false });
+    
     const parsedLatitudeParsed = parseFloat(latitude.toString());
     const parsedLongitude = parseFloat(longitude.toString());
     const posts = await client.post.findMany({

@@ -21,7 +21,7 @@ interface PostResponse {
 
 const Community: NextPage = () => {
   const { latitude , longitude } = useCoords();
-  const { data } = useSWR<PostResponse>(`/api/posts?latitude=${latitude}&longitude=${longitude}`);
+  const { data } = useSWR<PostResponse>(latitude && longitude ? `/api/posts?latitude=${latitude}&longitude=${longitude}` : "");
   console.log(data);
   return (
     <Layout hasTabBar title="동네생활">
