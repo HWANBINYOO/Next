@@ -55,7 +55,7 @@ model Product {
   favs        Fav[]
   Sale        Sale[]
   Purchase    Purchase[]
-  Record      Record[]
+  records     Record[]
 }
 
 model Fav {
@@ -111,6 +111,7 @@ model Review {
   createdById  Int
   createdFor   User     @relation(name: "receivedReviews", fields: [createdForId], references: [id], onDelete: Cascade)
   createdForId Int
+  score        Int      @default(1)
 }
 
 model Sale {
