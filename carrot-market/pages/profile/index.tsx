@@ -7,7 +7,7 @@ import { Review, User } from "@prisma/client";
 import { cls } from "@libs/client/utils";
 
 interface ReviewWithUser extends Review{
-  creeatedBy: User;
+  createdBy: User;
 }
 
 interface ReviewsResponse {
@@ -110,10 +110,10 @@ const Profile: NextPage = () => {
                 {review.createdBy.name}
               </h4>
               <div className="flex items-center">
-                {[1,2,3,4,5].map((star) => ( 
+                {[1,2,3,4,5].map((star) => (                   
                 <svg
                   key={star}
-                  className={cls("h-5 w-5", review.score >= star ? "text-yellow-400" : "text-gray-400")}
+                  className={cls("h-5 w-5", review.score >= star ? "text-yellow-400" : "text-g")}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                   fill="currentColor"
