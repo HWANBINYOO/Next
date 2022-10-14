@@ -53,8 +53,8 @@ model Product {
   price       Int
   description String     @db.MediumText
   favs        Fav[]
-  Sale        Sale[]
-  Purchase    Purchase[]
+  sales       Sale[]
+  purchases   Purchase[]
   records     Record[]
 }
 
@@ -142,7 +142,7 @@ model Record {
   updateAt  DateTime @updatedAt
   userId    Int
   productId Int
-  kind      Kind
+  kind      String
 }
 
 enum Kind {

@@ -32,4 +32,4 @@ export default function withHandler({methods, isPrivate = true, handler}: Config
       return res.status(500).json({ error });
     }
   };
-}
+} 
