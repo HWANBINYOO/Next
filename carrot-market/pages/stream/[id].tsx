@@ -6,11 +6,25 @@ import { useRouter } from "next/router";
 import { Stream } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import useMutation from "@libs/client/useMutation";
+import useUser from "@libs/client/useUser";
+import { useEffect } from "react";
 
+interface StreamMessage {
+  id: number;
+  message: string;
+  user: {
+    avatar?: string;
+    id: number;
+  };
+}
+
+interface StreamWithMessages extends Stream {
+  messages: StreamMessage[];
+}
 
 interface StreamResponse {
   ok: true;
-  stream: Stream;
+  stream: StreamWithMessages;
 }
 
 interface MessageForm {
@@ -18,10 +32,11 @@ interface MessageForm {
 }
 
 
-const Stream: NextPage = () => {
+const StreamDetail: NextPage = () => {
+  const {user} = useUser();
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<MessageForm>();
-  const { data } = useSWR<StreamResponse>(
+  const { data, mutate  } = useSWR<StreamResponse>(
     router.query.id ? `/api/streams/${router.query.id}` : null
   );
   const [sendMessage, { loading, data: sendMessageData }] = useMutation(
@@ -32,6 +47,11 @@ const Stream: NextPage = () => {
     reset();
     sendMessage(form);
   };
+  useEffect(() => {
+    if(sendMessageData && sendMessageData.ok){
+       mutate();
+    }
+  } ,[sendMessageData, mutate]);
   return (
     <Layout canGoBack>
       <div className="py-10 px-4  space-y-4">
@@ -48,9 +68,9 @@ const Stream: NextPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Live Chat</h2>
           <div className="py-10 pb-16 h-[50vh] overflow-y-scroll  px-4 space-y-4">
-          {/* {data?.stream.messages.map(message => (
-            <Message key={message.id} message={message.message} />
-          ))} */}
+          {data?.stream.messages.map(message => (
+            <Message key={message.id} message={message.message} reversed={message.user.id === user?.id} />
+          ))}
           </div>
           <div className="fixed py-2 bg-white  bottom-0 inset-x-0">
             <form
@@ -75,4 +95,4 @@ const Stream: NextPage = () => {
   );
 };
 
-export default Stream;
+export default StreamDetail;
