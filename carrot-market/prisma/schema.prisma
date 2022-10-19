@@ -30,7 +30,9 @@ model User {
   fav             Fav[]
   sales           Sale[]
   purchases       Purchase[]
-  Record          Record[]
+  record          Record[]
+  streams         Stream[]
+  messages        Message[]
 }
 
 model Token {
@@ -149,4 +151,27 @@ enum Kind {
   Purchase
   Sale
   Fav
+}
+
+model Stream {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
+  name        String
+  description String    @db.MediumText
+  price       Int
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  messages    Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  message   String   @db.MediumText
+  stream    Stream   @relation(fields: [streamId], references: [id])
+  streamId  Int
 }
