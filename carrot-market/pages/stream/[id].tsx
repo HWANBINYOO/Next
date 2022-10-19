@@ -7,6 +7,7 @@ import { Stream } from "@prisma/client";
 import { useForm } from "react-hook-form";
 import useMutation from "@libs/client/useMutation";
 
+
 interface StreamResponse {
   ok: true;
   stream: Stream;
@@ -15,6 +16,7 @@ interface StreamResponse {
 interface MessageForm {
   message: string;
 }
+
 
 const Stream: NextPage = () => {
   const router = useRouter();
@@ -46,9 +48,9 @@ const Stream: NextPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Live Chat</h2>
           <div className="py-10 pb-16 h-[50vh] overflow-y-scroll  px-4 space-y-4">
-            <Message message="Hi how much are you selling them for?" />
-            <Message message="I want ￦20,000" reversed />
-            <Message message="미쳤어" />
+          {/* {data?.stream.messages.map(message => (
+            <Message key={message.id} message={message.message} />
+          ))} */}
           </div>
           <div className="fixed py-2 bg-white  bottom-0 inset-x-0">
             <form
