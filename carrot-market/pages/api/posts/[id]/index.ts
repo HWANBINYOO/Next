@@ -35,6 +35,8 @@ const post =  await client.post.findUnique({
                     },
                 },
             },
+            take: 10,
+            skip: 20,
         },
         _count: {
             select: {

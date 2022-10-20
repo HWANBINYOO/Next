@@ -11,11 +11,13 @@ interface StreamsResponse {
 }
 
 const Streams: NextPage = () => {
-  const { data } = useSWR<StreamsResponse>(`/api/streams`);
+  const { data } = useSWR<StreamsResponse>(`/api/streams?page=3`);
+  console.log(data);
+  
   return (
     <Layout hasTabBar title="라이브">
       <div className=" divide-y-[1px] space-y-4">
-        {data?.streams.map((stream) => (
+        {data?.streams?.map((stream) => (
           <Link key={stream.id} href={`/stream/${stream.id}`}>
             <a className="pt-4 block  px-4">
               <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
@@ -25,7 +27,7 @@ const Streams: NextPage = () => {
             </a>
           </Link>
         ))}
-        <FloatingButton href="/streams/create">
+        <FloatingButton href="/stream/create">
           <svg
             className="w-6 h-6"
             fill="none"

@@ -31,7 +31,7 @@ const Create: NextPage = () => {
   };
   useEffect(() => {
     if(data && data.ok){
-      router.push(`/streams/${data.stream.id}`)
+      router.push(`/stream/${data.stream.id}`)
     }
   },[data, router])
   return (

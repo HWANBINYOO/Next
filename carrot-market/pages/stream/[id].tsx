@@ -41,7 +41,7 @@ const StreamDetail: NextPage = () => {
     {
       refreshInterval: 1000,
     }
-  );
+  );  
   const [sendMessage, { loading, data: sendMessageData }] = useMutation(
     `/api/streams/${router.query.id}/messages`
   );
