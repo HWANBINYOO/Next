@@ -62,3 +62,13 @@ npx prisma studio
 - Next.js에서 Authentication 구현을 도와주는 패키지
   간단한 인증은 매우 간단하게 처리가능
   npm i next-auth
+
+### Cloudflare Images
+
+- 대규모로 이미지를 저장,크기 조정, 최적화하는 하나의 API
+
+1. 이미지저장 : 많은이미지를 Cloudflare Images 에 저장할 수 있음
+2. 이미지 크기 조정 및 최적화 : 보관 및 크기 조정의 추가 비용 없이 모든 이미지를 조정할 수 있음
+3. 전달 : 전세계 Cloudflare 데이터 센터에서 이미지를 전달함
+
+#### Cloudflare? : 인터넷에 연결하는 모든 것을 안전적으로 연결하도록 설계된 전역 네트워크
