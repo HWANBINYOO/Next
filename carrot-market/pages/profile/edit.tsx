@@ -30,14 +30,21 @@ const EditProfile: NextPage = () => {
   },[user , setValue]);
   const [editProfile, {data, loading }] = 
   useMutation<EditProfileResponse>(`/api/users/me`);
-  const onValid = ({email , phone , name , avatar}: EditProfileForm) => {
-    console.log(avatar);
-    return;
+  const onValid = async ({email , phone , name , avatar}: EditProfileForm) => {
     if(loading) return;
     if(email === "" &&  phone === ""   && name === ""){
         return setError("formErrors" , {message: "Email OR Phone number are required."});
     }
-    editProfile({email,phone,name});
+
+    if(avatar &&  avatar.length > 0){
+      const clouflareRequest = await (await fetch(`/api/files`)).json()
+      console.log(clouflareRequest);
+      //upload file to CF URL
+      return
+      editProfile({email,phone,name});
+    } else {
+      editProfile({email,phone,name});
+    } 
   };
   useEffect(() => {
     if(data && !data.ok && data.error) {
