@@ -36,11 +36,15 @@ const EditProfile: NextPage = () => {
         return setError("formErrors" , {message: "Email OR Phone number are required."});
     }
 
-    if(avatar &&  avatar.length > 0){
-      const clouflareRequest = await (await fetch(`/api/files`)).json()
-      console.log(clouflareRequest);
-      //upload file to CF URL
-      return
+    if(avatar &&  avatar.length > 0 && user){
+      const {id,uploadURL} = await (await fetch(`/api/files`)).json()
+      const form = new FormData();
+      form.append("file",avatar[0], user?.id + "");
+      await fetch(uploadURL, {
+        method: "POST",
+        body: form,
+      });
+      return;
       editProfile({email,phone,name});
     } else {
       editProfile({email,phone,name});
