@@ -23,8 +23,8 @@ const Profile: NextPage = () => {
       <div className="px-4">
         <div className="flex items-center mt-4 space-x-3">
           {user?.avatar? (
-            <img src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${user?.avatar}/public`} className="w-16 h-16 bg-slate-500 rounded-full" />
-          ) :  <img src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${user?.avatar}/public`} className="w-16 h-16 bg-slate-500 rounded-full" />
+            <img src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${user?.avatar}/avatar`} className="w-16 h-16 bg-slate-500 rounded-full" />
+          ) :  <img src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${user?.avatar}/avatar`} className="w-16 h-16 bg-slate-500 rounded-full" />
           }
           <div className="flex flex-col">
             <span className="font-medium text-gray-900">{user?.name}</span>
