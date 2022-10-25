@@ -154,15 +154,18 @@ enum Kind {
 }
 
 model Stream {
-  id          Int       @id @default(autoincrement())
-  createdAt   DateTime  @default(now())
-  updateAt    DateTime  @updatedAt
-  name        String
-  description String    @db.MediumText
-  price       Int
-  user        User      @relation(fields: [userId], references: [id])
-  userId      Int
-  messages    Message[]
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now())
+  updateAt      DateTime  @updatedAt
+  name          String
+  description   String    @db.MediumText
+  price         Int
+  user          User      @relation(fields: [userId], references: [id])
+  userId        Int
+  messages      Message[]
+  cloudflareId  String
+  cloudflareUrl String
+  cloudflareKey String
 }
 
 model Message {
