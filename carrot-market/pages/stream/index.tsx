@@ -23,9 +23,7 @@ const Streams: NextPage = () => {
             <a className="pt-4 block  px-4">
             <div className="w-full relative overflow-hidden rounded-md shadow-sm bg-slate-300 aspect-video">
                 <Image
-                  layout="fill"
-                  src={`https://videodelivery.net/${stream.cloudflareId}/thumbnails/thumbnail.jpg?height=320`}
-                />
+                  src={`https://videodelivery.net/${stream.cloudflareId}/thumbnails/thumbnail.jpg?height=320`} alt={""}                />
               </div>
              <h1 className="text-2xl mt-2 font-bold text-gray-900">
                 {stream.name}

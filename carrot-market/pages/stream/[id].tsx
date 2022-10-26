@@ -68,7 +68,7 @@ const StreamDetail: NextPage = () => {
           },
         } as any)
     , false );
-    // sendMessage(form); //백엔드로 POST 요청을 보내는 함수
+    sendMessage(form);
   };
 
   return (

@@ -42,7 +42,7 @@ const ItemDetail: NextPage = () => {
           <Image
             src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${data?.product.image}/public`}
             className="h-96 bg-slate-300 object-cover"
-            layout="fill"
+            alt={""}
             />
         </div>
         <div className="flex cursor-pointer py-3 border-y items-center space-x-3">
@@ -51,7 +51,7 @@ const ItemDetail: NextPage = () => {
               height={48}
               src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${data?.product?.user?.avatar}/avatar`}
               className="w-12 h-12 rounded-full bg-slate-300"
-
+              alt={""}
             />
           <div>
             <p className="text-sm font-medium text-gray-700">{data?.product?.user?.name}</p>
