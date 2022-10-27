@@ -87,3 +87,7 @@ npm i next-auth
 ### middleware
 
 미들웨어는 request가 완료되기 전에 코드를 실행할 수 있기 때문에 Next.js에서 완전한 유연성을 제공합니다. 사용자의 수신 요청에 따라 rewriting, redirecting, 헤더 추가 또는 HTML 스트리밍을 통해 response를 수정할 수 있습니다.
+
+### document
+
+Custom Document는 페이지를 랜더링하는 데 사용되는 html 및 body 태그를 업데이트할 수 있습니다. 이 파일은 서버에서만 랜더링되므로 onClick과 같은 이벤트 핸들러는 \_document에서 사용할 수 없습니다. Html, Head, Main 및 NextScript는 페이지가 제대로 랜더링되는 데 필요합니다

@@ -19,12 +19,12 @@ model User {
   name            String
   avatar          String?
   createdAt       DateTime    @default(now())
-  updateAt        DateTime    @updatedAt
+  updatedAt       DateTime    @updatedAt
   tokens          Token[]
   products        Product[]
   posts           Post[]
   answers         Answer[]
-  Wondering       Wondering[]
+  wonderings      Wondering[]
   writtenReviews  Review[]    @relation(name: "writtenReviews")
   receivedReviews Review[]    @relation(name: "receivedReviews")
   fav             Fav[]
@@ -38,17 +38,17 @@ model User {
 model Token {
   id        Int      @id @default(autoincrement())
   payload   String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
 }
 
 model Product {
   id          Int        @id @default(autoincrement())
   createdAt   DateTime   @default(now())
-  updateAt    DateTime   @updatedAt
-  user        User       @relation(fields: [userId], references: [id])
+  updatedAt   DateTime   @updatedAt
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
   image       String
   name        String
@@ -60,20 +60,10 @@ model Product {
   records     Record[]
 }
 
-model Fav {
-  id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
-  userId    Int
-  productId Int
-}
-
 model Post {
   id        Int         @id @default(autoincrement())
   createdAt DateTime    @default(now())
-  updateAt  DateTime    @updatedAt
+  updatedAt DateTime    @updatedAt
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   question  String      @db.MediumText
@@ -86,7 +76,7 @@ model Post {
 model Answer {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
@@ -97,7 +87,7 @@ model Answer {
 model Wondering {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
@@ -107,7 +97,7 @@ model Wondering {
 model Review {
   id           Int      @id @default(autoincrement())
   createdAt    DateTime @default(now())
-  updateAt     DateTime @updatedAt
+  updatedAt    DateTime @updatedAt
   review       String   @db.MediumText
   createdBy    User     @relation(name: "writtenReviews", fields: [createdById], references: [id], onDelete: Cascade)
   createdById  Int
@@ -118,33 +108,43 @@ model Review {
 
 model Sale {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Purchase {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Fav {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Record {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // Casecade 부모 레코드가 삭제되었을 떄 자식 레코드도 삭제시킨다.
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
+  createdAt DateTime @default(now())
   kind      String
+  updatedAt DateTime @updatedAt
 }
 
 enum Kind {
@@ -156,11 +156,11 @@ enum Kind {
 model Stream {
   id            Int       @id @default(autoincrement())
   createdAt     DateTime  @default(now())
-  updateAt      DateTime  @updatedAt
+  updatedAt     DateTime  @updatedAt
   name          String
   description   String    @db.MediumText
   price         Int
-  user          User      @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId        Int
   messages      Message[]
   cloudflareId  String
@@ -171,10 +171,10 @@ model Stream {
 model Message {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   message   String   @db.MediumText
-  stream    Stream   @relation(fields: [streamId], references: [id])
+  stream    Stream   @relation(fields: [streamId], references: [id], onDelete: Cascade)
   streamId  Int
 }
