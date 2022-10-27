@@ -4,7 +4,11 @@ import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { emailState, passwordState } from '../../utils/recoil/state';
 
-export default function Login() {
+interface Props {
+  a: () => void
+}
+
+export default function Login({a}: Props) {
   const [InputEmail, setInputEmail] = useState("");         //Eamil input value
   const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
 
@@ -25,7 +29,7 @@ export default function Login() {
         <S.LoginInput>
           <p>Email</p>
           <input
-            onChange={(e) => setInputEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email을 입력하세요"
           />
         </S.LoginInput>
@@ -33,12 +37,12 @@ export default function Login() {
           <p>PassWord</p>
           <input
             type="password"
-            onChange={(e) => setInputPassWord(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="PassWord을 입력하세요"
           />
         </S.LoginInput>
       </S.InputsWapper>
-      <S.LoginButton onClick={onLogin}>Login</S.LoginButton>
+      <S.LoginButton onClick={a}>Login</S.LoginButton>
       <Link href="/user/resister">
         <p>회원가입하거가기</p>
       </Link>

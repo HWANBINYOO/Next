@@ -12,8 +12,7 @@ export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsCo
   const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
   const [email] = useRecoilState(emailState); 
   const [password] = useRecoilState<string>(passwordState);
-
- useEffect(()=>{
+  
   async function a(){
     try {
       const { data } = await axios.post(
@@ -33,12 +32,14 @@ export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsCo
       console.error(e.message);
     }
   }
-  a(); 
- },[email,password]);
 
   return (
     <>
-      <Login/>
+      <Login onClick={a}/>
     </>
   );
+}
+
+export async function getServerSideProps () {
+
 }
