@@ -100,3 +100,9 @@ Next.js Script 컴포넌트인 next/script는 HTML script 태그의 확장
 beforeInteractive: 페이지가 interactive 되기 전에 로드
 afterInteractive: (기본값) 페이지가 interactive 된 후에 로드
 lazyOnload: 다른 모든 데이터나 소스를 불러온 후에 로드 // === onLoad prop
+
+### getServerSideProps
+
+페이지에서 getServerSideProps(서버 측 렌더링)라는 함수를 export 하면 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 각 요청에서 이 페이지를 미리 랜더링함
+
+단점: SWR 에서 제공하는 기능을 사용할 수가 없음 (다른 탭으로 전환했다가 다시 페이지로 돌아오면 SWR이 api를 다시 불러주는것)
