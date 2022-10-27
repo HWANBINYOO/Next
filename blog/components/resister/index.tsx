@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
+import axios from "axios";
 
 export default function Register() {
   const [Email, setEmail] = useState("");
@@ -25,11 +26,20 @@ export default function Register() {
       } else if (!PassWordPegex.test(PassWord)) {
         return console.log("패스워드가 4자리 이상이려야해요!(숫자포함)");
       }
-      const { data }: any = await CustomAxois.post("user/register", {
-        name: Name,
+      // const { data }: any = await CustomAxois.post("user/register", {
+      //   name: Name,
+      //   email: Email,
+      //   password: PassWord,
+      // });
+
+      const { data } = await axios.post(
+        `http://10.120.74.59:8081/user/register`,
+        {
+          name: Name,
         email: Email,
         password: PassWord,
-      });
+        }
+        );
       console.log(data);
       redirect("/user/login");
     } catch (e: any) {

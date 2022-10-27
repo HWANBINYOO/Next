@@ -3,7 +3,7 @@ import { GetServerSidePropsContext, NextApiResponse } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Login from "@components/login";
+import Login from "../../components/login/index";
 import { emailState, passwordState } from "../../utils/recoil/state";
 
 export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsContext) {
@@ -12,16 +12,16 @@ export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsCo
   const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
   const [email] = useRecoilState(emailState); 
   const [password] = useRecoilState<string>(passwordState);
-  
+
   async function a(){
     try {
       const { data } = await axios.post(
-        `https://server.dev-log.kr/user/login`,
+        `http://10.120.74.59:8081/user/login`,
         {
           email: email,
           password: password,
         }
-        );
+      );
       const Blog_accessToken = data.accessToken;
       const Blog_refreshToken = data.refreshToken;
       ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
@@ -38,8 +38,4 @@ export default function LoginPage(res: NextApiResponse,ctx: GetServerSidePropsCo
       <Login onClick={a}/>
     </>
   );
-}
-
-export async function getServerSideProps () {
-
 }
