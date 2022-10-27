@@ -35,7 +35,7 @@ const Create: NextPage = () => {
     }
   },[data, router])
   return (
-    <Layout canGoBack title="Go Live">
+    <Layout canGoBack seoTitle="Go Live">
     <form onSubmit={handleSubmit(onValid) } className=" space-y-4 py-10 px-4">
       <Input register={register("name", {required:true})} required label="Name" name="name" type="text" />
       <Input

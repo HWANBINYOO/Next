@@ -23,7 +23,7 @@ const Home: NextPage = () => {
   const { data } = useSWR<ProductsResponse>("/api/products");
   console.log(data);
   return (
-    <Layout title='홈' hasTabBar>
+    <Layout seoTitle='홈' hasTabBar>
       <Head><title>Home</title></Head>
       <div className='flex flex-col space-y-5 py-10'>
         {data?.products?.map((product) => (
