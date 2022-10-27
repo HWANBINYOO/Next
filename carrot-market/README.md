@@ -86,8 +86,17 @@ npm i next-auth
 
 ### middleware
 
-미들웨어는 request가 완료되기 전에 코드를 실행할 수 있기 때문에 Next.js에서 완전한 유연성을 제공합니다. 사용자의 수신 요청에 따라 rewriting, redirecting, 헤더 추가 또는 HTML 스트리밍을 통해 response를 수정할 수 있습니다.
+미들웨어는 request가 완료되기 전에 코드를 실행할 수 있기 때문에 Next.js에서 완전한 유연성을 제공함. 사용자의 수신 요청에 따라 rewriting, redirecting, 헤더 추가 또는 HTML 스트리밍을 통해 response를 수정할 수 있음
 
 ### document
 
-Custom Document는 페이지를 랜더링하는 데 사용되는 html 및 body 태그를 업데이트할 수 있습니다. 이 파일은 서버에서만 랜더링되므로 onClick과 같은 이벤트 핸들러는 \_document에서 사용할 수 없습니다. Html, Head, Main 및 NextScript는 페이지가 제대로 랜더링되는 데 필요합니다
+Custom Document는 페이지를 랜더링하는 데 사용되는 html 및 body 태그를 업데이트할 수 있음. 이 파일은 서버에서만 랜더링되므로 onClick과 같은 이벤트 핸들러는 \_document에서 사용할 수 없음. Html, Head, Main 및 NextScript는 페이지가 제대로 랜더링되는 데 필요함
+
+### Script Component
+
+Next.js Script 컴포넌트인 next/script는 HTML script 태그의 확장
+이를 통해 개발자는 애플리케이션에서 써드 파티 스크립트의 로드되는 우선 순위를 설정할 수 있으므로 개발자 시간을 절약하면서 로드하는 성능을 향상시킬 수 있음
+
+beforeInteractive: 페이지가 interactive 되기 전에 로드
+afterInteractive: (기본값) 페이지가 interactive 된 후에 로드
+lazyOnload: 다른 모든 데이터나 소스를 불러온 후에 로드 // === onLoad prop
