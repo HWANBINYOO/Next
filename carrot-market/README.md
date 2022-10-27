@@ -81,3 +81,9 @@ npm i next-auth
 3. 전달 : 전세계 Cloudflare 데이터 센터에서 이미지를 전달함
 
 #### Cloudflare? : 인터넷에 연결하는 모든 것을 안전적으로 연결하도록 설계된 전역 네트워크
+
+## Next.js
+
+### middleware
+
+미들웨어는 request가 완료되기 전에 코드를 실행할 수 있기 때문에 Next.js에서 완전한 유연성을 제공합니다. 사용자의 수신 요청에 따라 rewriting, redirecting, 헤더 추가 또는 HTML 스트리밍을 통해 response를 수정할 수 있습니다.
