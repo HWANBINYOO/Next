@@ -1,18 +1,19 @@
-{
-  "name": "carrot-market",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+{  
+  "name": "front-end",
+"version": "0.1.0",
+"private": true,
+"scripts": {
+  "dev": "next dev",
+  "build": "next build",
+  "start": "next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@prisma/client": "^4.4.0",
     "@sendgrid/mail": "^7.7.0",
     "@tailwindcss/forms": "^0.5.3",
     "@types/nodemailer": "^6.4.6",
+    "gray-matter": "^4.0.3",
     "iron-session": "^6.2.1",
     "next": "^12.3.2-canary.32",
     "nodemailer": "^6.7.8",

@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import {FieldErrors , useForm } from "react-hook-form";
 
 // Less code (c)
