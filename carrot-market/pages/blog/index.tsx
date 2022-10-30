@@ -1,7 +1,7 @@
 import Layout from "@components/layout";
 import matter from "gray-matter";
 import { readdirSync, readFileSync } from "fs";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 
 interface Post {
@@ -35,7 +35,7 @@ const Blog: NextPage<{ posts: Post[] }> = ({ posts }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps:GetStaticProps = async() => {
   const blogPosts = readdirSync("./posts").map((file) => {
     const content = readFileSync(`./posts/${file}`, "utf-8");
     const [slug, _] = file.split(".");

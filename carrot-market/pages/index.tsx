@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { GetServerSideProps, NextPage } from 'next'
 import Layout from '../components/layout';
 import FloatingButton from "@components/floating-button";
 import Item from "@components/item";
@@ -6,6 +6,7 @@ import useUser from '@libs/client/useUser';
 import Head from 'next/head';
 import useSWR, { SWRConfig } from 'swr';
 import { Product } from '@prisma/client';
+import client from "@libs/server/client";
 
 export interface ProductWithCount extends Product {
   _count: {
@@ -72,8 +73,10 @@ const Page:NextPage<{products: ProductWithCount[] }> = ({products}) => {
   );
 };
 
-export async function getServerSideProps() {
+export const getServerSideProps:GetServerSideProps = async() => {
+  console.log("SSR");
   const products = await client?.product.findMany({});
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   return {
     props:{
       products:JSON.parse(JSON.stringify(products)),

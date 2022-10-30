@@ -118,7 +118,7 @@ lazyOnload: 다른 모든 데이터나 소스를 불러온 후에 로드 // === 
 
 SWR 에서 제공하는 기능을 사용할 수가 없음 (다른 탭으로 전환했다가 다시 페이지로 돌아오면 SWR이 api를 다시 불러주는것)
 
-getServerSideProps를 이용해서 데이터를 불러오는 도중에 에러가 나면 에러가 나는 과정에서 유저는 아무 UI도 볼 수 없게 된됨
+getServerSideProps를 이용해서 데이터를 불러오는 도중에 에러가 나면 에러가 나는 과정에서 유저는 아무 UI도 볼 수 없게됨
 
 ## getStaticProps
 
@@ -151,3 +151,9 @@ npm i gray-matter
 getStaticPaths는 getStaticProps와 함께 사용해야 함
 
 getServerSideProps와 함께 사용할 수 없고 getStaticPaths는 getStaticProps도 사용하는 동적 경로에서만 export할 수 있음
+
+## _Incremental Static Regeneration(단계적 정적 재생성)_
+
+getServerSideProps의 단점과 getStaticProps 의 단점을 모두 보완한것
+
+getStaticProps 을써 빌드할떄 페이지를 만들어놓은뒤 시간을 정해 그 시간마다 데이터를 받아옴
