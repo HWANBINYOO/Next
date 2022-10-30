@@ -152,8 +152,14 @@ getStaticPaths는 getStaticProps와 함께 사용해야 함
 
 getServerSideProps와 함께 사용할 수 없고 getStaticPaths는 getStaticProps도 사용하는 동적 경로에서만 export할 수 있음
 
-## _Incremental Static Regeneration(단계적 정적 재생성)_
+## \*Incremental Static Regeneration(단계적 정적 재생성)
 
 getServerSideProps의 단점과 getStaticProps 의 단점을 모두 보완한것
 
 getStaticProps 을써 빌드할떄 페이지를 만들어놓은뒤 시간을 정해 그 시간마다 데이터를 받아옴
+
+## \*On-demand Revalidation
+
+revalidate 시간을 60으로 설정하면 모든 방문자는 1분 동안 동일한 버전의 사이트를 봄. 캐시를 무효화하는 유일한 방법은 1분이 지난 후 누군가가 해당 페이지를 방문하는 것
+
+revalidate가 생략되면 Next.js는 기본값인 false(재검증 없음)를 사용하고, revalidate()가 호출될 때 on-demand 페이지만 revalidate함

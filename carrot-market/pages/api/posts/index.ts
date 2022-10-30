@@ -25,6 +25,9 @@ if(req.method === "POST"){
             },
         },
     });
+
+    await res.revalidate("/comunity");
+    
     res.json({
         ok: true,
         post,
