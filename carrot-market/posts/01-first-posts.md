@@ -7,3 +7,7 @@ category: thouths
 # Welecome everyone!
 
 This is my first blog post!
+
+- i
+- like
+- potatoes
