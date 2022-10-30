@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Layout from "@components/layout";
 import Button from "@components/button";
 import { useRouter } from "next/router";
@@ -9,6 +9,8 @@ import useMutation from "@libs/client/useMutation";
 import { cls } from "@libs/client/utils";
 import useUser from "@libs/client/useUser";
 import Image from "next/image";
+import client from "@libs/server/client";
+
 
 interface ProductWithUser extends Product {
   user: User;
@@ -20,8 +22,11 @@ interface ItemDetailResponse {
   isLiked:boolean;
 }
 
-const ItemDetail: NextPage = () => {
-  const { user,isLoading} = useUser();
+const ItemDetail: NextPage<ItemDetailResponse> = ({
+  product,
+  relatedProducts,
+  isLiked,
+}) => {  const { user,isLoading} = useUser();
   const router = useRouter();
   const {mutate} = useSWRConfig();
   const { data , mutate:boundMutate } = useSWR<ItemDetailResponse>(
@@ -40,7 +45,7 @@ const ItemDetail: NextPage = () => {
       <div className="mb-8">
         <div className="relative pb-20">  
           <Image
-            src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${data?.product.image}/public`}
+            src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${product.image}/public`}
             className="h-96 bg-slate-300 object-cover"
             alt={""}
             />
@@ -49,22 +54,22 @@ const ItemDetail: NextPage = () => {
         <Image
               width={48}
               height={48}
-              src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${data?.product?.user?.avatar}/avatar`}
+              src={`https://imagedelivery.net/xuyMWmX8fLPKBCrPnpoXwQ/${product?.user?.avatar}/avatar`}
               className="w-12 h-12 rounded-full bg-slate-300"
               alt={""}
             />
           <div>
-            <p className="text-sm font-medium text-gray-700">{data?.product?.user?.name}</p>
+            <p className="text-sm font-medium text-gray-700">{product?.user?.name}</p>
             <Link href={`user/profiles/${data?.product?.user?.id}`}>
               <a className="text-xs font-medium text-gray-500">View profile &rarr;</a>
             </Link>
           </div>
         </div>
         <div className="mt-5">
-          <h1 className="text-3xl font-bold text-gray-900">{data?.product?.name}</h1>
-          <span className="text-3xl mt-3 text-gray-900">${data?.product?.price}</span>
+          <h1 className="text-3xl font-bold text-gray-900">{product?.name}</h1>
+          <span className="text-3xl mt-3 text-gray-900">${product?.price}</span>
           <p className="text-base my-6 text-gray-600">
-            {data?.product?.description}
+            {product?.description}
           </p>
           <div className=" flex items-center justify-center space-x-2">
           <Button large text="Talk to seller" />
@@ -72,12 +77,12 @@ const ItemDetail: NextPage = () => {
               onClick={onFavClick}
               className={cls(
                 "p-3 rounded-md flex items-center justify-items-center",
-                data?.isLiked
+                isLiked
                 ? "text-red-400 hover:red-gray-500" 
                 : "text-gray-400 hover:text-gray-500"
               )}
             >
-             {data?.isLiked ? 
+             {isLiked ? 
              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
               <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
             </svg>:
@@ -103,7 +108,7 @@ const ItemDetail: NextPage = () => {
       <div>
         <h2 className="text-2xl font-bold text-gray-900">Similar items</h2>
         <div className="mt-6 grid grid-cols-2 gap-4">
-          {data?.relatedProducts?.map((product) => (
+          {relatedProducts?.map((product) => (
             <div key={product.id}>
               <div className="h-56 w-full mb-4 bg-slate-300"/>
               <h3 className=" text-gray-700">{product.name}</h3>
@@ -117,6 +122,59 @@ const ItemDetail: NextPage = () => {
     </div>
     </Layout>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  if (!ctx?.params?.id) {
+    return {
+      props: {},
+    };
+  }
+  const product = await client.product.findUnique({
+    where: {
+      id: +ctx.params.id.toString(),
+    },
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          avatar: true,
+        },
+      },
+    },
+  });
+  const terms = product?.name.split(" ").map((word) => ({
+    name: {
+      contains: word,
+    },
+  }));
+  const relatedProducts = await client.product.findMany({
+    where: {
+      OR: terms,
+      AND: {
+        id: {
+          not: product?.id,
+        },
+      },
+    },
+  });
+  const isLiked = false;
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+  return {
+    props: {
+      product: JSON.parse(JSON.stringify(product)),
+      relatedProducts: JSON.parse(JSON.stringify(relatedProducts)),
+      isLiked,
+    },
+  };
 };
 
 export default ItemDetail;
