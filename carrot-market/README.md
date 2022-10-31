@@ -15,7 +15,7 @@ npx prisma generate
 //데이터베이스 관리자
 npx prisma studio
 
-### Prisma
+## Prisma
 
 nodejs, typescript의 ORM
 
@@ -84,13 +84,13 @@ npm i next-auth
 
 # Next.js
 
-### middleware
+## middleware
 
 미들웨어는 request가 완료되기 전에 코드를 실행할 수 있기 때문에 Next.js에서 완전한 유연성을 제공함.
 
 사용자의 수신 요청에 따라 rewriting, redirecting, 헤더 추가 또는 HTML 스트리밍을 통해 response를 수정할 수 있음
 
-### document
+## document
 
 Custom Document는 페이지를 랜더링하는 데 사용되는 html 및 body 태그를 업데이트할 수 있음.
 
@@ -198,3 +198,15 @@ Suspense는 단순히 데이터 로딩뿐만 아니라 이미지, 스크립트, 
     < ProfilePage />
 < /Suspense>
 ```
+
+## React Server Components
+
+Server Components를 사용하면 서버에서 React 컴포넌트를 렌더링할 수 있음
+
+서버에서 HTML을 미리 생성하는 SSR과 근본적으로 다름
+
+서버 컴포넌트를 사용하면 "클라이언트 측 JavaScript가 필요하지 않으므로" 페이지 렌더링이 빨라짐
+
+서버 렌더링의 가장 좋은 부분을 클라이언트 측 상호 작용과 결합하여 응용 프로그램의 사용자 경험을 향상시킴
+
+서버에서 컴포넌트를 실행하려면 파일 이름 끝에 .server.js를 추가해야함

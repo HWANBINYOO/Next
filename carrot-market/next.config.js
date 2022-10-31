@@ -3,6 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     reactRoot: true,
+    runtime: "nodejs",
+    serverComponents: true,
   },
   swcMinify: true,
   images : {
@@ -10,4 +12,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;
