@@ -152,6 +152,24 @@ getStaticPaths는 getStaticProps와 함께 사용해야 함
 
 getServerSideProps와 함께 사용할 수 없고 getStaticPaths는 getStaticProps도 사용하는 동적 경로에서만 export할 수 있음
 
+### fallback: 'blocking'
+
+fallback이 'blocking'인 경우 getStaticPaths에서 반환되지 않은 새 경로는 SSR과 동일하게 HTML이 생성될 때까지 기다렸다가 이후 요청을 위해 캐시되어 path당 한 번만 발생함 fallback: 'blocking'은 기본적으로 생성된 페이지를 업데이트하지 않음 생성된 페이지를 업데이트하려면 fallback: blocking과 함께 ISR을 사용해야함
+
+### fallback: false
+
+getStaticPaths가 반환한 경로만 빌드함
+
+이 옵션은 생성할 경로가 적거나 새 페이지 데이터가 자주 추가되지 않는 경우에 유용
+
+### fallback: true
+
+이 옵션은 데이터에 의존하는 static 페이지가 많은 경우에 유용
+
+fallback: 'blocking'과 같이 작동하는데 첫 번째 요청에서 페이지의 "fallback" 버전(isFallback)을 제공함
+
+모든 제품 페이지를 미리 렌더링하려면 빌드 시간이 매우 오래 걸림
+
 ## \*Incremental Static Regeneration(단계적 정적 재생성)
 
 getServerSideProps의 단점과 getStaticProps 의 단점을 모두 보완한것
