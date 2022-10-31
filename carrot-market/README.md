@@ -82,7 +82,7 @@ npm i next-auth
 
 #### Cloudflare? : 인터넷에 연결하는 모든 것을 안전적으로 연결하도록 설계된 전역 네트워크
 
-## Next.js
+# Next.js
 
 ### middleware
 
@@ -110,7 +110,7 @@ afterInteractive: (기본값) 페이지가 interactive 된 후에 로드
 
 lazyOnload: 다른 모든 데이터나 소스를 불러온 후에 로드 // === onLoad prop
 
-### getServerSideProps
+## getServerSideProps
 
 페이지에서 getServerSideProps(서버 측 렌더링)라는 함수를 export 하면 Next.js는 getServerSideProps에서 반환된 데이터를 사용하여 각 요청에서 이 페이지를 미리 랜더링함
 
@@ -170,14 +170,31 @@ fallback: 'blocking'과 같이 작동하는데 첫 번째 요청에서 페이지
 
 모든 제품 페이지를 미리 렌더링하려면 빌드 시간이 매우 오래 걸림
 
-## \*Incremental Static Regeneration(단계적 정적 재생성)
+### \*Incremental Static Regeneration(단계적 정적 재생성)
 
 getServerSideProps의 단점과 getStaticProps 의 단점을 모두 보완한것
 
 getStaticProps 을써 빌드할떄 페이지를 만들어놓은뒤 시간을 정해 그 시간마다 데이터를 받아옴
 
-## \*On-demand Revalidation
+### \*On-demand Revalidation
 
 revalidate 시간을 60으로 설정하면 모든 방문자는 1분 동안 동일한 버전의 사이트를 봄. 캐시를 무효화하는 유일한 방법은 1분이 지난 후 누군가가 해당 페이지를 방문하는 것
 
 revalidate가 생략되면 Next.js는 기본값인 false(재검증 없음)를 사용하고, revalidate()가 호출될 때 on-demand 페이지만 revalidate함
+
+# REACT 18
+
+## Suspense
+
+Suspense를 사용하면 컴포넌트가 렌더링되기 전까지 기다릴 수 있음
+
+코드를 불러오는 동안 “기다릴 수 있고”, 기다리는 동안 로딩 상태를 지정할 수 있도록 < Suspense > 컴포넌트가 추가됨
+
+Suspense는 단순히 데이터 로딩뿐만 아니라 이미지, 스크립트, 비동기 작업을 기다리는 데에도 사용될 수 있음
+
+```
+// ProfilePage를 불러오는 동안 Loading를 표시함
+< Suspense fallback={< Loading / >}>
+    < ProfilePage />
+< /Suspense>
+```
