@@ -28,6 +28,8 @@ const StartContents:NextPage = () => {
 const Wapper = styled.div`
     width: 100%;
     height: 100vh;
+    background-color: #ff6464;
+
      
     display: flex;
     flex-direction:column;
@@ -50,6 +52,7 @@ const Btn = styled.button`
     border: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: all 0.15s ease-in-out;
+    background-color: #ff6464;
 
     :hover{
         color: black;
@@ -77,21 +80,19 @@ const IBtn = styled.div`
     justify-content: center;
     align-items: flex-end;
     cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 const Modal = styled.div`
     width: 450px;
-    height: 140px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 120px;
     background-color: white;
-    padding: 15px 20px;
+    padding: 50% 20px;
     border-radius: 10px;
     position: absolute;
     right: 0px;
     top: 50px;
-
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 

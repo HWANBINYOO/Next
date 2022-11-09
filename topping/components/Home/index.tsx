@@ -1,9 +1,21 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from "next/image";
+import { MenuProps } from '../../types';
+import {MarathonData , RamenData , TteokbokkiData } from "../../meta"
 
-const Home:NextPage = () => {
+const Home = ({router} : {router:string}) => {
+    const [toppingData , setToppingData ] = useState<MenuProps[]>();
+
+    useEffect(() => {
+        switch(router) {
+            case "마라탕" : setToppingData(MarathonData); break;
+            case "라면" : setToppingData(RamenData); break;
+            case "떡볶이" : setToppingData(TteokbokkiData); break;
+        }
+    },[router])
+    console.log(toppingData);
 
     const onClick = () => {
         
@@ -12,7 +24,7 @@ const Home:NextPage = () => {
         <Wapper>
             <HomeWapper>
                 <ToppingsWapper>
-                    <Topping>{"a"}</Topping>
+                    { toppingData?.map((i, index) =>  <Topping key={index}>{i.menu}</Topping> ) }
                 </ToppingsWapper>
                 <ToppingImg>
                     <Image src={''} alt={''}></Image>

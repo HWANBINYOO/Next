@@ -1,13 +1,16 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Home from '../components/Home';
 
 const toppingPage:NextPage = () => {
+    const router = useRouter();
     
     return (
         <>
             <Header />
-            <Home />
+            <Home router={router.query.name as string} />
         </>
     )
 }
