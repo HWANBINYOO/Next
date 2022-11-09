@@ -1,4 +1,4 @@
-# [뭐 넣지?](https://topping.netlify.app/)
+# [뭐 넣지?](https://topping.vercel.app/)
 
 마라탕 , 떡볶이 , 라면 토핑을 랜덤추천해주는 사이트
 
