@@ -18,6 +18,8 @@ html,
 body,
 a,
 button {
+  background-color: #ff6464;
+
   font-family: GmarketSansMedium;
 }
 
