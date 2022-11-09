@@ -9,7 +9,9 @@ const Header:NextPage = () => {
     
     return (
         <Wapper>
-            <Logo>뭐 넣지?</Logo>
+            <Link  href="마라탕">
+                <Logo>뭐 넣지?</Logo>
+            </Link>
             <Nav>
                 <Link  href="마라탕" style={{borderBottom: menuValue === "마라탕" ? "5px solid white" : "none"}}>마라탕</Link>
                 <Link href="떡볶이" style={{borderBottom: menuValue === "떡볶이" ? "5px solid white" : "none"}}>떡볶이</Link>
@@ -21,7 +23,7 @@ const Header:NextPage = () => {
 
 const Wapper = styled.div`
     width: 100%;
-    height: 130px;
+    height: 100px;
     
     display: flex;
     justify-content: space-between;
@@ -31,8 +33,9 @@ const Wapper = styled.div`
 `;
 
 const Logo = styled.div`
-    font-size: 55px;
+    font-size: 50px;
     color: white;
+    cursor: pointer;
 `;
 
 const Nav = styled.nav`
@@ -47,4 +50,3 @@ const Nav = styled.nav`
 `;
 
 export default Header;
-

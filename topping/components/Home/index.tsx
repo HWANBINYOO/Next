@@ -17,19 +17,13 @@ const Home = ({router} : {router:string}) => {
             case "라면" : setToppingData(RamenData); break;
             case "떡볶이" : setToppingData(TteokbokkiData); break;
         }
+        setRandomList();
         setMenuValue(router);
-    },[router])
-    console.log(toppingData);
-
+    },[router]);
 
     const onClick = () => {
-        setRandomList(toppingData.sort(() =>   Math.random() - 0.5).slice(1, (Number(sliceValue) +1)))
+        setRandomList(toppingData.sort(() => Math.random() - 0.5).slice(1, (Number(sliceValue) +1)))
     }
-    // console.log(radomList);
-    
-
-   
-
     
     return (
         <Wapper>
@@ -43,8 +37,7 @@ const Home = ({router} : {router:string}) => {
             </HomeWapper>
             <BtnsWapper>
                 <input type="range" min="1" max="5" onChange={(e) => setSliceValue(e.target.value)} value={sliceValue} />
-                <span>{sliceValue}</span>
-                <Btn onClick={onClick}>추천</Btn>
+                <Btn onClick={onClick}>{sliceValue}개추천</Btn>
             </BtnsWapper>
         </Wapper>
     )
@@ -57,6 +50,7 @@ const Wapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
 `;
 
 const HomeWapper = styled.div`
@@ -87,19 +81,56 @@ const ToppingImg = styled.div`
 `;
 
 const BtnsWapper = styled.div`
-    width: 400px;
+    width: 600px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content:space-between;
+
+    input[type="range"] {
+    overflow: hidden;
+    height: 30px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 250px;
+    background: transparent;
+}
+input[type="range"]:focus {
+	outline: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #ffc3bb;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #ff6464;
+    box-shadow: 1px 1px 7px #ffc3bb;
+    cursor: pointer;
+    box-shadow: -100vw 0 0 100vw #ffc3bb;
+}
 `;
 
 const Btn = styled.button`
-    width: 130px;
+    width: 250px;
     height: 50px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    font-size: 25px;
+    background-color: #ff6464;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: all 0.3s ease-in-out;
+
+    :hover{
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    }
 `;
 
 export default Home;

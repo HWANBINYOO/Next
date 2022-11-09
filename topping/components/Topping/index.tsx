@@ -17,7 +17,7 @@ const ToppingWapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius:10px;
-    background-color: #ffc3bb;
+    background-color: #ff8780;
     color: white;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
