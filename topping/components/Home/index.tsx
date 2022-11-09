@@ -13,11 +13,10 @@ const Home = ({router} : {router:string}) => {
     const [radomList , setRandomList ] = useState<string[]>();
     useEffect(() => {
         switch(router) {
-            case "마라탕" : setToppingData(MarathonData); break;
-            case "라면" : setToppingData(RamenData); break;
-            case "떡볶이" : setToppingData(TteokbokkiData); break;
+            case "마라탕" : setToppingData(MarathonData); setRandomList(MarathonData); break;
+            case "라면" : setToppingData(RamenData); setRandomList(RamenData);  break;
+            case "떡볶이" : setToppingData(TteokbokkiData); setRandomList(TteokbokkiData); break;
         }
-        setRandomList(toppingData);
         setMenuValue(router);
     },[router]);
 
@@ -28,12 +27,12 @@ const Home = ({router} : {router:string}) => {
     return (
         <Wapper>
             <HomeWapper>
-                <ToppingsWapper>
-                    { radomList ? (radomList?.map((i, index) =>  <Topping key={index} data={i} />) ) : (toppingData?.map((i, index) =>  <Topping key={index} data={i} />) ) }
-                </ToppingsWapper>
                 <ToppingImg>
                     <Image src={`/image/${router}.jpg`} alt={'이미지'} width={400} height={350}/>
                 </ToppingImg>
+                <ToppingsWapper>
+                    { radomList ? (radomList?.map((i, index) =>  <Topping key={index} data={i} />) ) : (toppingData?.map((i, index) =>  <Topping key={index} data={i} />) ) }
+                </ToppingsWapper>
             </HomeWapper>
             <BtnsWapper>
                 <input type="range" min="1" max="5" onChange={(e) => setSliceValue(e.target.value)} value={sliceValue} />
