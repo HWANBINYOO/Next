@@ -1,25 +1,27 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import Link from 'next/link';
+import { useRecoilState} from 'recoil';
+import { MenuValueAtom } from '../../recoil/state';
 
 const Header:NextPage = () => {
+    const  [ menuValue,] = useRecoilState(MenuValueAtom);
     
     return (
         <Wapper>
             <Logo>뭐 넣지?</Logo>
             <Nav>
-                <Link  href="마라탕">마라탕</Link>
-                <Link href="떡볶이">떡볶이</Link>
-                <Link href="라면">라면</Link>
+                <Link  href="마라탕" style={{borderBottom: menuValue === "마라탕" ? "5px solid white" : "none"}}>마라탕</Link>
+                <Link href="떡볶이" style={{borderBottom: menuValue === "떡볶이" ? "5px solid white" : "none"}}>떡볶이</Link>
+                <Link href="라면" style={{borderBottom: menuValue === "라면" ? "5px solid white" : "none"}}>라면</Link>
             </Nav>
-            {/* <EmptyBox /> */}
         </Wapper>
     )
 }
 
 const Wapper = styled.div`
     width: 100%;
-    height: 150px;
+    height: 130px;
     
     display: flex;
     justify-content: space-between;
@@ -37,16 +39,11 @@ const Nav = styled.nav`
     width: 300px;
     display: flex;
     justify-content: space-between;
-
-    /* border: 1px solid black; */
     font-size: 30px;
 
     a{
         color: white;
     }
-`;
-
-const EmptyBox = styled.div`
 `;
 
 export default Header;
