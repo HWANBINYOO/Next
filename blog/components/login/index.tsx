@@ -1,23 +1,18 @@
 import * as S from "./styled";
 import Link from "next/link";
-import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { emailState, passwordState } from '../../utils/recoil/state';
+import useLogin from "../../utils/lib/useLogin";
 
-interface Props {
-  a: () => void
-}
-
-export default function Login({a}: Props) {
-  const [InputEmail, setInputEmail] = useState("");         //Eamil input value
-  const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
+export default function Login() {
+  // const [InputEmail, setInputEmail] = useState("");         //Eamil input value
+  // const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
 
   const [,setEmail] = useRecoilState(emailState);
   const [,setPassword] = useRecoilState<string>(passwordState);
 
   const onLogin = async () => {
-    setEmail(InputEmail);
-    setPassword(InputPassWord);
+    useLogin();
   };
 
   return (
@@ -42,7 +37,7 @@ export default function Login({a}: Props) {
           />
         </S.LoginInput>
       </S.InputsWapper>
-      <S.LoginButton onClick={a}>Login</S.LoginButton>
+      <S.LoginButton onClick={onLogin}>Login</S.LoginButton>
       <Link href="/user/resister">
         <p>회원가입하거가기</p>
       </Link>
