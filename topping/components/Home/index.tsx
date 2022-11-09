@@ -17,7 +17,7 @@ const Home = ({router} : {router:string}) => {
             case "라면" : setToppingData(RamenData); break;
             case "떡볶이" : setToppingData(TteokbokkiData); break;
         }
-        setRandomList();
+        setRandomList(toppingData);
         setMenuValue(router);
     },[router]);
 
