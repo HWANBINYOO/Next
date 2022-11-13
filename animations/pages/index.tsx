@@ -1,8 +1,11 @@
 import type { NextPage } from 'next'
+import {Header} from '../components/index'
 
 const Home: NextPage = () => {
   return (
-    <>hi</>
+    <>
+      <Header />
+    </>
   )
 }
 
