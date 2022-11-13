@@ -1,12 +1,13 @@
 import type { NextPage } from 'next'
-import {Header} from '../components/index'
+import {Header, Home} from '../components/index'
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <>
       <Header />
+      <Home />
     </>
   )
 }
 
-export default Home
+export default HomePage
