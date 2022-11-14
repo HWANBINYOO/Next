@@ -1,5 +1,2 @@
 export { default as Header } from './Header'
 export { default as Home } from './Home'
-export { default as SectionOne } from './sections/sectionOne'
-export { default as sectionTwo } from './sections/sectionTwo'
-export { default as sectionThree } from './sections/sectionThree'

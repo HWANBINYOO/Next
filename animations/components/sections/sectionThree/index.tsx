@@ -1,6 +1,6 @@
 import * as S from "./styled";
 import { NextPage } from "next";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import useIntersectionObserver from "../../../Hook/useIntersectionObserver";
 
 const SectionThree:NextPage = () => {
@@ -13,10 +13,9 @@ const SectionThree:NextPage = () => {
 
   return(
       <S.SectionThreeWapper>
-       <p style={{opacity : part1State ? "1" : "0"}} ref={setTarget}>useRef를 사용했다</p>
+            <S.Box  style={{width: part1State ? "300px" : "300px" , height : part1State ? "100vh" : "100vh"}} ref={setTarget}></S.Box>
       </S.SectionThreeWapper>
   )
 }
 
 export default SectionThree;
-

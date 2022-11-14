@@ -9,5 +9,5 @@ export const SectionOneWapper = styled.div`
     align-items: center;
     justify-content: center;
     color: black;
-    font-size: 30px;
+    font-size: 50px;
 `;

@@ -8,13 +8,24 @@ export const SectionTwoWapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
     font-size: 30px;
+`;
+
+export const Box = styled.div`
+    width: 300px;
+    height: 300px;
+    background-color: black;
+    opacity: 0;
+    transition: all  ease-in-out 0.5s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     p{
-      background-color: antiquewhite;
       opacity: 0;
-      transition: all 0.5s ease-in-out;
+      color: white;
+      /* transition: all 0.5s ease-in-out; */
       font-size: 70px;
     }
 `;

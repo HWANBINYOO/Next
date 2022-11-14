@@ -9,9 +9,9 @@ export const HeaderWapper = styled.div`
   padding-left: 10%;
   gap: 30px;
   background-color: gray;
-  position: fixed;
   z-index: 1000;
-
+  position: sticky;
+  top: -50px;
 
   a{
         color: white;
