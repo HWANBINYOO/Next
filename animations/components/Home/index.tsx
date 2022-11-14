@@ -1,6 +1,7 @@
 import * as S from "./styled";
 import { NextPage } from "next";
 import { SectionOne , SectionTwo , SectionThree } from "../sections/index";
+import SectionFour from "../sections/sectionFour";
 // const [scrollY, setScrollY] = useState(0);
 // const partOneRef = useRef<any>();
 // const onScroll = useCallback((event:any) => {
@@ -24,6 +25,7 @@ const Home:NextPage = () => {
         <SectionOne />
         <SectionTwo />
         <SectionThree />
+        <SectionFour />
     </S.HomeWapper>
   );
 }
