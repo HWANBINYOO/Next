@@ -2,6 +2,9 @@ import * as S from "./styled";
 import { NextPage } from "next";
 import { useCallback, useEffect, useRef, useState } from "react";
 import useIntersectionObserver from "../../Hook/useIntersectionObserver";
+import SectionOne from "../sections/sectionOne";
+import SectionTwo from "../sections/sectionTwo";
+import SectionThree from "../sections/sectionThree";
     // const [scrollY, setScrollY] = useState(0);
     // const partOneRef = useRef<any>();
     // const onScroll = useCallback((event:any) => {
@@ -21,20 +24,11 @@ import useIntersectionObserver from "../../Hook/useIntersectionObserver";
     // })
 
 const Home:NextPage = () => {
-    const [part1State , setPart1State] = useState(false);
-    const observer = useRef<IntersectionObserver | null>(null);
-
-    const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-        setPart1State(isIntersecting)
-    };
-    const { setTarget } = useIntersectionObserver({ onIntersect });
-
-
-
   return (
     <S.HomeWapper>
-        <S.PartOne>안녕하세요</S.PartOne>
-        <S.PartTwo><p style={{opacity : part1State ? "1" : "0"}} ref={setTarget}>스크롤 이벤트 연습 중</p></S.PartTwo>
+        <SectionOne />
+        <SectionTwo />
+        <SectionThree />
     </S.HomeWapper>
   );
 }
