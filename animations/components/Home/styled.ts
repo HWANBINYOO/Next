@@ -15,8 +15,8 @@ export const PartOne = styled.div`
     align-items: center;
     justify-content: center;
     color: black;
-    border: 1px solid black;
     font-size: 30px;
+    /* border: 1px solid black; */
 `;
 
 export const PartTwo = styled.div`
@@ -25,8 +25,14 @@ export const PartTwo = styled.div`
 
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     color: black;
-    border: 1px solid black;
-    font-size: 30px;
+    /* border: 1px solid black; */
+
+    p{
+      background-color: antiquewhite;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+      font-size: 70px;
+    }
 `;

@@ -10,6 +10,8 @@ export const HeaderWapper = styled.div`
   gap: 30px;
   background-color: gray;
   position: fixed;
+  z-index: 1000;
+
 
   a{
         color: white;
