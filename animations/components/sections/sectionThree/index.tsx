@@ -4,17 +4,17 @@ import { useState } from "react";
 import useIntersectionObserver from "../../../Hook/useIntersectionObserver";
 
 const SectionThree:NextPage = () => {
-    const [part1State , setPart1State] = useState(false);
+    const [partState , setPartState] = useState(false);
 
     const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-        setPart1State(isIntersecting)
+        setPartState(isIntersecting)
     };
     const { setTarget } = useIntersectionObserver({ onIntersect });
 
   return(
       <S.SectionThreeWapper>
-            <S.Box  style={{width: part1State ? "800px" : "300px" , height : part1State ? "300px" : "100vh" , backgroundColor: part1State ?  "gray" : "black"}} ref={setTarget}>
-            <p style={{opacity : part1State ? "1" : "0"}} >Ref 사용</p>
+            <S.Box  style={{width: partState ? "100%" : "300px" , backgroundColor: partState ?  "grey" : "black"}} ref={setTarget}>
+            <p style={{opacity : partState ? "1" : "0" , color : partState ? "#F5F5F5" : "black"}} >' IntersectionObserver ' 사용</p>
             </S.Box>
       </S.SectionThreeWapper>
   )

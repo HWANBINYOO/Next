@@ -4,16 +4,18 @@ import { useState } from "react";
 import useIntersectionObserver from "../../../Hook/useIntersectionObserver";
 
 const SectionFour:NextPage = () => {
-    const [part1State , setPart1State] = useState(false);
+    const [partState , setPartState] = useState(false);
 
     const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-        setPart1State(isIntersecting)
+        setPartState(isIntersecting)
     };
     const { setTarget } = useIntersectionObserver({ onIntersect });
 
   return(
     <S.SectionFourWapper>
-           <S.TextWapper>안녕하세요</S.TextWapper>
+          <p>엄청</p>
+           <S.TextWapper style={{ backgroundSize: partState ? "100% 100%" : "0% 100%" , 
+           filter: partState ?  "drop-shadow(0 0 5 px #f9f7f1)" : "none" }} ref={setTarget}>든든해진</S.TextWapper>
     </S.SectionFourWapper>
   )
 }

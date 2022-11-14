@@ -16,7 +16,7 @@ export const Box = styled.div`
     height: 300px;
     background-color: black;
     opacity: 0;
-    transition: all  ease-in-out 0.5s;
+    transition: opacity ease-in-out 0.5s;
 
     display: flex;
     justify-content: center;
@@ -25,7 +25,6 @@ export const Box = styled.div`
     p{
       opacity: 0;
       color: white;
-      /* transition: all 0.5s ease-in-out; */
       font-size: 70px;
     }
 `;

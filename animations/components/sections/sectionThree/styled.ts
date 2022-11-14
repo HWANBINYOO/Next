@@ -12,9 +12,9 @@ export const SectionThreeWapper = styled.div`
 
 export const Box = styled.div`
     width: 300px;
-    height: 300px;
-    background-color: purple;
-    transition: all ease-in-out 1s 0.5s;
+    height: 100vh;
+    background-color: black;
+    transition: all ease-in-out 0.5s 1s;
 
     display: flex;
     align-items: center;
@@ -22,8 +22,11 @@ export const Box = styled.div`
 
     p{
       opacity: 0;
-      color: white;
-      transition: all ease-in 0.5s 1.5s;
-      font-size: 70px;
+      color: black;
+
+      transition: color ease-in 0.5s 1.3s;
+      transition: opacity ease-in 0.1s 1.8s;
+      font-size: 90px;
+      font-weight: bold;
     }
 `;
