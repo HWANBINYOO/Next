@@ -38,37 +38,26 @@ const StartContents:NextPage = () => {
         
         
         try {
-            const {data} = await axios.post("v1/vision/celebrity", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                  'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
-                  "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
-                  "Access-Control-Allow-Origin": "*",
-                },
-              });
-            console.log(data);
+            // const response1 = await axios.post("v1/vision/celebrity", formData, {
+            //     headers: {
+            //       "Content-Type": "multipart/form-data",
+            //       'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
+            //       "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
+            //     },
+            //   });
+            // console.log(response1);
+            const reponse2 = await axios.post("v1/vision/face", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
+                "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
+              },
+            });
+          console.log(reponse2.data.faces);
           } catch (e: any) {
             console.error(e);
           }
       };
-
-//   useEffect(() => {
-//     async function getblog() {
-//       try {
-//         const { data } = await axios.post("https://openapi.naver.com/v1/vision/celebrity", formData, {
-//             headers: {
-//               "Content-Type": "multipart/form-data",
-//               'X-Naver-Client-Id':"EvY6apNDh5yLogXj5xPK",
-//               "X-Naver-Client-Secret":"HYJkW3bKb9",
-//             },
-//           });
-//         console.log(data);
-//       } catch (e: any) {
-//         console.error(e.message);
-//       }
-//     }
-//     getblog();
-//   }, []);
 
     const onClick = (name:string) => {
         router.push(`${name}`);
