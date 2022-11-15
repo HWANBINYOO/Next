@@ -30,28 +30,27 @@ const StartContents:NextPage = () => {
           setFile(e.target.files[0]); // 파일 상태 업데이트
         }
       };
-
     
       const onSubmit = async (e: any) => {
         e.preventDefault();
         let formData = new FormData();
-        formData.append("file", file);
+        formData.append("image", file);
+        
+        
         try {
-            const response = await axios.post("https://openapi.naver.com/v1/vision/celebrity", formData, {
+            const {data} = await axios.post("v1/vision/celebrity", formData, {
                 headers: {
                   "Content-Type": "multipart/form-data",
-                  'X-Naver-Client-Id':"EvY6apNDh5yLogXj5xPK",
-                  "X-Naver-Client-Secret":"HYJkW3bKb9",
-                //   "Access-Control-Allow-Origin": "*",
+                  'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
+                  "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
+                  "Access-Control-Allow-Origin": "*",
                 },
               });
-            console.log(response);
+            console.log(data);
           } catch (e: any) {
             console.error(e);
           }
       };
-
-      fetch
 
 //   useEffect(() => {
 //     async function getblog() {
@@ -70,8 +69,6 @@ const StartContents:NextPage = () => {
 //     }
 //     getblog();
 //   }, []);
-
-    
 
     const onClick = (name:string) => {
         router.push(`${name}`);
