@@ -1,26 +1,122 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from "axios";
+import Image from "next/image";
+
 
 const StartContents:NextPage = () => {
     const router = useRouter();
     const [ModalState , setModalState] = useState(false);
+    const [ startBtnClick , setStartBtnClick ] = useState(false);
+
+    const [file, setFile] = useState(""); //파일
+    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+
+    const handleChangeFile = (e: any) => {
+        e.preventDefault();
+        let reader = new FileReader();
+    
+        reader.onloadend = () => {
+          // 2. 읽기가 완료되면 아래코드가 실행됩니다.
+          const base64 = reader.result;
+          if (base64) {
+            setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
+          }
+        };
+        if (e.target.files[0]) {
+          reader.readAsDataURL(e.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
+          setFile(e.target.files[0]); // 파일 상태 업데이트
+        }
+      };
+
+    
+      const onSubmit = async (e: any) => {
+        e.preventDefault();
+        let formData = new FormData();
+        formData.append("file", file);
+        try {
+            const response = await axios.post("https://openapi.naver.com/v1/vision/celebrity", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  'X-Naver-Client-Id':"EvY6apNDh5yLogXj5xPK",
+                  "X-Naver-Client-Secret":"HYJkW3bKb9",
+                //   "Access-Control-Allow-Origin": "*",
+                },
+              });
+            console.log(response);
+          } catch (e: any) {
+            console.error(e);
+          }
+      };
+
+      fetch
+
+//   useEffect(() => {
+//     async function getblog() {
+//       try {
+//         const { data } = await axios.post("https://openapi.naver.com/v1/vision/celebrity", formData, {
+//             headers: {
+//               "Content-Type": "multipart/form-data",
+//               'X-Naver-Client-Id':"EvY6apNDh5yLogXj5xPK",
+//               "X-Naver-Client-Secret":"HYJkW3bKb9",
+//             },
+//           });
+//         console.log(data);
+//       } catch (e: any) {
+//         console.error(e.message);
+//       }
+//     }
+//     getblog();
+//   }, []);
+
+    
 
     const onClick = (name:string) => {
         router.push(`${name}`);
     }
+
     return (
         <Wapper>
-            <IBtn onClick={() => setModalState(ModalState ? false : true )}>i
+        <form
+          name="files"
+          method="post"
+          encType="multipart/form-data"
+        >
+          <input
+            id="change_img"
+            type="file"
+            style={{ display: "none" }}
+            onChange={handleChangeFile}
+          />
+          <label htmlFor="change_img">변경</label>
+          {/* <button type="submit">제출하기</button> */}
+        </form>
+            {
+            imgBase64 ? (
+                <Image width={300} height={300} src={imgBase64} alt={''} />
+            ) : (
+                <p>없음</p>
+            )
+            }
+            <button onClick={onSubmit}>올리기</button>
+
+
+            {/* <IBtn onClick={() => setModalState(ModalState ? false : true )}>i
                 <Modal style={{display: ModalState ? "block" : "none"}}>
                     마라탕 , 떡볶이 , 라면 토핑과 재료를 <br/>
                     랜덤으로 추천해주는 사이트입니다
                 </Modal>
             </IBtn>
-            <Title>뭐 넣지?</Title>
-            <Btn onClick={() => onClick("마라탕")}>시작하기</Btn>
+            <Title>
+                { startBtnClick ? "메뉴를 선택하세요" : "뭐 넣지?" }
+            </Title>
 
+            
+            <Btn onClick={() => startBtnClick ? onClick("마라탕") : setStartBtnClick(true)}>
+                { startBtnClick ? "" : "시작하기" }
+            </Btn> */}
         </Wapper>
     )
 }

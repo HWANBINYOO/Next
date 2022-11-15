@@ -28,7 +28,8 @@ const Home = ({router} : {router:string}) => {
         <Wapper>
             <HomeWapper>
                 <ToppingImg>
-                    <Image src={`/image/${router}.jpg`} alt={'이미지'} width={400} height={350}/>
+                    {/* <Image src={`/image/${router}.jpg`} alt={'이미지'} width={400} height={350}/> */}
+                    <h1 style={{fontSize: "70px"}}> 마라탕</h1>
                 </ToppingImg>
                 <ToppingsWapper>
                     { radomList ? (radomList?.map((i, index) =>  <Topping key={index} data={i} />) ) : (toppingData?.map((i, index) =>  <Topping key={index} data={i} />) ) }
