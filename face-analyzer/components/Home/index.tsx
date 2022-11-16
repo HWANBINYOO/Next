@@ -10,12 +10,10 @@ import { celebrityProps, FaceProps } from '../../types/analyzer';
 
 const Home:NextPage = () => {
   const router = useRouter();
-  const [file, setFile] = useState(""); //파일
-  const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base64
-  const [celebrityList, setCelebrityList] = useRecoilState<celebrityProps[]>(celebrityListAtom); // 파일 base64
-  const [faceList, setFaceList] = useRecoilState<FaceProps[]>(faceListAtom); // 파일 base64
-  console.log(celebrityList);
-  
+  const [file, setFile] = useState("");
+  const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom);
+  const [, setCelebrityList] = useRecoilState<celebrityProps>(celebrityListAtom);
+  const [, setFaceList] = useRecoilState<FaceProps>(faceListAtom);
 
     const handleChangeFile = (e: any) => {
         e.preventDefault();
@@ -47,8 +45,7 @@ const Home:NextPage = () => {
                   "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
                 },
               });
-              // console.log(response1.data.faces);
-              setCelebrityList(response1.data.faces);
+            setCelebrityList(response1.data.faces[0]);
             const reponse2 = await axios.post("v1/vision/face", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -56,12 +53,11 @@ const Home:NextPage = () => {
                 "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
               },
             });
-          console.log(reponse2.data.faces);
-          console.log(reponse2.data);
-          setFaceList(reponse2.data.faces);
+            setFaceList(reponse2.data.faces[0]);
           router.push(`/analyzer`);
           } catch (e: any) {
             console.error(e);
+            console.error(e.message);
           }
       };
 
@@ -72,18 +68,17 @@ const Home:NextPage = () => {
           {
               imgBase64 ? (
                 <ImgWapper>
-                  <Image  layout="fill"  src={imgBase64}  objectFit={'cover'} alt={'분석할 이미지'} />
+                  <Image  layout="fill" objectFit={'cover'}  src={imgBase64} alt={'분석할 이미지'} />
                 </ImgWapper>
               ) : ( <EmptyWapper/>)
           }
-          <form
+
+          <ImgChangeBtn>
+            <form
             name="files"
             method="post"
             encType="multipart/form-data"
-          >
-
-            <ImgChangeBtn>
-            <div>
+            >
               <input
               id="change_img"
               type="file"
@@ -95,9 +90,8 @@ const Home:NextPage = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
               </label>
-            </div>
-            </ImgChangeBtn>
           </form>
+            </ImgChangeBtn>
           </ImgProviewWapper>
 
         <AnaBtn onClick={onSubmit}>분석하기</AnaBtn>
@@ -107,8 +101,8 @@ const Home:NextPage = () => {
 }
 
 const EmptyWapper = styled.div`
-  width: 450px;
-  height: 400px;
+  width: 550px;
+  height: 500px;
   background-color: #393E46;
   border: 1px solid white;
   border-radius: 20px;
@@ -116,12 +110,13 @@ const EmptyWapper = styled.div`
 
 const ImgWapper = styled.div`
     position: relative;
-    width: 450px;
-    height: 400px;
+    width: 550px;
+    height: 500px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
+    border: 1px solid black;
     
     img{
        border-radius: 10px;
@@ -133,8 +128,6 @@ const Wapper = styled.div`
     width: 100%;
     height: calc(100vh - 100px);
     background-color:#222831;
-    /* background-image: url("/img/manyPaces.png");  */
-    /* background-size: cover; */
 
     display: flex;
     flex-direction:column;
@@ -157,6 +150,7 @@ const AnaBtn = styled.button`
 
   &:hover{
     box-shadow: rgba(225, 225, 225, 0.25) 0px 50px 100px -20px, rgba(225, 225, 225, 0.3) 0px 30px 60px -30px, rgba(215, 215, 215, 0.35) 0px -2px 6px 0px inset;
+    border: 1px solid white;
   }
 `;
 
@@ -166,7 +160,6 @@ const ImgProviewWapper  = styled.div`
   justify-content: center;
   gap: 10px;
   margin-left: 50px;
-
 `;
 
 const ImgChangeBtn = styled.div`
@@ -183,9 +176,9 @@ const ImgChangeBtn = styled.div`
     &:hover{
       border-radius: 50%;
     }
-    
+
     font-size: 10px;
-    div{
+    form{
         width: 30px;
         height: 30px;
       label {

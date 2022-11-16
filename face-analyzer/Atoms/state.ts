@@ -1,14 +1,33 @@
 import {atom} from "recoil";
 import { celebrityProps, FaceProps } from "../types/analyzer";
 
-const celebrityListAtom = atom<celebrityProps[]>({
+const celebrityListAtom = atom<celebrityProps>({
     key: 'celebrityList',
-    default : [],
+    default : {celebrity : {
+        confidence:0,
+        value:"0",
+    },}
 })
 
-const faceListAtom = atom<FaceProps[]>({
+const faceListAtom = atom<FaceProps>({
     key: 'faceList',
-    default : [],
+    default : {
+        age : {
+            confidence : 0,
+            value: "",
+        },
+        emotion : {
+            confidence:0,
+            value: "",
+        },
+        gender : {
+            confidence:0,
+            value: "",
+        },
+        landmark:"",
+        pose : "",
+        roi:"",
+    }
 })
 
 const imgBase64Atom = atom<string>({

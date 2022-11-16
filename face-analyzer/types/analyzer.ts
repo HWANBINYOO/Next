@@ -19,9 +19,6 @@ export interface FaceProps{
         value: string,
     }
     landmark:any,
-    pose : {
-        confidence:number,
-        value: string,
-    }
+    pose : any
     roi:any,
 }

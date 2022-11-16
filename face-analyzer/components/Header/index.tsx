@@ -25,6 +25,7 @@ const Wapper = styled.div`
 const HeaderTitle = styled.p`
     font-size: 40px;
     color: white;
+    font-weight: bold;
 `;
 
 export default Header;
