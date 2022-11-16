@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRecoilState } from 'recoil';
 import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
 import { celebrityProps, FaceProps } from '../../types/analyzer';
+import { toast } from "react-toastify";
 
 const Home:NextPage = () => {
   const router = useRouter();
@@ -35,6 +36,9 @@ const Home:NextPage = () => {
       const onSubmit = async (e: any) => {
         e.preventDefault();
         let formData = new FormData();
+        if(!file){
+          toast('이미지가 선택되지 않았어요', { hideProgressBar: true, autoClose: 1000, type: 'error' })
+        }
         formData.append("image", file);
         
         try {
@@ -54,7 +58,7 @@ const Home:NextPage = () => {
               },
             });
             setFaceList(reponse2.data.faces[0]);
-          router.push(`/analyzer`);
+            router.push(`/analyzer`);
           } catch (e: any) {
             console.error(e);
             console.error(e.message);
@@ -63,7 +67,6 @@ const Home:NextPage = () => {
 
     return (
         <Wapper>
-          {/* <ContentWapper> */}
           <ImgProviewWapper>
           {
               imgBase64 ? (
@@ -95,7 +98,6 @@ const Home:NextPage = () => {
           </ImgProviewWapper>
 
         <AnaBtn onClick={onSubmit}>분석하기</AnaBtn>
-        {/* </ContentWapper> */}
         </Wapper>
     )
 }
@@ -126,7 +128,7 @@ const ImgWapper = styled.div`
 
 const Wapper = styled.div`
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 140px);
     background-color:#222831;
 
     display: flex;
@@ -171,9 +173,10 @@ const ImgChangeBtn = styled.div`
     height: 50px;
     border-radius: 20%;
     background-color: #EEEEEE;
-    transition: border-radius ease-in-out 0.3s;
+    transition: all ease-in-out 0.3s;
     color:black;
     &:hover{
+      transform: rotate(90deg);
       border-radius: 50%;
     }
 

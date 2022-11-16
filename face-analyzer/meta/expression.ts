@@ -5,7 +5,7 @@ export const expressionData =[
      },
      {
           value:"disgust",
-          Kvalue:"혐오스러운"
+          Kvalue:"혐오하는"
      },
      {
           value:"fear",

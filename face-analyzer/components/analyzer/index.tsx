@@ -22,6 +22,8 @@ const onClick = () => {
 }
 const Usepercentage = (n:number) => (n*100).toFixed(1);
 
+
+
 const mos:expressionProps[] = expressionData.filter(i => faceList.emotion.value === i.value);
 
 console.log();
@@ -44,9 +46,9 @@ console.log();
           {`성별 : ${ faceList.gender.value === "male" ? "남자" : faceList.gender.value ==="child" ? "어린이" : "여자"} (${Usepercentage(faceList.gender.confidence)})%`}
           </Content>
           <Content>
-          {`표정 : ${ mos[0].Kvalue}모습`}
+          {`표정 : ${ mos[0].Kvalue}표정 (${Usepercentage(faceList.emotion.confidence)})%`}
           </Content>
-          <Content>
+          <Content onClick={() => router.push(`https://www.google.com/search?q=${mos[0].Kvalue}`)}>
           {`닮은사람: ${celebrityList.celebrity.value} (${Usepercentage(celebrityList.celebrity.confidence)})%`}
           </Content>
         <button onClick={onClick}>다른사진선택하기</button>
@@ -57,7 +59,7 @@ console.log();
 
 const Wapper = styled.div`
     width: 100%;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 140px);
     background-color:#222831;
      
     display: flex;
