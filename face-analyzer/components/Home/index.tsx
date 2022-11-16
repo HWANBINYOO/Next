@@ -1,18 +1,18 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from "axios";
 import Image from "next/image";
-
+import { useRecoilState } from 'recoil';
+import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
 
 const Home:NextPage = () => {
-    const router = useRouter();
-    const [ModalState , setModalState] = useState(false);
-    const [ startBtnClick , setStartBtnClick ] = useState(false);
-
-    const [file, setFile] = useState(""); //파일
-    const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+  const router = useRouter();
+  const [file, setFile] = useState(""); //파일
+  const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base64
+  const [, setCelebrityListAtom] = useRecoilState(celebrityListAtom); // 파일 base64
+  const [, setFaceList] = useRecoilState(faceListAtom); // 파일 base64
 
     const handleChangeFile = (e: any) => {
         e.preventDefault();
@@ -37,14 +37,15 @@ const Home:NextPage = () => {
         formData.append("image", file);
         
         try {
-            // const response1 = await axios.post("v1/vision/celebrity", formData, {
-            //     headers: {
-            //       "Content-Type": "multipart/form-data",
-            //       'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
-            //       "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
-            //     },
-            //   });
-            // console.log(response1);
+            const response1 = await axios.post("v1/vision/celebrity", formData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                  'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
+                  "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
+                },
+              });
+              // console.log(response1.data.faces);
+              setCelebrityListAtom(response1.data.faces);
             const reponse2 = await axios.post("v1/vision/face", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -53,22 +54,23 @@ const Home:NextPage = () => {
               },
             });
           console.log(reponse2.data.faces);
+          console.log(reponse2.data);
+          setFaceList(reponse2.data.faces);
+          router.push(`/analyzer`);
           } catch (e: any) {
             console.error(e);
           }
       };
 
-    const onClick = (name:string) => {
-        router.push(`${name}`);
-    }
-
     return (
         <Wapper>
+          <h1 style={{fontSize:"80px"}}>FAR</h1>
         {
             imgBase64 ? (
-                <Image width={300} height={300} src={imgBase64} alt={''} />
-            ) : ( <p>없음</p> )
+                <Image width={400} height={400} src={imgBase64} alt={'분석할 이미지'} />
+            ) : ( <EmptyWapper/>)
         }
+
         <form
           name="files"
           method="post"
@@ -80,83 +82,43 @@ const Home:NextPage = () => {
             style={{ display: "none" }}
             onChange={handleChangeFile}
           />
-          <label htmlFor="change_img">변경</label>
+          <label htmlFor="change_img">사진변경</label>
           {/* <button type="submit">제출하기</button> */}
         </form>
-        <button onClick={onSubmit}>분석하기</button>
+        <AnaBtn onClick={onSubmit}>분석하기</AnaBtn>
         </Wapper>
     )
 }
+
+const EmptyWapper = styled.div`
+  width: 400px;
+  height: 400px;
+  background-color: white;
+`;
 
 const Wapper = styled.div`
     width: 100%;
     height: 100vh;
     background-color:darkgray;
 
-     
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
-
-    padding-bottom: 100px;
     gap: 50px;
 `;
 
-const Btn = styled.button`
-    width: 250px;
-    height: 70px;
+const AnaBtn = styled.button`
+  width: 150px;
+  height: 60px;
+  font-size: 30px;
+  border-radius: 10px;
+  border: none;
 
-    cursor: pointer;
-    color: white;
-    margin-right: 20px;
-    font-size: 30px;
-    border-radius: 10px;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: all 0.15s ease-in-out;
-    background-color: #ff6464;
-
-    :hover{
-        color: black;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    }
+  cursor: pointer;
+  
 `;
 
-const Title = styled.span`
-    color: white;
-    font-size: 110px;
-`;
-
-const IBtn = styled.div`
-    position: relative;
-    bottom: 7%;
-    left: 43%;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: white;
-    color: gray;
-    font-size: 25px;
-
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-`;
-
-const Modal = styled.div`
-    width: 450px;
-    height: 120px;
-    background-color: white;
-    padding: 50% 20px;
-    border-radius: 10px;
-    position: absolute;
-    right: 0px;
-    top: 50px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-`;
 
 
 export default Home;

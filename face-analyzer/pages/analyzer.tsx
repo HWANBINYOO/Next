@@ -1,15 +1,13 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Analyzer from '../components/analyzer'
 import Home from '../components/Home'
-import styles from '../styles/Home.module.css'
 
-const HomePage: NextPage = () => {
+const AnalyzerPage: NextPage = () => {
   return (
     <>
-      <Home />
+      <Analyzer />
     </>
   )
 }
 
-export default HomePage
+export default AnalyzerPage

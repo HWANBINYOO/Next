@@ -1,0 +1,27 @@
+export interface celebrityProps{
+    celebrity : {
+        confidence:number,
+        value:string,
+    }
+}
+
+export interface FaceProps{
+    age : {
+        confidence : number,
+        value: string,
+    }
+    emotion : {
+        confidence:number,
+        value: string,
+    }
+    gender : {
+        confidence:number,
+        value: string,
+    }
+    landmark:any,
+    pose : {
+        confidence:number,
+        value: string,
+    }
+    roi:any,
+}
