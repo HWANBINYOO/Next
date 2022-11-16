@@ -26,7 +26,8 @@ a {
   text-decoration: none;
 }
 
-* {
+*,
+label {
   box-sizing: border-box;
 }
 

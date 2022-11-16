@@ -1,23 +1,24 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
 import { useRouter } from 'next/router';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import Image from "next/image";
 import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
 import { celebrityProps, FaceProps } from '../../types/analyzer';
 
 const Analyzer:NextPage = () => {
 const router = useRouter();
-const onClick = () => {
-      setImgBase64("");
-      setCelebrityList([]);
-      setFaceList([]);
-      router.push("/");
-}
 const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base64
 const [celebrityList, setCelebrityList] = useRecoilState<celebrityProps[]>(celebrityListAtom); // 파일 base64
 const [faceList, setFaceList] = useRecoilState<FaceProps[]>(faceListAtom); // 파일 base64
-console.log(faceList);
+const resetcelebrityList = useResetRecoilState(celebrityListAtom);
+const resetFaceList = useResetRecoilState(faceListAtom);
+const onClick = () => {
+  setImgBase64("");
+  resetcelebrityList
+  resetFaceList
+  router.push("/");
+}
 
     return (
         <Wapper>
@@ -47,7 +48,7 @@ console.log(faceList);
 
 const Wapper = styled.div`
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 100px);
     background-color:darkgray;
      
     display: flex;

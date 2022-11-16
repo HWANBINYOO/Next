@@ -6,13 +6,16 @@ import axios from "axios";
 import Image from "next/image";
 import { useRecoilState } from 'recoil';
 import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
+import { celebrityProps, FaceProps } from '../../types/analyzer';
 
 const Home:NextPage = () => {
   const router = useRouter();
   const [file, setFile] = useState(""); //파일
   const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base64
-  const [, setCelebrityListAtom] = useRecoilState(celebrityListAtom); // 파일 base64
-  const [, setFaceList] = useRecoilState(faceListAtom); // 파일 base64
+  const [celebrityList, setCelebrityList] = useRecoilState<celebrityProps[]>(celebrityListAtom); // 파일 base64
+  const [faceList, setFaceList] = useRecoilState<FaceProps[]>(faceListAtom); // 파일 base64
+  console.log(celebrityList);
+  
 
     const handleChangeFile = (e: any) => {
         e.preventDefault();
@@ -45,7 +48,7 @@ const Home:NextPage = () => {
                 },
               });
               // console.log(response1.data.faces);
-              setCelebrityListAtom(response1.data.faces);
+              setCelebrityList(response1.data.faces);
             const reponse2 = await axios.post("v1/vision/face", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -64,42 +67,54 @@ const Home:NextPage = () => {
 
     return (
         <Wapper>
-          <h1 style={{fontSize:"80px"}}>FAR</h1>
-        {
-            imgBase64 ? (
-                <Image width={400} height={400} src={imgBase64} alt={'분석할 이미지'} />
-            ) : ( <EmptyWapper/>)
-        }
+          {/* <ContentWapper> */}
+          <ImgProviewWapper>
+          {
+              imgBase64 ? (
+                  <Image width={450} height={400} src={imgBase64} alt={'분석할 이미지'} />
+              ) : ( <EmptyWapper/>)
+          }
+          <form
+            name="files"
+            method="post"
+            encType="multipart/form-data"
+          >
+            <input
+              id="change_img"
+              type="file"
+              style={{ display: "none" }}
+              onChange={handleChangeFile}
+            />
+            <ImgChangeBtn>
+            <div>
+              <label htmlFor="change_img">
+                파일선택
+              </label>
+            </div>
+             
+            </ImgChangeBtn>
+          </form>
+          </ImgProviewWapper>
 
-        <form
-          name="files"
-          method="post"
-          encType="multipart/form-data"
-        >
-          <input
-            id="change_img"
-            type="file"
-            style={{ display: "none" }}
-            onChange={handleChangeFile}
-          />
-          <label htmlFor="change_img">사진변경</label>
-          {/* <button type="submit">제출하기</button> */}
-        </form>
         <AnaBtn onClick={onSubmit}>분석하기</AnaBtn>
+        {/* </ContentWapper> */}
         </Wapper>
     )
 }
 
 const EmptyWapper = styled.div`
-  width: 400px;
+  width: 450px;
   height: 400px;
-  background-color: white;
+  background-color: #EAEAEA;
 `;
 
 const Wapper = styled.div`
     width: 100%;
-    height: 100vh;
-    background-color:darkgray;
+    height: calc(100vh - 100px);
+    background-color:white;
+    /* background-image: url("/img/manyPaces.png");  */
+    background-size: cover;
+    /* background-color: rgba(255, 255, 255, 0.8); */
 
     display: flex;
     flex-direction:column;
@@ -108,15 +123,56 @@ const Wapper = styled.div`
     gap: 50px;
 `;
 
+const ContentWapper = styled.div`
+width: 600px;
+height: 680px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgray;
+    border-radius: 10px;
+`;
+
 const AnaBtn = styled.button`
-  width: 150px;
-  height: 60px;
-  font-size: 30px;
+  width: 250px;
+  height: 70px;
+  font-size: 32px;
   border-radius: 10px;
   border: none;
-
   cursor: pointer;
-  
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: all ease-in-out 0.3s;
+
+  &:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+`;
+
+const ImgProviewWapper  = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+`;
+
+const ImgChangeBtn = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 450px;
+    height: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 10px;
+      label {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      font-size: 20px;
+    }
 `;
 
 
