@@ -71,7 +71,9 @@ const Home:NextPage = () => {
           <ImgProviewWapper>
           {
               imgBase64 ? (
-                  <Image width={450} height={400} src={imgBase64} alt={'분석할 이미지'} />
+                <ImgWapper>
+                  <Image  layout="fill"  src={imgBase64}  objectFit={'cover'} alt={'분석할 이미지'} />
+                </ImgWapper>
               ) : ( <EmptyWapper/>)
           }
           <form
@@ -79,19 +81,21 @@ const Home:NextPage = () => {
             method="post"
             encType="multipart/form-data"
           >
-            <input
+
+            <ImgChangeBtn>
+            <div>
+              <input
               id="change_img"
               type="file"
               style={{ display: "none" }}
               onChange={handleChangeFile}
-            />
-            <ImgChangeBtn>
-            <div>
+              />
               <label htmlFor="change_img">
-                파일선택
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
               </label>
             </div>
-             
             </ImgChangeBtn>
           </form>
           </ImgProviewWapper>
@@ -105,33 +109,38 @@ const Home:NextPage = () => {
 const EmptyWapper = styled.div`
   width: 450px;
   height: 400px;
-  background-color: #EAEAEA;
+  background-color: #393E46;
+  border: 1px solid white;
+  border-radius: 20px;
+`;
+
+const ImgWapper = styled.div`
+    position: relative;
+    width: 450px;
+    height: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    
+    img{
+       border-radius: 10px;
+        cursor: pointer;
+    }
 `;
 
 const Wapper = styled.div`
     width: 100%;
     height: calc(100vh - 100px);
-    background-color:white;
+    background-color:#222831;
     /* background-image: url("/img/manyPaces.png");  */
-    background-size: cover;
-    /* background-color: rgba(255, 255, 255, 0.8); */
+    /* background-size: cover; */
 
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
     gap: 50px;
-`;
-
-const ContentWapper = styled.div`
-width: 600px;
-height: 680px;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-    background-color: darkgray;
-    border-radius: 10px;
 `;
 
 const AnaBtn = styled.button`
@@ -143,17 +152,20 @@ const AnaBtn = styled.button`
   cursor: pointer;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: all ease-in-out 0.3s;
+  background-color: #00ADB5;
+  color: white;
 
   &:hover{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(225, 225, 225, 0.25) 0px 50px 100px -20px, rgba(225, 225, 225, 0.3) 0px 30px 60px -30px, rgba(215, 215, 215, 0.35) 0px -2px 6px 0px inset;
   }
 `;
 
 const ImgProviewWapper  = styled.div`
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
+  gap: 10px;
+  margin-left: 50px;
 
 `;
 
@@ -162,18 +174,27 @@ const ImgChangeBtn = styled.div`
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: 450px;
+    width: 50px;
     height: 50px;
-    background-color: gray;
-    color: white;
-    font-size: 10px;
-      label {
-      width: 100%;
-      height: 100%;
-      cursor: pointer;
-      font-size: 20px;
+    border-radius: 20%;
+    background-color: #EEEEEE;
+    transition: border-radius ease-in-out 0.3s;
+    color:black;
+    &:hover{
+      border-radius: 50%;
     }
-`;
+    
+    font-size: 10px;
+    div{
+        width: 30px;
+        height: 30px;
+      label {
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+    }
+      `;
 
 
 

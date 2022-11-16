@@ -8,7 +8,7 @@ import { celebrityProps, FaceProps } from '../../types/analyzer';
 
 const Analyzer:NextPage = () => {
 const router = useRouter();
-const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base64
+const [imgBase64, setImgBase64] = useRecoilState(imgBase64Atom); // 파일 base6 4
 const [celebrityList, setCelebrityList] = useRecoilState<celebrityProps[]>(celebrityListAtom); // 파일 base64
 const [faceList, setFaceList] = useRecoilState<FaceProps[]>(faceListAtom); // 파일 base64
 const resetcelebrityList = useResetRecoilState(celebrityListAtom);

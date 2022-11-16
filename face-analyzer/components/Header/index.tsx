@@ -15,7 +15,7 @@ const Header:NextPage = () => {
 const Wapper = styled.div`
     width: 100%;
     height: 100px;
-    background-color:white;
+    background-color:#222831;
      
     display: flex;
     justify-content: center;
@@ -24,6 +24,7 @@ const Wapper = styled.div`
 
 const HeaderTitle = styled.p`
     font-size: 40px;
+    color: white;
 `;
 
 export default Header;
