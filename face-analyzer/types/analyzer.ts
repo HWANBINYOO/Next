@@ -22,3 +22,8 @@ export interface FaceProps{
     pose : any
     roi:any,
 }
+
+export interface expressionProps{
+    value:string,
+    Kvalue:string,
+}

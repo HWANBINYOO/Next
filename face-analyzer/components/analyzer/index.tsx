@@ -4,7 +4,8 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import Image from "next/image";
 import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
-import { celebrityProps, FaceProps } from '../../types/analyzer';
+import { celebrityProps, expressionProps, FaceProps } from '../../types/analyzer';
+import { expressionData } from '../../meta/expression';
 
 const Analyzer:NextPage = () => {
 const router = useRouter();
@@ -19,17 +20,18 @@ const onClick = () => {
   resetFaceList
   router.push("/");
 }
+const Usepercentage = (n:number) => (n*100).toFixed(1);
 
-const Usepercentage = (n:number) => (n*100).toFixed(1)
+const mos:expressionProps[] = expressionData.filter(i => faceList.emotion.value === i.value);
 
-console.log(Usepercentage(celebrityList.celebrity.confidence));
+console.log();
 
     return (
         <Wapper>
         {
             imgBase64 ? (
               <ImgWapper>
-                <Image  layout="fill" objectFit={'cover'} src={imgBase64} alt={''} />
+                <Image  layout="fill" objectFit={'cover'} src={imgBase64} alt={'분석이미지'} />
               </ImgWapper>
             ) : ( <p>?</p> )
         }
@@ -39,10 +41,10 @@ console.log(Usepercentage(celebrityList.celebrity.confidence));
           {`나이:  ${faceList.age.value}세 (${Usepercentage(faceList.age.confidence)})%`}
           </Content>
           <Content>
-          {`성별 : ${ faceList.gender.value === "male" ? "남자" : "여자" } (${Usepercentage(faceList.gender.confidence)})%`}
+          {`성별 : ${ faceList.gender.value === "male" ? "남자" : faceList.gender.value ==="child" ? "어린이" : "여자"} (${Usepercentage(faceList.gender.confidence)})%`}
           </Content>
           <Content>
-          {`표정 : ${ faceList.emotion.value}`}
+          {`표정 : ${ mos[0].Kvalue}모습`}
           </Content>
           <Content>
           {`닮은사람: ${celebrityList.celebrity.value} (${Usepercentage(celebrityList.celebrity.confidence)})%`}
