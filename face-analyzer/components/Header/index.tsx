@@ -1,11 +1,23 @@
 import { NextPage } from 'next';
 import styled from "@emotion/styled";
+import { useRouter } from 'next/router';
+import { useResetRecoilState , useRecoilState} from 'recoil';
+import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
 
 const Header:NextPage = () => {
-
+    const router = useRouter();
+    const [, setImgBase64] = useRecoilState(imgBase64Atom);
+    const resetcelebrityList = useResetRecoilState(celebrityListAtom);
+    const resetFaceList = useResetRecoilState(faceListAtom);
+    const onClick = () => {
+        setImgBase64("")
+        resetcelebrityList
+        resetFaceList
+        router.push('/')
+    }
     return (
         <Wapper>
-            <HeaderTitle>
+            <HeaderTitle onClick={onClick}>
                 Face Analyzer
             </HeaderTitle>
         </Wapper>
@@ -26,6 +38,7 @@ const HeaderTitle = styled.p`
     font-size: 50px;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 `;
 
 export default Header;

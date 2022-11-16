@@ -6,6 +6,9 @@ import Image from "next/image";
 import { imgBase64Atom , celebrityListAtom , faceListAtom } from '../../Atoms/state';
 import { celebrityProps, expressionProps, FaceProps } from '../../types/analyzer';
 import { expressionData } from '../../meta/expression';
+import { toast } from "react-toastify";
+import { useEffect } from 'react';
+
 
 const Analyzer:NextPage = () => {
 const router = useRouter();
@@ -14,6 +17,7 @@ const [celebrityList,] = useRecoilState<celebrityProps>(celebrityListAtom);
 const [faceList,] = useRecoilState<FaceProps>(faceListAtom);
 const resetcelebrityList = useResetRecoilState(celebrityListAtom);
 const resetFaceList = useResetRecoilState(faceListAtom);
+const expressionKname:expressionProps[] = expressionData.filter(i => faceList.emotion.value === i.value);
 const onClick = () => {
   setImgBase64("");
   resetcelebrityList
@@ -21,14 +25,15 @@ const onClick = () => {
   router.push("/");
 }
 const Usepercentage = (n:number) => (n*100).toFixed(1);
-
-
-
-const mos:expressionProps[] = expressionData.filter(i => faceList.emotion.value === i.value);
-
-console.log();
+useEffect(() => {
+  if(!imgBase64){
+    toast('메인페이지로 이동합니다', { hideProgressBar: true, autoClose: 1000, type: 'info' })
+    onClick()
+  }
+},[])
 
     return (
+      <>
         <Wapper>
         {
             imgBase64 ? (
@@ -37,7 +42,6 @@ console.log();
               </ImgWapper>
             ) : ( <p>?</p> )
         }
-
         <ContentWapper>
           <Content>
           {`나이:  ${faceList.age.value}세 (${Usepercentage(faceList.age.confidence)})%`}
@@ -46,14 +50,15 @@ console.log();
           {`성별 : ${ faceList.gender.value === "male" ? "남자" : faceList.gender.value ==="child" ? "어린이" : "여자"} (${Usepercentage(faceList.gender.confidence)})%`}
           </Content>
           <Content>
-          {`표정 : ${ mos[0].Kvalue}표정 (${Usepercentage(faceList.emotion.confidence)})%`}
+          {`표정 : ${ expressionKname[0]?.Kvalue}표정 (${Usepercentage(faceList.emotion.confidence)})%`}
           </Content>
-          <Content onClick={() => router.push(`https://www.google.com/search?q=${mos[0].Kvalue}`)}>
+          <Content>
           {`닮은사람: ${celebrityList.celebrity.value} (${Usepercentage(celebrityList.celebrity.confidence)})%`}
           </Content>
-        <button onClick={onClick}>다른사진선택하기</button>
         </ContentWapper>
         </Wapper>
+        <OtherBtn onClick={onClick}>다른사진선택하기</OtherBtn>
+      </>
     )
 }
 
@@ -62,16 +67,17 @@ const Wapper = styled.div`
     height: calc(100vh - 140px);
     background-color:#222831;
      
+    padding: 30px 0 0 0 ;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 50px;
 `;
 
 const ImgWapper = styled.div`
     position: relative;
-    width: 500px;
-    height: 500px;
+    width: 30%;
+    height: 70%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -86,7 +92,7 @@ const ImgWapper = styled.div`
 
 const ContentWapper = styled.div`
   width: 500px;
-  height: calc(100vh - 100px);
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -99,5 +105,25 @@ const Content = styled.div`
     color: white;
 `;
 
-export default Analyzer;
+const OtherBtn = styled.button`
+  width: 12%;
+  height: 50px;
+  position: fixed;
+  bottom: 40px;
+  left: 45vw;
+  font-size: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: rgba(232, 232, 232, 0.2) 0px 8px 24px;
+  transition: all ease-in-out 0.3s;
+  background-color: #00ADB5;
+  color: white;
 
+  &:hover{
+    box-shadow: rgba(225, 225, 225, 0.25) 0px 50px 100px -20px, rgba(225, 225, 225, 0.3) 0px 30px 60px -30px, rgba(215, 215, 215, 0.35) 0px -2px 6px 0px inset;
+    border: 1px solid white;
+  }
+`;
+
+export default Analyzer;

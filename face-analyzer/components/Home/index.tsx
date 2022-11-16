@@ -16,54 +16,53 @@ const Home:NextPage = () => {
   const [, setCelebrityList] = useRecoilState<celebrityProps>(celebrityListAtom);
   const [, setFaceList] = useRecoilState<FaceProps>(faceListAtom);
 
-    const handleChangeFile = (e: any) => {
-        e.preventDefault();
-        let reader = new FileReader();
-    
-        reader.onloadend = () => {
-          // 2. 읽기가 완료되면 아래코드가 실행됩니다.
-          const base64 = reader.result;
-          if (base64) {
-            setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
-          }
-        };
-        if (e.target.files[0]) {
-          reader.readAsDataURL(e.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-          setFile(e.target.files[0]); // 파일 상태 업데이트
+  const handleChangeFile = (e: any) => {
+      e.preventDefault();
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        // 2. 읽기가 완료되면 아래코드가 실행됩니다.
+        const base64 = reader.result;
+        if (base64) {
+          setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
         }
       };
+      if (e.target.files[0]) {
+        reader.readAsDataURL(e.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
+        setFile(e.target.files[0]); // 파일 상태 업데이트
+      }
+    };
     
-      const onSubmit = async (e: any) => {
-        e.preventDefault();
-        let formData = new FormData();
-        if(!file){
-          toast('이미지가 선택되지 않았어요', { hideProgressBar: true, autoClose: 1000, type: 'error' })
-        }
-        formData.append("image", file);
-        
-        try {
-            const response1 = await axios.post("v1/vision/celebrity", formData, {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                  'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
-                  "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
-                },
-              });
-            setCelebrityList(response1.data.faces[0]);
-            const reponse2 = await axios.post("v1/vision/face", formData, {
+    const onSubmit = async (e: any) => {
+      e.preventDefault();
+      let formData = new FormData();
+      if(!file){
+        toast('이미지가 선택되지 않았어요', { hideProgressBar: true, autoClose: 1000, type: 'error' })
+      }
+      formData.append("image", file);
+      
+      try {
+          const response1 = await axios.post("v1/vision/celebrity", formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
                 'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
                 "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
               },
             });
-            setFaceList(reponse2.data.faces[0]);
-            router.push(`/analyzer`);
-          } catch (e: any) {
-            console.error(e);
-            console.error(e.message);
-          }
-      };
+          setCelebrityList(response1.data.faces[0]);
+          const reponse2 = await axios.post("v1/vision/face", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              'X-Naver-Client-Id':process.env.NEXT_PUBLIC_ClientId,
+              "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
+            },
+          });
+          setFaceList(reponse2.data.faces[0]);
+          router.push(`/analyzer`);
+        } catch (e: any) {
+          console.error(e);
+          console.error(e.message);
+        }
+    };
 
     return (
         <Wapper>
@@ -75,7 +74,6 @@ const Home:NextPage = () => {
                 </ImgWapper>
               ) : ( <EmptyWapper/>)
           }
-
           <ImgChangeBtn>
             <form
             name="files"
@@ -103,8 +101,8 @@ const Home:NextPage = () => {
 }
 
 const EmptyWapper = styled.div`
-  width: 550px;
-  height: 500px;
+   width: 45%;
+    height: 85%;
   background-color: #393E46;
   border: 1px solid white;
   border-radius: 20px;
@@ -112,8 +110,8 @@ const EmptyWapper = styled.div`
 
 const ImgWapper = styled.div`
     position: relative;
-    width: 550px;
-    height: 500px;
+    width: 45%;
+    height: 85%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -139,7 +137,7 @@ const Wapper = styled.div`
 `;
 
 const AnaBtn = styled.button`
-  width: 250px;
+  width: 15%;
   height: 70px;
   font-size: 32px;
   border-radius: 10px;
@@ -157,6 +155,8 @@ const AnaBtn = styled.button`
 `;
 
 const ImgProviewWapper  = styled.div`
+  height: 70%;
+  width: 60%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
