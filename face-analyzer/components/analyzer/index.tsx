@@ -30,6 +30,7 @@ useEffect(() => {
     toast('메인페이지로 이동합니다', { hideProgressBar: true, autoClose: 1000, type: 'info' })
     onClick()
   }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 
     return (
