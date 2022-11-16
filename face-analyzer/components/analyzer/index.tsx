@@ -30,7 +30,6 @@ useEffect(() => {
     toast('메인페이지로 이동합니다', { hideProgressBar: true, autoClose: 1000, type: 'info' })
     onClick()
   }
-// eslint-disable-next-line react-hooks/exhaustive-deps
 },[])
 
     return (
@@ -45,16 +44,16 @@ useEffect(() => {
         }
         <ContentWapper>
           <Content>
-          {`나이:  ${faceList.age.value}세 (${Usepercentage(faceList.age.confidence)})%`}
+          {`나이 :  ${faceList.age.value}세 (${Usepercentage(faceList.age.confidence)}%)`}
           </Content>
           <Content>
-          {`성별 : ${ faceList.gender.value === "male" ? "남자" : faceList.gender.value ==="child" ? "어린이" : "여자"} (${Usepercentage(faceList.gender.confidence)})%`}
+          {`성별 : ${ faceList.gender.value === "male" ? "남자" : faceList.gender.value ==="child" ? "어린이" : "여자"} (${Usepercentage(faceList.gender.confidence)}%)`}
           </Content>
           <Content>
-          {`표정 : ${ expressionKname[0]?.Kvalue}표정 (${Usepercentage(faceList.emotion.confidence)})%`}
+          {`표정 : ${ expressionKname[0]?.Kvalue}표정 (${Usepercentage(faceList.emotion.confidence)}%)`}
           </Content>
           <Content>
-          {`닮은사람: ${celebrityList.celebrity.value} (${Usepercentage(celebrityList.celebrity.confidence)})%`}
+          {`닮은사람: ${celebrityList.celebrity.value} (${Usepercentage(celebrityList.celebrity.confidence)}%)`}
           </Content>
         </ContentWapper>
         </Wapper>
@@ -68,7 +67,7 @@ const Wapper = styled.div`
     height: calc(100vh - 140px);
     background-color:#222831;
      
-    padding: 30px 0 0 0 ;
+    padding: 30px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -107,12 +106,12 @@ const Content = styled.div`
 `;
 
 const OtherBtn = styled.button`
-  width: 12%;
-  height: 50px;
+  width: 15%;
+  height: 70px;
   position: fixed;
-  bottom: 40px;
-  left: 45vw;
-  font-size: 20px;
+  bottom: 59px;
+  left: 42.5vw;
+  font-size: 25px;
   border-radius: 10px;
   border: none;
   cursor: pointer;

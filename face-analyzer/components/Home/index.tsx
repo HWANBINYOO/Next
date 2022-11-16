@@ -34,10 +34,8 @@ const Home:NextPage = () => {
     
     const onSubmit = async (e: any) => {
       e.preventDefault();
-      let formData = new FormData();
-      if(!file){
-        toast('이미지가 선택되지 않았어요', { hideProgressBar: true, autoClose: 1000, type: 'error' })
-      }
+      if(!file) return toast('이미지가 선택되지 않았어요', { hideProgressBar: true, autoClose: 1000, type: 'error' })
+      let formData = new FormData();  
       formData.append("image", file);
       
       try {
@@ -48,7 +46,6 @@ const Home:NextPage = () => {
                 "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
               },
             });
-          setCelebrityList(response1.data.faces[0]);
           const reponse2 = await axios.post("v1/vision/face", formData, {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -56,11 +53,17 @@ const Home:NextPage = () => {
               "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
             },
           });
-          setFaceList(reponse2.data.faces[0]);
-          router.push(`/analyzer`);
+          
+          console.log(response1.data.faces);
+          if(response1.data.faces[0] && reponse2.data.faces[0]){
+            setCelebrityList(response1.data.faces[0]);
+            setFaceList(reponse2.data.faces[0]);
+            router.push(`/analyzer`);
+          } else{
+            return toast('부적절한 사진입니다', { hideProgressBar: true, autoClose: 1000, type: 'error' })
+          }
         } catch (e: any) {
-          console.error(e);
-          console.error(e.message);
+          return toast('부적절한 파일입니다', { hideProgressBar: true, autoClose: 1000, type: 'error' })
         }
     };
 
@@ -101,9 +104,10 @@ const Home:NextPage = () => {
 }
 
 const EmptyWapper = styled.div`
-   width: 45%;
-    height: 85%;
+  width: 45%;
+  height: 85%;
   background-color: #393E46;
+  box-shadow: rgba(222, 222, 222, 0.2) 0px 7px 29px 0px;
   border: 1px solid white;
   border-radius: 20px;
 `;
@@ -116,11 +120,10 @@ const ImgWapper = styled.div`
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    border: 1px solid black;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 24px;
     
     img{
        border-radius: 10px;
-        cursor: pointer;
     }
 `;
 
@@ -143,7 +146,7 @@ const AnaBtn = styled.button`
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(205, 205, 205, 0.2) 0px 8px 24px;
   transition: all ease-in-out 0.3s;
   background-color: #00ADB5;
   color: white;
@@ -175,6 +178,8 @@ const ImgChangeBtn = styled.div`
     background-color: #EEEEEE;
     transition: all ease-in-out 0.3s;
     color:black;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 8px 24px;
+
     &:hover{
       transform: rotate(90deg);
       border-radius: 50%;
