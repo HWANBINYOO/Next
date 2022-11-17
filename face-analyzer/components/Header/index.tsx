@@ -39,6 +39,10 @@ const HeaderTitle = styled.p`
     color: white;
     font-weight: bold;
     cursor: pointer;
+    
+    @media (max-width: 768px) {
+        font-size: 30px;
+    }
 `;
 
 export default Header;

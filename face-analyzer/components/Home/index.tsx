@@ -53,8 +53,7 @@ const Home:NextPage = () => {
               "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
             },
           });
-          
-          console.log(response1.data.faces);
+
           if(response1.data.faces[0] && reponse2.data.faces[0]){
             setCelebrityList(response1.data.faces[0]);
             setFaceList(reponse2.data.faces[0]);
@@ -110,6 +109,11 @@ const EmptyWapper = styled.div`
   box-shadow: rgba(222, 222, 222, 0.2) 0px 7px 29px 0px;
   border: 1px solid white;
   border-radius: 20px;
+
+  @media (max-width: 768px) {
+    width: 95%;
+    height: 50%;
+  }
 `;
 
 const ImgWapper = styled.div`
@@ -125,6 +129,10 @@ const ImgWapper = styled.div`
     img{
        border-radius: 10px;
     }
+    @media (max-width: 768px) {
+    width: 95%;
+    height: 50%;
+  }
 `;
 
 const Wapper = styled.div`
@@ -155,6 +163,11 @@ const AnaBtn = styled.button`
     box-shadow: rgba(225, 225, 225, 0.25) 0px 50px 100px -20px, rgba(225, 225, 225, 0.3) 0px 30px 60px -30px, rgba(215, 215, 215, 0.35) 0px -2px 6px 0px inset;
     border: 1px solid white;
   }
+  @media (max-width: 768px) {
+    width: 35%;
+    height: 50px;
+    font-size: 20px;
+  }
 `;
 
 const ImgProviewWapper  = styled.div`
@@ -184,18 +197,22 @@ const ImgChangeBtn = styled.div`
       transform: rotate(90deg);
       border-radius: 50%;
     }
-
-    font-size: 10px;
     form{
-        width: 30px;
-        height: 30px;
+      width: 30px;
+      height: 30px;
       label {
         cursor: pointer;
-        font-size: 20px;
       }
-
     }
-      `;
+    @media (max-width: 768px) {
+    width: 40px;
+    height: 35px;
+    form{
+      width: 20px;
+      height: 20px;
+    }
+  }
+`;
 
 
 

@@ -72,6 +72,14 @@ const Wapper = styled.div`
     justify-content: center;
     align-items: flex-start;
     gap: 50px;
+    @media (max-width: 768px) {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+
 `;
 
 const ImgWapper = styled.div`
@@ -88,6 +96,10 @@ const ImgWapper = styled.div`
        border-radius: 10px;
         cursor: pointer;
     }
+    @media (max-width: 768px) {
+    width: 60%;
+    height: 40%;
+  }
 `;
 
 const ContentWapper = styled.div`
@@ -98,11 +110,23 @@ const ContentWapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 50px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+    gap: 20px;
+    width: 80%;
+    height: 40%;
+    margin-left: 70px;
+  }
 `;
 
 const Content = styled.div`
     font-size: 30px;
     color: white;
+    @media (max-width: 768px) {
+      font-size: 15px;
+  }
 `;
 
 const OtherBtn = styled.button`
@@ -119,6 +143,13 @@ const OtherBtn = styled.button`
   transition: all ease-in-out 0.3s;
   background-color: #00ADB5;
   color: white;
+  @media (max-width: 768px) {
+    width: 45%;
+    height: 45px;
+    font-size: 15px;
+    left: 27vw;
+    bottom: 39px;
+  }
 
   &:hover{
     box-shadow: rgba(225, 225, 225, 0.25) 0px 50px 100px -20px, rgba(225, 225, 225, 0.3) 0px 30px 60px -30px, rgba(215, 215, 215, 0.35) 0px -2px 6px 0px inset;
