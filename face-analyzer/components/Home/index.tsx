@@ -53,7 +53,7 @@ const Home:NextPage = () => {
               "X-Naver-Client-Secret":process.env.NEXT_PUBLIC_ClientSecret,
             },
           });
-
+          
           if(response1.data.faces[0] && reponse2.data.faces[0]){
             setCelebrityList(response1.data.faces[0]);
             setFaceList(reponse2.data.faces[0]);
@@ -62,7 +62,7 @@ const Home:NextPage = () => {
             return toast('부적절한 사진입니다', { hideProgressBar: true, autoClose: 1000, type: 'error' })
           }
         } catch (e: any) {
-          return toast('부적절한 파일입니다', { hideProgressBar: true, autoClose: 1000, type: 'error' })
+          return toast(e.response.data.errorMessage, { hideProgressBar: true, autoClose: 1000, type: 'error' })
         }
     };
 
