@@ -18,7 +18,7 @@ const [faceList,] = useRecoilState<FaceProps>(faceListAtom);
 const resetcelebrityList = useResetRecoilState(celebrityListAtom);
 const resetFaceList = useResetRecoilState(faceListAtom);
 const expressionKname:expressionProps[] = expressionData.filter(i => faceList.emotion.value === i.value);
-const onClick = () => {
+const handleClick = () => {
   setImgBase64("");
   resetcelebrityList
   resetFaceList
@@ -28,7 +28,7 @@ const Usepercentage = (n:number) => (n*100).toFixed(1);
 useEffect(() => {
   if(!imgBase64){
     toast('메인페이지로 이동합니다', { hideProgressBar: true, autoClose: 1000, type: 'info' })
-    onClick()
+    handleClick()
   }
 },[])
 
@@ -57,7 +57,7 @@ useEffect(() => {
           </Content>
         </ContentWapper>
         </Wapper>
-        <OtherBtn onClick={onClick}>다른사진선택하기</OtherBtn>
+        <OtherBtn onClick={handleClick}>다른사진선택하기</OtherBtn>
       </>
     )
 }

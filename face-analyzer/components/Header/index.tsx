@@ -9,7 +9,7 @@ const Header:NextPage = () => {
     const [, setImgBase64] = useRecoilState(imgBase64Atom);
     const resetcelebrityList = useResetRecoilState(celebrityListAtom);
     const resetFaceList = useResetRecoilState(faceListAtom);
-    const onClick = () => {
+    const handleClick = () => {
         setImgBase64("")
         resetcelebrityList
         resetFaceList
@@ -17,7 +17,7 @@ const Header:NextPage = () => {
     }
     return (
         <Wapper>
-            <HeaderTitle onClick={onClick}>
+            <HeaderTitle onClick={handleClick}>
                 Face Analyzer
             </HeaderTitle>
         </Wapper>
