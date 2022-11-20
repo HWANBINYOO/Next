@@ -1,13 +1,19 @@
-import CustomAxois from "./CustomAxois";
-import { GetServerSidePropsContext } from "next";
+import {Cookies} from 'react-cookie'
 
-const Cookie = async (ctx: GetServerSidePropsContext) => {
-  let accessToken = ctx.req.cookies["Blog_accessToken"] ;
-  const refreshToken = ctx.req.cookies["Blog_refreshToken"];
-  let cookies: string[] | undefined;
+// type SetcookieType = {
+//     name : string,
+//     value : string,
+//     options ? :any
+// }
 
-  
-  return { cookies, accessToken };
-};
+// const cookies = new Cookies();
 
-export default Cookie;
+// const setCookie = ({name,value,options } : SetcookieType)=>{
+// 	return cookies.set(name, value, {...options})
+// }
+
+// const getCookie = (name:string)=>{
+// 	return cookies.get(name)
+// }
+
+// export {setCookie , getCookie}

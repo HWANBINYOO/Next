@@ -2,7 +2,7 @@ import Board from "../../components/board/index";
 import Header from "../../components/header";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import {BlogType } from "../../types/BlogType"
-import Cookie from "../../utils/lib/cookie";
+import { useCookies } from "react-cookie";
 import { GetServerSideProps } from "next";
 
 
@@ -17,12 +17,12 @@ export default function BoardPage({blogs} :{blogs : BlogType} ) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { accessToken } = await Cookie(ctx);
+  const [cookies, setCookie] = useCookies(["Blog_accessToken"]);
 
   try {
     const { data } = await CustomAxois.get(`/board`, {
       headers: {
-        Authorization: accessToken ?? "",
+        Authorization: cookies.Blog_accessToken ?? "",
       },
     });
     if (data) {

@@ -3,16 +3,55 @@ import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { emailState, passwordState } from '../../utils/recoil/state';
 import useLogin from "../../utils/lib/useLogin";
-
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
+import axios from "axios";
 export default function Login() {
   // const [InputEmail, setInputEmail] = useState("");         //Eamil input value
   // const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
+  const [cookies, setCookie] = useCookies(["Blog_accessToken", "Blog_refreshToken"]);
 
-  const [,setEmail] = useRecoilState(emailState);
-  const [,setPassword] = useRecoilState<string>(passwordState);
+  const router = useRouter();
+  const AccessToKenTime = 60000 * 3;  //3분
+  const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
+
+  const [email,setEmail] = useRecoilState(emailState);
+  const [password,setPassword] = useRecoilState<string>(passwordState);
 
   const onLogin = async () => {
-    useLogin();
+    try {
+      const { data } = await axios.post(
+        `http://10.120.74.59:8081/user/login`,
+        {
+          email: email,
+          password: password,
+        }
+      );
+      const Blog_accessToken = data.accessToken;
+      const Blog_refreshToken = data.refreshToken;
+      axios.defaults.headers.common["Blog_accessToken"] = `${Blog_accessToken}`;
+      axios.defaults.headers.common["Blog_refreshToken"] = `${Blog_refreshToken}`;
+
+      setCookie("Blog_accessToken", Blog_accessToken, {
+          path: "/Blog_accessToken",
+          secure: true,
+          sameSite: "none",
+          maxAge : AccessToKenTime,
+        });
+        setCookie("Blog_refreshToken", Blog_refreshToken, {
+          path: "/Blog_refreshToken",
+          secure: true,
+          sameSite: "none",
+          maxAge : RefreshTokenTime,
+        });
+
+      // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
+      // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
+
+      router.push("/board");
+    } catch (e: any) {
+      console.error(e.message);
+    }
   };
 
   return (
