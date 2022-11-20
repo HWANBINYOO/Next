@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import axios from "axios";
 
-export default function Register() {
+export default function SignUp() {
   const [Email, setEmail] = useState("");
   const [PassWord, setPassWord] = useState("");
   const [Name, setName] = useState("");
@@ -32,12 +32,12 @@ export default function Register() {
       //   password: PassWord,
       // });
 
-      const { data } = await axios.post(
-        `http://10.120.74.59:8081/user/register`,
+      const { data } = await CustomAxois.post(
+        `http://10.82.20.18:8081/auth/signup`,
         {
           name: Name,
-        email: Email,
-        password: PassWord,
+          email: Email,
+          password: PassWord,
         }
         );
       console.log(data);
@@ -50,7 +50,7 @@ export default function Register() {
 
   return (
     <S.LoginWapper>
-      <Link href="/register">
+      <Link href="/signUp">
         <S.LoginTitle>회원가입</S.LoginTitle>
       </Link>
       <S.InputsWapper>

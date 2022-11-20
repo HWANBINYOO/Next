@@ -17,7 +17,8 @@ export default function BoardPage({blogs} :{blogs : BlogType} ) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const [cookies, setCookie] = useCookies(["Blog_accessToken"]);
+  const [cookies] = useCookies(["Blog_accessToken"]);
+  
 
   try {
     const { data } = await CustomAxois.get(`/board`, {

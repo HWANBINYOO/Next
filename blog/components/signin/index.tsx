@@ -6,7 +6,7 @@ import useLogin from "../../utils/lib/useLogin";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import axios from "axios";
-export default function Login() {
+export default function SignIn() {
   // const [InputEmail, setInputEmail] = useState("");         //Eamil input value
   // const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
   const [cookies, setCookie] = useCookies(["Blog_accessToken", "Blog_refreshToken"]);
@@ -21,7 +21,7 @@ export default function Login() {
   const onLogin = async () => {
     try {
       const { data } = await axios.post(
-        `http://10.120.74.59:8081/user/login`,
+        `http://10.82.20.18:8081/auth/signin`,
         {
           email: email,
           password: password,
@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <S.LoginWapper>
-      <Link href="/user/login">
+      <Link href="/auth/signIn">
         <S.LoginTitle>로그인</S.LoginTitle>
       </Link>
       <S.InputsWapper>

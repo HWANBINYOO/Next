@@ -1,10 +1,10 @@
-import Login from "../../components/login/index";
+import SignIn from "../../components/signin/index";
 export default function LoginPage() {
 
 
   return (
     <>
-      <Login />
+      <SignIn />
     </>
   );
 }

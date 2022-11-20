@@ -21,10 +21,10 @@ export default function Home() {
         <Image src={carImg} objectFit="cover" alt="홈 이미지" />
       </S.HomeImgsWapper>
       <S.LoginWapper>
-        <Link href="/user/login">
+        <Link href="/auth/signin">
           <a>Login</a>
         </Link>
-        <Link href="/user/resister">
+        <Link href="/auth/signup">
           <a>Signup</a>
         </Link>
       </S.LoginWapper>
