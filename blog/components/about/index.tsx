@@ -1,5 +1,4 @@
 import * as S from "./styled";
-import Link from "next/link";
 import Image from "next/image";
 import catImg from "../../public/Img/cat.jpg";
 import penguinImg from "../../public/Img/penguin.jpg";

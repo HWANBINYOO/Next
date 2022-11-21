@@ -1,5 +1,4 @@
-import Head from "next/head";
-import Home from "../components/home/index";
+import { Home } from "../components";
 
 function HomePage() {
   return <Home />;

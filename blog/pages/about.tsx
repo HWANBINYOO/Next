@@ -1,5 +1,4 @@
-import About from "@components/about";
-import Header from "@components/header";
+import { About, Header } from "../components";
 
 function HomePage() {
   return (

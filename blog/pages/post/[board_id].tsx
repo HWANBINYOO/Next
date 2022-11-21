@@ -1,10 +1,10 @@
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import BoardIn from "@components/boardIn";
-import Header from "@components/header";
+import { BoardIn, Header } from "../../components";
 import { BlogType } from "../../types";
-import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
+import cookie from 'react-cookies'
+
 
 export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   const router = useRouter();
@@ -40,12 +40,12 @@ export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { board_id } = ctx.query;
-  const { accessToken } = await Cookie(ctx);
+  const token = cookie.load('Blog_accessToken')
 
   try {
     const { data } = await CustomAxois.get(`/board/${board_id}`, {
       headers: {
-        Authorization: accessToken ?? "",
+        Authorization: token ?? "",
       },
     });
     if (data) {

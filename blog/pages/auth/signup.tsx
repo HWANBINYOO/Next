@@ -1,4 +1,4 @@
-import SignUp from "../../components/signUp/index";
+import { SignUp } from "../../components";
 
 export default function ResisterPage() {
   return <SignUp />

@@ -33,7 +33,7 @@ export default function SignUp() {
       // });
 
       const { data } = await CustomAxois.post(
-        `http://10.82.20.18:8081/auth/signup`,
+        `auth/signup`,
         {
           name: Name,
           email: Email,
@@ -41,7 +41,7 @@ export default function SignUp() {
         }
         );
       console.log(data);
-      redirect("/user/login");
+      redirect("/auth/signin");
     } catch (e: any) {
       const { data } = e.response;
       console.error("data : ", data);
@@ -80,7 +80,7 @@ export default function SignUp() {
         </S.SignupInput>
       </S.InputsWapper>
       <S.LoginButton onClick={onSignup}>Signup</S.LoginButton>
-      <Link href="/user/login">
+      <Link href="/auth/signin">
         <p>로그인하러가기</p>
       </Link>
     </S.LoginWapper>
