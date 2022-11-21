@@ -7,7 +7,7 @@ import App, { AppContext, AppProps } from "next/app";
 import getToken from "../utils/lib/getToken";
 
 
-const  MyApp = async ({ Component, pageProps }: { Component: any; pageProps: any }) => {
+const  MyApp = async ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <RecoilRoot>
@@ -19,16 +19,16 @@ const  MyApp = async ({ Component, pageProps }: { Component: any; pageProps: any
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-
   const {ctx} = appContext;
   const req = ctx.req;
   const allCookies = cookies(ctx);
   const accessTokenByCookie = allCookies['accessToken'] || "";
+  const refreshTokenByCookie = (allCookies["refreshToken"] || "");
 
-  if ((accessTokenByCookie === "" || accessTokenByCookie === undefined) === false) {
-    const refreshTokenByCookie = (allCookies["refreshToken"] || "");
-    if(!accessTokenByCookie){
-      getToken(appContext);
+  if (!(accessTokenByCookie === "" || accessTokenByCookie === undefined)) {
+    if(!accessTokenByCookie || !refreshTokenByCookie){
+      const { accessToken , refreshToken } = await getToken(appContext);
+      setToken(accessToken, refreshToken)
     }
     setToken(accessTokenByCookie, refreshTokenByCookie)
   }

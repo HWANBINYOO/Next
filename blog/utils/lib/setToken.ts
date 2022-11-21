@@ -1,11 +1,9 @@
 import CustomAxois from "./CustomAxois";
 import cookie from 'react-cookies'
-import { useRouter } from "next/router";
 
 const setToken = (accessToken:string, refreshToken:string) => {
-  const router = useRouter();
     CustomAxois.defaults.headers.common["Blog_accessToken"] = accessToken;
-    // CustomAxois.defaults.headers.common["Blog_refreshToken"] = refreshToken;
+    CustomAxois.defaults.headers.common["Blog_refreshToken"] = refreshToken;
 
     const expires = new Date()
     const expiresAcess = new Date()
