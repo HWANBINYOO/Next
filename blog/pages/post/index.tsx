@@ -22,12 +22,10 @@ export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = cookie.load('Blog_accessToken')
-  let cookiee = ctx?.req?.headers?.cookie?.split(";");
-  
+  let cookiee = ctx?.req?.headers?.cookie
   console.log(cookiee);
   console.log(token);
   
-
   try {
     const { data } = await CustomAxois.get(`/post`, {
       headers: {

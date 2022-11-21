@@ -5,6 +5,7 @@ const CustomAxois = axios.create({
   headers : {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,PATCH",
     "Access-Control-Allow-Origin": "*",
+    "withCredentials" : true
   }
 });
 

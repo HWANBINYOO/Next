@@ -1,6 +1,5 @@
 import * as S from "./styled";
 import Link from "next/link";
-import useLogin from "../../utils/lib/useLogin";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
@@ -9,19 +8,9 @@ import setToken from "../../utils/lib/setToken";
 
 
 export default function SignIn() {
+  const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");         //Eamil input value
   const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
-
-  const router = useRouter();
-  const expiresAcess = new Date()
-  const expiresRef = new Date()
-  expiresAcess.setDate(Date.now() + 60000 * 3)
-  expiresRef.setDate(Date.now() + 60000 * 3)
-  const AccessToKenTime = 60000 * 3;  //3분
-  const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
-
-  // const [email,setEmail] = useRecoilState(emailState);
-  // const [password,setPassword] = useRecoilState<string>(passwordState);
 
   const onLogin = async () => {
     try {
@@ -32,28 +21,11 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    const accessToken = data.accessToken;
-    const refreshToken = data.refreshToken;
-    console.log(accessToken);
+    setToken(data.accessToken , data.refreshToken)
+    console.log(data.accessToken);
 
-    setToken(accessToken,refreshToken)
-
-    
-      // setCookie("Blog_accessToken", Blog_accessToken, {
-      //     path: "/Blog_accessToken",
-      //     secure: true,
-      //     sameSite: "none",
-      //     maxAge : AccessToKenTime,
-      //   });
-      //   setCookie("Blog_refreshToken", Blog_refreshToken, {
-      //     path: "/Blog_refreshToken",
-      //     secure: true,
-      //     sameSite: "none",
-      //     maxAge : RefreshTokenTime,
-      //   });
-      // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
-      // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
-
+    // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
+    // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
       router.push("/post");
     } catch (e: any) {
       console.error(e.message);
