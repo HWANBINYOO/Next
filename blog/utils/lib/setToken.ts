@@ -22,7 +22,7 @@ const setToken = (accessToken:string, refreshToken:string) => {
         {
             path: '/',
             expires : expires,
-            // httpOnly: true
+            httpOnly: false
         }
       )
       cookie.save(
@@ -31,10 +31,10 @@ const setToken = (accessToken:string, refreshToken:string) => {
         {
             path: '/',
             expires : expires,
-            // httpOnly: true
+            httpOnly: false
         }
       )
 
 }
 
-export default { setToken }
+export default setToken 

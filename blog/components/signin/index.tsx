@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
 import cookie from 'react-cookies'
+import setToken from "../../utils/lib/setToken";
 
 
 export default function SignIn() {
@@ -31,31 +32,12 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    const Blog_accessToken = data.accessToken;
-    const Blog_refreshToken = data.refreshToken;
-    console.log(Blog_accessToken);
-    CustomAxois.defaults.headers.common["Blog_accessToken"] = `${Blog_accessToken}`;
-    CustomAxois.defaults.headers.common["Blog_refreshToken"] = `${Blog_refreshToken}`;
+    const accessToken = data.accessToken;
+    const refreshToken = data.refreshToken;
+    console.log(accessToken);
 
-    cookie.save(
-      'Blog_accessToken',
-      Blog_accessToken,
-      {
-          path: '/',
-          expires : expiresAcess,
-          // httpOnly: true
-      }
-    )
-    cookie.save(
-      'Blog_refreshToken',
-      Blog_refreshToken,
-      {
-          path: '/',
-          expires : expiresRef,
-          // httpOnly: true
-      }
-    )
-    console.log(Blog_accessToken);
+    setToken(accessToken,refreshToken)
+
     
       // setCookie("Blog_accessToken", Blog_accessToken, {
       //     path: "/Blog_accessToken",
@@ -69,7 +51,6 @@ export default function SignIn() {
       //     sameSite: "none",
       //     maxAge : RefreshTokenTime,
       //   });
-
       // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
       // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
 
