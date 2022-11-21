@@ -3,10 +3,15 @@ import {BlogType } from "../../types/BlogType"
 import cookie from 'react-cookies'
 import { GetServerSideProps } from "next";
 import { Board, Header } from "../../components";
+import { LOADIPHLPAPI } from "dns";
 
 
 
-export default function BoardPage({blogs} :{blogs : BlogType} ) {
+export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
+  const token = cookie.load('Blog_accessToken')
+  console.log(token);
+
+
   return (
     <>
       <Header HeaderColor={"skyblue"} />
@@ -17,7 +22,7 @@ export default function BoardPage({blogs} :{blogs : BlogType} ) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = cookie.load('Blog_accessToken')
-  let cookiee = ctx?.ctx?.req?.headers?.cookie?.split(";");
+  let cookiee = ctx?.req?.headers?.cookie?.split(";");
   
   console.log(cookiee);
   console.log(token);
@@ -31,6 +36,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     });
     if (data) {
       const blogs = data.blogs;
+      console.log(blogs);
       return { props: { blogs } };
     }
     return { props: {} };

@@ -21,10 +21,11 @@ import { BlogType } from "../../types";
 //   }
 // }
 
-export default function Board({blogs} : {blogs : BlogType}) {
+export default function Board({blogs} : {blogs : BlogType[]}) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const [Blogs, setBlogs] = useState<BlogType[]>();
+  
 
   // useEffect(() => {
   //   async function getblog() {

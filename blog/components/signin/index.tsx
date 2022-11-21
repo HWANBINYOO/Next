@@ -1,11 +1,7 @@
 import * as S from "./styled";
 import Link from "next/link";
-import { useRecoilState } from "recoil";
-import { emailState, passwordState } from '../../utils/recoil/state';
 import useLogin from "../../utils/lib/useLogin";
-import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
-import axios from "axios";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
 import cookie from 'react-cookies'
@@ -14,9 +10,12 @@ import cookie from 'react-cookies'
 export default function SignIn() {
   const [InputEmail, setInputEmail] = useState("");         //Eamil input value
   const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
-  const [cookies, setCookie] = useCookies(["Blog_accessToken", "Blog_refreshToken"]);
 
   const router = useRouter();
+  const expiresAcess = new Date()
+  const expiresRef = new Date()
+  expiresAcess.setDate(Date.now() + 60000 * 3)
+  expiresRef.setDate(Date.now() + 60000 * 3)
   const AccessToKenTime = 60000 * 3;  //3분
   const RefreshTokenTime = 60000 * 60 * 24 * 7; //일주일
 
@@ -34,16 +33,17 @@ export default function SignIn() {
     );
     const Blog_accessToken = data.accessToken;
     const Blog_refreshToken = data.refreshToken;
-    axios.defaults.headers.common["Blog_accessToken"] = `${Blog_accessToken}`;
-    axios.defaults.headers.common["Blog_refreshToken"] = `${Blog_refreshToken}`;
+    console.log(Blog_accessToken);
+    CustomAxois.defaults.headers.common["Blog_accessToken"] = `${Blog_accessToken}`;
+    CustomAxois.defaults.headers.common["Blog_refreshToken"] = `${Blog_refreshToken}`;
 
     cookie.save(
       'Blog_accessToken',
       Blog_accessToken,
       {
           path: '/',
-          maxAge: AccessToKenTime,
-          httpOnly: true
+          expires : expiresAcess,
+          // httpOnly: true
       }
     )
     cookie.save(
@@ -51,10 +51,12 @@ export default function SignIn() {
       Blog_refreshToken,
       {
           path: '/',
-          maxAge: RefreshTokenTime,
-          httpOnly: true
+          expires : expiresRef,
+          // httpOnly: true
       }
     )
+    console.log(Blog_accessToken);
+    
       // setCookie("Blog_accessToken", Blog_accessToken, {
       //     path: "/Blog_accessToken",
       //     secure: true,
@@ -71,7 +73,7 @@ export default function SignIn() {
       // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
       // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
 
-      router.push("/board");
+      router.push("/post");
     } catch (e: any) {
       console.error(e.message);
     }

@@ -43,7 +43,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const token = cookie.load('Blog_accessToken')
 
   try {
-    const { data } = await CustomAxois.get(`/board/${board_id}`, {
+    const { data } = await CustomAxois.get(`/post/${board_id}`, {
       headers: {
         Authorization: token ?? "",
       },
