@@ -25,10 +25,8 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const refreshTokenByCookie = (allCookies["RefreshToken"] || "");
 
   if (!(accessTokenByCookie === "" || accessTokenByCookie === undefined)) {
-    if(!accessTokenByCookie || !refreshTokenByCookie){
       const { accessToken , refreshToken } = await getToken(appContext);
       setToken(accessToken, refreshToken)
-    }
   }
 
   // if (req?.url?.startsWith('/_next')) {

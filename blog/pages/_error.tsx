@@ -1,5 +1,5 @@
 
-function Error({ statusCode } : { statusCode : any }) {
+function Error({ statusCode } : { statusCode : number }) {
   return (
     <p>
       {statusCode
