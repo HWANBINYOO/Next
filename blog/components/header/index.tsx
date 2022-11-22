@@ -5,6 +5,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
+import removeToken from "../../utils/lib/removeToken";
 
 export default function Header({ HeaderColor }: { HeaderColor: string }) {
   const [userId, setUserid] = useState("");
@@ -27,18 +28,15 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   }, [router.query]);
 
   const Logout = () => {
-    localStorage.removeItem("Blog_accessToken");
-    localStorage.removeItem("Blog_refreshToken");
-    console.log("로그아웃 되었습니다!");
-    window.location.replace("/user/login");
-    location.reload();
+    removeToken();
+    router.push('/')
   };
 
   return (
     <S.HeaderWapper>
       <S.HeaderTopWapper>
         <S.EmptyWapper />
-        <Link href="/board">
+        <Link href="/post">
           <a>DevLog </a>
         </Link>
         <S.HeaderRIght>
@@ -63,7 +61,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
         </S.HeaderRIght>
       </S.HeaderTopWapper>
       <S.HeaderBottomWapper>
-        <Link href="/board">
+        <Link href="/post">
           <S.HeaderMenu
             style={{
               backgroundColor: `${

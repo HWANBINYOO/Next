@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable jsx-a11y/alt-text */
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
@@ -8,20 +6,6 @@ import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
 import { BlogType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
-
-// export async function getStaticProps() {
-//   const router = useRouter();
-//   const board_id = router.query.board_id;
-//   try {
-//     const response = await CustomAxois.get(`/board/${board_id}`);
-//     const boardIndata = response.data;
-//   } catch (e: any) {
-//     console.error(e.message);
-//   }
-//   return {
-//     props: { boardIndata },
-//   };
-// }
 
 const BoardIn = ({
   boardIndata,

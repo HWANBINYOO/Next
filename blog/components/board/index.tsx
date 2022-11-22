@@ -1,5 +1,4 @@
 import * as S from "./styled";
-import { useState } from "react";
 import { useRouter } from "next/router";
 import Animation from "./animation";
 import BoardItem from "../boarditem/index";
@@ -8,7 +7,7 @@ import { BlogType } from "../../types";
 export default function Board({blogs} : {blogs : BlogType[]}) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  
+
   // const token = cookie.load('Authorization') // csr
   // useEffect(() => {
   //   async function getblog() {

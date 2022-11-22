@@ -5,7 +5,6 @@ import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
 import setToken from "../../utils/lib/setToken";
 
-
 export default function SignIn() {
   const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");         //Eamil input value
@@ -21,8 +20,6 @@ export default function SignIn() {
       }
     );
     setToken(data.accessToken , data.refreshToken);
-    console.log(data.accessToken);
-
     // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
     // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
       router.push("/post");
