@@ -1,42 +1,38 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
-import { useState, useEffect } from "react";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import { useState } from "react";
 import { BlogType } from "../../types";
+import { NextPage } from "next";
 
-const BoardItem: React.FC<BlogType> = ({
-  user_name,
-  date,
+const BoardItem: NextPage<BlogType> = ({
   title,
   content,
-  board_id,
-  user_id,
+  postId,
 }) => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const [boardImg, setboardImg] = useState("");
   const [profileImg, setProfileImg] = useState("");
 
-  useEffect(() => {
-    async function getboard() {
-      try {
-        const respone = await CustomAxois.get(`board_image/${board_id}`);
-        console.log(respone.data);
-        setboardImg(respone.data);
-        const respone2 = await CustomAxois.get(`user_image/${user_id}`);
-        setProfileImg(respone2.data);
-      } catch (e: any) {
-        console.error(e.message);
-      }
-    }
-    getboard();
-  }, [board_id, user_id]);
+  // useEffect(() => {
+  //   async function getboard() {
+  //     try {
+  //       const respone = await CustomAxois.get(`board_image/${postId}`);
+  //       console.log(respone.data);
+  //       setboardImg(respone.data);
+  //       const respone2 = await CustomAxois.get(`user_image/${user_id}`);
+  //       setProfileImg(respone2.data);
+  //     } catch (e: any) {
+  //       console.error(e.message);
+  //     }
+  //   }
+  //   getboard();
+  // }, [board_id, user_id]);
 
   return (
-    <S.BoardItem onClick={() => redirect(`/board/${board_id}`)}>
+    <S.BoardItem onClick={() => redirect(`/board/${postId}`)}>
       {
         boardImg ? 
         <Image
@@ -53,7 +49,8 @@ const BoardItem: React.FC<BlogType> = ({
         <S.desc>{content}</S.desc>
         <S.ItemBottom>
           <S.BottomLeft>
-            <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}>
+            <S.MemberImg>
+            {/* <S.MemberImg onClick={() => redirect(`/profile/${user_id}`)}> */}
               {
                 profileImg ?
                 <Image
@@ -70,9 +67,9 @@ const BoardItem: React.FC<BlogType> = ({
                 />
               }
             </S.MemberImg>
-            <S.MemberId>{user_name}</S.MemberId>
+            <S.MemberId>{"유저 이름"}</S.MemberId>
           </S.BottomLeft>
-          <S.date>{date}</S.date>
+          <S.date>{"날짜"}</S.date>
         </S.ItemBottom>
       </S.TextBox>
     </S.BoardItem>

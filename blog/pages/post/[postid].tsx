@@ -7,24 +7,22 @@ import cookies from "next-cookies";
 
 
 export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
-  const router = useRouter();
-  const { board_id } = router.query;
-
+  
   return (
     <>
       <Header HeaderColor={"skyblue"} />
-      <BoardIn boardIndata={blogInData} board_id={board_id} />
+      <BoardIn boardIndata={blogInData}/>
     </>
   );
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { board_id } = ctx.query;
+  const { postid } = ctx.query;
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
 
   try {
-    const { data } = await CustomAxois.get(`/post/${board_id}`, {headers: {Authorization}});
+    const { data } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
     if (data) {
       const blogIndata = data;
       return { props: { blogIndata } };

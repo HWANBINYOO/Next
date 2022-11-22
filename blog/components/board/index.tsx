@@ -8,21 +8,6 @@ export default function Board({blogs} : {blogs : BlogType[]}) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
 
-  // const token = cookie.load('Authorization') // csr
-  // useEffect(() => {
-  //   async function getblog() {
-  //     try {
-  //       const { data } = await CustomAxois.get(`/post`);
-  //       console.log(data);
-  //       console.log(data.blogs);
-  //       setBlogs(data.blogs); 
-  //     } catch (e: any) {
-  //       console.error(e.message);
-  //     }
-  //   }
-  //   getblog();
-  // }, []);
-
   return (
     <S.BlogWapper>
       <S.BlogButtonBox>
@@ -35,12 +20,9 @@ export default function Board({blogs} : {blogs : BlogType[]}) {
           blogs.map((item, index) => (
             <BoardItem
               key={index}
-              board_id={item.board_id}
-              user_id={item.user_id}
-              user_name={item.user_name}
+              postId={item.postId}
               title={item.title}
               content={item.content}
-              date={item.date}
             />
           ))
         ) : (

@@ -6,39 +6,34 @@ import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
 import { BlogType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
+import { NextPage } from "next";
 
-const BoardIn = ({
-  boardIndata,
-  board_id,
-}: {
-  boardIndata?: BlogType;
-  board_id?: string | string[];
-}) => {
+const BoardIn = ({boardIndata} : { boardIndata : BlogType} ) => {
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
 
-  useEffect(() => {
-    async function GetBoardImg() {
-      const res = await CustomAxois.get(`/board_image/${board_id}`);
-      setBoardurl(res.data);
-      const res2 = await CustomAxois.get(`/user_image/${boardIndata?.user_id}`);
-      setProfileImg(res2.data);
-      const respone2 = await CustomAxois.get(`/user_name`);
+  // useEffect(() => {
+  //   async function GetBoardImg() {
+  //     const res = await CustomAxois.get(`/board_image/${board_id}`);
+  //     setBoardurl(res.data);
+  //     const res2 = await CustomAxois.get(`/user_image/${boardIndata?.user_id}`);
+  //     setProfileImg(res2.data);
+  //     const respone2 = await CustomAxois.get(`/user_name`);
 
-      if (respone2.data.user_id === boardIndata?.user_id) {
-        setDelectDisplay(true);
-      } else {
-        setDelectDisplay(false);
-      }
-    }
-    GetBoardImg();
-  }, []);
+  //     if (respone2.data.user_id === boardIndata?.user_id) {
+  //       setDelectDisplay(true);
+  //     } else {
+  //       setDelectDisplay(false);
+  //     }
+  //   }
+  //   GetBoardImg();
+  // }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${board_id}`);
+    await CustomAxois.delete(`/delete/${boardIndata.postId}`);
   };
 
   return (
@@ -64,7 +59,8 @@ const BoardIn = ({
       <S.Title>{boardIndata?.title}</S.Title>
       <S.NameDate>
         <S.Name>
-          {boardIndata?.user_name} · {boardIndata?.date}
+          {/* {boardIndata?.user_name} · {boardIndata?.date} */}
+          "유저이름 · 날짜"
         </S.Name>
       </S.NameDate>
       <S.TextBox>
@@ -78,9 +74,7 @@ const BoardIn = ({
         }
       <S.desc>{boardIndata?.content}</S.desc>
       </S.TextBox>
-      <S.ProfileWapper
-        onClick={(e) => redirect(`/profile/${boardIndata?.user_id}`)}
-      >
+      <S.ProfileWapper>
         {
           profileImg ?
           <Image
@@ -98,7 +92,7 @@ const BoardIn = ({
         alt="profile 이미지"
         />
       }
-        <S.ProfileName>{boardIndata?.user_name}</S.ProfileName>
+        <S.ProfileName>{"유저이름"}</S.ProfileName>
       </S.ProfileWapper>
     </S.BoardInWapper>
   );
