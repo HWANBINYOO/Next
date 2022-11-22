@@ -3,7 +3,6 @@ import cookies from "next-cookies";
 import { AppContext } from "next/app";
 import setToken from "./setToken";
 
-
 const getToken = async  (appContext: AppContext) => {
  const {ctx} = appContext;
  const allCookies = cookies(ctx);
@@ -13,9 +12,7 @@ const getToken = async  (appContext: AppContext) => {
   let refreshToken : string;
 
   if (!accessTokenByCookie) {
-    const {data} = await CustomAxois.patch(
-      "/auth/reissue",
-      {},
+    const {data} = await CustomAxois.patch("/auth/reissue",
       { headers: { "RefreshToken": refreshTokenByCookie} }
     );
     accessToken = data.accessToken;

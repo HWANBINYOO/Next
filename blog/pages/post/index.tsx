@@ -16,14 +16,10 @@ export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
-  const accessTokenByCookie = allCookies['Authorization'] || "";
+  const Authorization = allCookies['Authorization'] || "";
   
   try {
-    const { data } = await CustomAxois.get(`/post`, {
-      headers: {
-        Authorization: accessTokenByCookie,
-      },
-    });
+    const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});
     if (data) {
       const blogs = data.list;
       return { props: { blogs } };

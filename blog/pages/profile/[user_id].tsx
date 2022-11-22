@@ -1,9 +1,9 @@
-import Header from "@components/header";
-import Profile from "@components/profile";
 import { GetServerSideProps } from "next";
-import Cookie from "../../utils/lib/cookie";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { ProfileType } from "../../types";
+import { Header, Profile } from "../../components";
+import cookies from "next-cookies";
+
 
 export default function ProfilePage({ProfileData} : {ProfileData : ProfileType}) {
   return (
@@ -16,14 +16,11 @@ export default function ProfilePage({ProfileData} : {ProfileData : ProfileType})
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { user_id } = ctx.query;
-  const { accessToken } = await Cookie(ctx);
+  const allCookies = cookies(ctx);
+  const Authorization = allCookies['Authorization'] || "";
   
   try {
-    const { data } = await CustomAxois.get(`/user_profile/${user_id}`, {
-      headers: {
-        Authorization: accessToken ?? "",
-      },
-    });
+    const { data } = await CustomAxois.get(`/user_profile/${user_id}`, {headers: {Authorization}});
     if (data) {
       const ProfileData = data;
       return { props: { ProfileData } };

@@ -1,4 +1,4 @@
-import ProfileEdit from "@components/profileEdit";
+import { ProfileEdit } from "../../components";
 
 export default function ProfilePage() {
   return (
