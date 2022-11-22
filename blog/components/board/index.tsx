@@ -1,37 +1,20 @@
 import * as S from "./styled";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import Animation from "./animation";
-import CustomAxois from "../../utils/lib/CustomAxois";
 import BoardItem from "../boarditem/index";
 import { BlogType } from "../../types";
-
-// export async function getServerSideProps() {
-//   console.log(window.localStorage.getItem("Blog_accessToken")); 
-//   try {
-//     const { data } = await CustomAxois.get(`/board`);
-//     if (data) {
-//       const blogs = data.blogs;
-//       return { props: { blogs } };
-//     }
-//     return { props: {} };
-//   } catch (error) {
-//     console.log(error);
-//     return { props: {} };
-//   }
-// }
 
 export default function Board({blogs} : {blogs : BlogType[]}) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const [Blogs, setBlogs] = useState<BlogType[]>();
   
-
+  // const token = cookie.load('Authorization') // csr
   // useEffect(() => {
   //   async function getblog() {
-  //     console.log(window.localStorage.getItem("Blog_accessToken"));
   //     try {
-  //       const { data } = await CustomAxois.get(`/board`);
+  //       const { data } = await CustomAxois.get(`/post`);
+  //       console.log(data);
   //       console.log(data.blogs);
   //       setBlogs(data.blogs); 
   //     } catch (e: any) {
@@ -49,8 +32,8 @@ export default function Board({blogs} : {blogs : BlogType[]}) {
         </S.Button>
       </S.BlogButtonBox>
       <S.BLogWarpper>
-        {Blogs ? (
-          Blogs.map((item, index) => (
+        {blogs ? (
+          blogs.map((item, index) => (
             <BoardItem
               key={index}
               board_id={item.board_id}

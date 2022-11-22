@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
-import cookie from 'react-cookies'
 import setToken from "../../utils/lib/setToken";
 
 
@@ -21,7 +20,7 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    setToken(data.accessToken , data.refreshToken)
+    setToken(data.accessToken , data.refreshToken);
     console.log(data.accessToken);
 
     // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);

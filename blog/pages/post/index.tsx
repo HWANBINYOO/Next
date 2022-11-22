@@ -1,16 +1,10 @@
 import CustomAxois from "../../utils/lib/CustomAxois";
 import {BlogType } from "../../types/BlogType"
-import cookie from 'react-cookies'
+import cookies from "next-cookies";
 import { GetServerSideProps } from "next";
 import { Board, Header } from "../../components";
-import { LOADIPHLPAPI } from "dns";
-
-
 
 export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
-  const token = cookie.load('Blog_accessToken')
-  console.log(token);
-
 
   return (
     <>
@@ -21,20 +15,17 @@ export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const token = cookie.load('Blog_accessToken')
-  let cookiee = ctx?.req?.headers?.cookie
-  console.log(cookiee);
-  console.log(token);
+  const allCookies = cookies(ctx);
+  const accessTokenByCookie = allCookies['Authorization'] || "";
   
   try {
     const { data } = await CustomAxois.get(`/post`, {
       headers: {
-        Authorization: token ?? "",
+        Authorization: accessTokenByCookie,
       },
     });
     if (data) {
-      const blogs = data.blogs;
-      console.log(blogs);
+      const blogs = data.list;
       return { props: { blogs } };
     }
     return { props: {} };

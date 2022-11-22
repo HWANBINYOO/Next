@@ -2,8 +2,8 @@ import CustomAxois from "./CustomAxois";
 import cookie from 'react-cookies'
 
 const setToken = (accessToken:string, refreshToken:string) => {
-    CustomAxois.defaults.headers.common["Blog_accessToken"] = accessToken;
-    CustomAxois.defaults.headers.common["Blog_refreshToken"] = refreshToken;
+    CustomAxois.defaults.headers.common["Authorization"] = accessToken;
+    // CustomAxois.defaults.headers.common["RefreshToken"] = refreshToken;
 
     const expires = new Date()
     const expiresAcess = new Date()
@@ -14,7 +14,7 @@ const setToken = (accessToken:string, refreshToken:string) => {
 
 
     cookie.save(
-        'Blog_accessToken',
+        'Authorization',
         accessToken,
         {
             path: '/',
@@ -23,7 +23,7 @@ const setToken = (accessToken:string, refreshToken:string) => {
         }
       )
       cookie.save(
-        'Blog_refreshToken',
+        'RefreshToken',
         refreshToken,
         {
             path: '/',
