@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { useState } from "react";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxois";
@@ -18,23 +17,22 @@ const BoardAdd = () => {
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [file, setFile] = useState(""); //파일
-  const [imgBase64, setImgBase64] = useState(""); // 파일 base64
+  const [file, setFile] = useState("");
+  const [imgBase64, setImgBase64] = useState("");
 
   const handleChangeFile = (e: any) => {
     e.preventDefault();
     let reader = new FileReader();
 
     reader.onloadend = () => {
-      // 2. 읽기가 완료되면 아래코드가 실행됩니다.
       const base64 = reader.result;
       if (base64) {
-        setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
+        setImgBase64(base64.toString());
       }
     };
     if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]); // 1. 파일을 읽어 버퍼에 저장합니다.
-      setFile(e.target.files[0]); // 파일 상태 업데이트
+      reader.readAsDataURL(e.target.files[0]);
+      setFile(e.target.files[0]);
     }
   };
 
@@ -52,13 +50,19 @@ const BoardAdd = () => {
       new Blob([JSON.stringify(boardDto)], { type: "application/json" })
     );
     try {
-      await CustomAxois.post("/board/write", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      // await CustomAxois.post("/board/write", formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      await CustomAxois.post("/post",{
+        title,
+        content : desc,
+        tages : ["벡엔드" , "프론트엔드"]
+      }
+      );
       console.log("추가됐습니다!");
-      redirect("/board");
+      redirect("/post");
     } catch (e: any) {
       console.log(e.message);
     }
@@ -103,7 +107,6 @@ const BoardAdd = () => {
             onChange={handleChangeFile}
           />
           <label htmlFor="change_img">변경</label>
-          {/* <button type="submit">제출하기</button> */}
         </form>
       </S.BoardAddImgWapper>
 
