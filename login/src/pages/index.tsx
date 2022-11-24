@@ -1,10 +1,10 @@
-import axios from "axios";
 import { GetServerSidePropsContext, NextApiResponse } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { emailState, passwordState } from "../utils/recoil/state";
-import Login from "@components/login";
+import Login from "../components/login";
+import CustomAxois from "../../Util/CustomAxois";
 
 export default function Home(res: NextApiResponse,ctx: GetServerSidePropsContext) {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Home(res: NextApiResponse,ctx: GetServerSidePropsContext
  useEffect(()=>{
   async function a(){
     try {
-      const { data } = await axios.post(
+      const { data } = await CustomAxois.post(
         `https://server.dev-log.kr/user/login`,
         {
           email: email,
