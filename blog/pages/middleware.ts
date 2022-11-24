@@ -3,9 +3,10 @@ import cookies from "next-cookies";
 import setToken from '../utils/lib/setToken';
 import getToken from '../utils/lib/getToken';
 import removeToken from '../utils/lib/removeToken';
+import { AppContext } from 'next/app';
 
-export const middleware = async (appContext:any , req: NextRequest) => {
-  const {ctx} = appContext;
+export const middleware = async (appContext:any) => {
+  const {ctx , req} = appContext;
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
   const RefreshToken = (allCookies["RefreshToken"] || "");
