@@ -1,7 +1,7 @@
 import * as S from "./styled";
 import { useRouter } from "next/router";
 import { NextApiRequest } from "next";
-import { profileProp } from "../../pages/me";
+import { profileProp } from "../../pages/member/me";
 
 export default function Profile({userId , msg} : profileProp) {
   const router = useRouter();

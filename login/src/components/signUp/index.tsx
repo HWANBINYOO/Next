@@ -12,13 +12,13 @@ export default function Signup() {
 
   const onSignup = async () => {
     try {
-      const { data } = await CustomAxois.post(`/join`, {
+      const { data } = await CustomAxois.post(`/member/join`, {
           email: Email,
           password: PassWord,
         }
       );
       console.log(data);
-      redirect("/login");
+      redirect("/member/login");
     } catch (e: any) {
       const { data } = e.response;
       console.error("data : ", data);
@@ -27,7 +27,7 @@ export default function Signup() {
 
   return (
     <S.LoginWapper>
-      <Link href="/join">
+      <Link href="/member/join">
         <S.LoginTitle>회원가입</S.LoginTitle>
       </Link>
       <S.InputsWapper>
@@ -49,7 +49,7 @@ export default function Signup() {
         </S.SignupInput>
       </S.InputsWapper>
       <S.LoginButton onClick={onSignup}>Signup</S.LoginButton>
-      <Link href="/login">
+      <Link href="/member/login">
         <p>로그인하러가기</p>
       </Link>
     </S.LoginWapper>

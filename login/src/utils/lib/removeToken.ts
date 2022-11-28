@@ -1,9 +1,6 @@
-import CustomAxois from "./CustomAxois";
-import cookie from 'react-cookies'
-
 const removeToken = () => {
-    cookie.remove('Authorization')
-    cookie.remove('RefreshToken')
+    document.cookie = `foo=Authorization; path=/; expires=-1`;
+    document.cookie = `foo=RefreshToken; path=/; expires=-1`;
 }
 
 export default removeToken 

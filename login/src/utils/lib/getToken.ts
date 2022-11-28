@@ -11,18 +11,17 @@ const getToken = async  (appContext: AppContext) => {
   let refreshToken : string;
 
   if (!accessTokenByCookie) {
-    const {data} = await CustomAxois.patch("/auth/reissue",
-      { headers: { "RefreshToken": refreshTokenByCookie} }
+    const {data} = await CustomAxois.post("/refresh",
+    { headers: { 
+        "RefreshToken": refreshTokenByCookie
+      } 
+    }
     );
     accessToken = data.accessToken;
     refreshToken =  data.refreshToken;
-  } else {  
-    const {data} = await CustomAxois.get("/auth/reissue2");
-    accessToken = data.accessToken;
-    refreshToken =  data.refreshToken;
+    return { accessToken };
   }
-
-  return { accessToken , refreshToken };
+  return { accessTokenByCookie };
 };
 
 export default getToken;

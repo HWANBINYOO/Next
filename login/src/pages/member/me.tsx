@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
-import CustomAxois from "../utils/lib/CustomAxois";
-import Profile from '../components/Profile'
+import CustomAxois from "../../utils/lib/CustomAxois";
+import Profile from '../../components/Profile'
 import cookies from "next-cookies";
 
 export interface profileProp {
@@ -10,12 +10,7 @@ export interface profileProp {
 
 export default function ProfilePage({userId , msg} : profileProp) {
   console.log(msg);
-    
-  return (
-    <>
-      <Profile userId={userId} msg={msg} />
-    </>
-  );
+  return <Profile userId={userId} msg={msg} />
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -23,7 +18,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const Authorization = allCookies['Authorization'] || "";
   
   try {
-    const {data} = await CustomAxois.get(`/me`, {headers: {Authorization}});
+    const {data} = await CustomAxois.get(`/member/me`, {headers: {Authorization}});
     if (data.data) {
       console.log(data.msg);
       

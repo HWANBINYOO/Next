@@ -40,7 +40,7 @@ export default function Login({ctx}: {ctx : any} ) {
 
   const onLogin = async () => {
     await a( InputEmail , InputPassWord)
-    router.push('/me');
+    router.push('/member/me');
   };
 
   return (
