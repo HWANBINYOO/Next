@@ -1,7 +1,7 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
-import CustomAxois from "../../../Util/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 import { useRouter } from "next/router";
 
 

@@ -1,7 +1,7 @@
 import * as S from "./styled";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import CustomAxois from "../../../Util/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxois";
 
 export default function Home() {
   const router = useRouter();
