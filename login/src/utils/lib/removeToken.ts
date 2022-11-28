@@ -1,6 +1,6 @@
 const removeToken = () => {
-    document.cookie = `foo=Authorization; path=/; expires=-1`;
-    document.cookie = `foo=RefreshToken; path=/; expires=-1`;
+    document.cookie = `Authorization=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+    document.cookie = `RefreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 }
 
 export default removeToken 
