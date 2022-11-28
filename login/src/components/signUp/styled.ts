@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const LoginWapper = styled.div`
   padding-top: 7vh;
@@ -12,18 +12,14 @@ export const LoginWapper = styled.div`
 
 export const LoginTitle = styled.span`
   width: max-content;
-  font-size: 5.5rem;
-  line-height: 0.8;
-  background-image: linear-gradient(transparent 60%, #e2b9ff 40%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  font-size: 3rem;
 `;
 
 export const InputsWapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 50vh;
+  height: 40vh;
 `;
 
 export const SignupInput = styled.div`
@@ -33,11 +29,10 @@ export const SignupInput = styled.div`
   flex-direction: column;
   justify-content: space-between;
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
   }
   input {
-    font-family: "SuncheonB";
     width: 60%;
     display: flex;
     align-items: center;
@@ -51,8 +46,8 @@ export const SignupInput = styled.div`
     transition: all ease 0.3s 0s;
   }
   input:focus {
-    border-color: #c8abc5;
-    color: #c8abc5;
+    border-color: grey;
+    color: grey;
   }
 `;
 
@@ -63,11 +58,12 @@ export const LoginButton = styled.button`
   border-radius: 10px;
   border: none;
   font-size: 1rem;
-  background-color: #e2b9ff;
+  background-color: grey;
+  color: white                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ;
   transition: all ease 0.2s 0s;
   font-weight: bold;
 
   &:hover {
-    background-color: #daa7ff;
+    background-color: black;
   }
 `;
