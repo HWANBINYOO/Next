@@ -9,7 +9,11 @@ export interface profileProp {
 }
 
 export default function ProfilePage({userId , msg} : profileProp) {
-  return <Profile userId={userId} msg={msg} />
+  return (
+    <>
+      <Profile userId={userId} msg={msg} />
+    </>
+  )
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -18,14 +22,12 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   console.log(Authorization);
   
   try {
-    const {data} = await CustomAxois.get(`/member/me    `, {headers: {Authorization}});
-    if (data) {
+    const {data} = await CustomAxois.get(`/member/me`, {headers: {Authorization}});
+    console.log(data);
       const userId = data.data.id;
       const msg = data.msg;
-      return { props: { userId , msg } };
-    }
-    return { props: {} };
-  } catch (error) {
+    return { props: { userId , msg } };
+  } catch (error:any) {
     console.log(error);
     return { props: {} };
   }
