@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   padding: 0;
@@ -6,12 +14,20 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+html,
+body,
+a,
+button {
+  font-family: GmarketSansMedium;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-* {
+*,
+label {
   box-sizing: border-box;
 }
 
