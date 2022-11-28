@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
