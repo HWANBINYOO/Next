@@ -1,10 +1,10 @@
-import { GetServerSidePropsContext } from "next";
+import { NextApiRequest } from "next";
 
-const Cookie = async (ctx: GetServerSidePropsContext) => {
-  let accessToken = ctx.req.cookies["Blog_accessToken"] ;
-  const refreshToken = ctx.req.cookies["Blog_refreshToken"];
+const Cookie = async (res: NextApiRequest) => {
+  let accessToken;
+  // let accessToken = res.headers['Blog_accessToken']
+  // const refreshToken = ctx.req.cookies["Blog_refreshToken"] ;
   let cookies: string[] | undefined;
-
   
   return { cookies, accessToken };
 };
