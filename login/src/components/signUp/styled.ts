@@ -52,7 +52,6 @@ export const SignupInput = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  font-family: "SuncheonB";
   width: 15%;
   height: 5vh;
   border-radius: 10px;
