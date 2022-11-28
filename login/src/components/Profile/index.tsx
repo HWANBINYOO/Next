@@ -5,9 +5,6 @@ import { profileProp } from "../../pages/member/me";
 
 export default function Profile({userId , msg} : profileProp) {
   const router = useRouter();
-  const redirect = (url: string) => router.push(url);
-  // let accessToken = res.headers['Blog_accessToken'];
-  // console.log(accessToken);
   
   return (
    <S.HomeWapper>

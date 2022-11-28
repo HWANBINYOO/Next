@@ -1,3 +1,9 @@
 import Signup from "../../components/signup";
 
-export default function HomePage() { <Signup /> }
+export default function HomePage() {
+  return (
+    <>
+      <Signup />
+    </>
+  );
+}

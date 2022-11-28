@@ -15,7 +15,7 @@ export const LoginTitle = styled.span`
   font-size: 3rem;
 `;
 
-export const InputsWapper = styled.div`
+export const InputsWapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
