@@ -10,9 +10,9 @@ const allCookies = cookies(ctx);
  let accessToken : string;
  let refreshToken : string;
 
-if(!refreshTokenByCookie){
-  router.push("/member/login");
-}
+// if(!refreshTokenByCookie){
+//   router.push("/member/login");
+// }
 
  const {data} = await CustomAxois.post("/refresh",{ headers: { 
    "RefreshToken": refreshTokenByCookie

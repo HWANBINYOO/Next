@@ -20,10 +20,6 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
   let Authorization = allCookies['Authorization'] || "";
   console.log(Authorization);
-
-  if(!Authorization){
-
-  }
   
   try {
     const {data} = await CustomAxois.get(`/member/me`, {headers: {Authorization}});

@@ -18,7 +18,6 @@ export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
   if (confirmedUrl.includes(pathname) && !RefreshToken) {
     const url = req.nextUrl.clone()
     url.pathname = '/member/login'
-    // return NextResponse.redirect("http://localhost:3000/member/me");
     return NextResponse.redirect(`${url}`)
   }
   
