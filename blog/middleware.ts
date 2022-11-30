@@ -1,16 +1,15 @@
 import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
 import cookies from "next-cookies";
-import removeToken from './utils/lib/removeToken';
 import { NextPageContext } from 'next';
 
 export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
-  const RefreshToken = allCookies["RefreshToken"] || "";
+  const RefreshToken = allCookies['RefreshToken'] || "";
 
-  console.log(req.url);
+  console.log(ctx);
   // const confirmedUrl = ['/', '/member/login', '/member/join']
-  const confirmedUrl = ['/post' , 'profile' , '/about' , 'boardadd']
+  const confirmedUrl = ['/post' , '/profile' , '/about' , '/boardadd']
   const { pathname } = req.nextUrl
 
   if (confirmedUrl.includes(pathname) && !RefreshToken) {

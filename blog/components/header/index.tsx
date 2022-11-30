@@ -5,7 +5,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
-import removeToken from "../../utils/lib/removeToken";
+import { useRemoveToken } from "../../Hooks/useToken";
 
 export default function Header({ HeaderColor }: { HeaderColor: string }) {
   const [userId, setUserid] = useState("");
@@ -28,7 +28,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   }, [router.query]);
 
   const Logout = () => {
-    removeToken();
+    useRemoveToken();
     router.push('/')
   };
 

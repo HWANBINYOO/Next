@@ -7,20 +7,19 @@ import {useSetToken} from "../../Hooks/useToken"
 
 export default function SignIn() {
   const router = useRouter();
-  const [InputEmail, setInputEmail] = useState("");         //Eamil input value
-  const [InputPassWord, setInputPassWord] = useState("");   //password ipnut value
+  const [InputEmail, setInputEmail] = useState("");
+  const [InputPassWord, setInputPassWord] = useState("");
 
   const onLogin = async () => {
     try {
-    const { data } = await CustomAxois.post(
-      `auth/signin`,
-      {
+    const { data } = await CustomAxois.post(`auth/signin`, {
         email: InputEmail,
         password: InputPassWord,
       }
     );
-    useSetToken(data.accessToken , data.refreshToken);
-      router.push("/post");
+    
+    useSetToken(data.accessToken, data.refreshToken);
+    router.push("/post");
     } catch (e: any) {
       console.error(e.message);
     }

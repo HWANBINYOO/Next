@@ -1,64 +1,31 @@
 import CustomAxois from "../utils/lib/CustomAxois";
 import cookies from "next-cookies";
-import { NextPageContext } from "next";
 import cookie from 'react-cookies'
 
-const useGetToken = async  (ctx : NextPageContext) => {
+const useGetToken = async  (ctx : any) => {
  const allCookies = cookies(ctx);
-  const accessTokenByCookie = allCookies['accessToken'] || "";
-  const refreshTokenByCookie = allCookies["refreshToken"] || "";
-  let accessToken : string;
-  let refreshToken : string;
+  let accessToken = allCookies['accessToken'] || "";
+  let refreshToken = allCookies["refreshToken"] || "";
 
-  if (!accessTokenByCookie) {
+  if (!accessToken) {
     const {data} = await CustomAxois.patch("/auth/reissue",
-      { headers: { "RefreshToken": refreshTokenByCookie} }
+      { headers: { "RefreshToken": refreshToken} }
     );
     accessToken = data.newAccessToken;
     refreshToken =  data.newRefreshToken;
-    return { accessToken , refreshToken };
   }
 
-  return { accessTokenByCookie , refreshTokenByCookie };
+  return { accessToken , refreshToken };
 };
 
 const useRemoveToken = () => {
-    cookie.remove('Authorization')
-    cookie.remove('RefreshToken')
+  document.cookie = `Authorization=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+  document.cookie = `RefreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
 }
 
-
 const useSetToken = (accessToken:string, refreshToken:string) => {
-  CustomAxois.defaults.headers.common["Authorization"] = accessToken;
-  // CustomAxois.defaults.headers.common["RefreshToken"] = refreshToken;
-
-  const expires = new Date()
-  const expiresAcess = new Date()
-  const expiresRef = new Date()
-  expiresAcess.setDate(Date.now() + 60000 * 3)  // 3분
-  expiresRef.setDate(Date.now() +  60000 * 60 * 24 * 7) // 일주일
-  expires.setDate(Date.now() + 1000 * 60 * 60 * 24) // 1일
-
-
-  cookie.save(
-      'Authorization',
-      accessToken,
-      {
-          path: '/',
-          expires : expiresAcess,
-          httpOnly: false
-      }
-    )
-    cookie.save(
-      'RefreshToken',
-      refreshToken,
-      {
-          path: '/',
-          expires : expiresRef,
-          httpOnly: false
-      }
-    )
-
+  document.cookie = `Authorization=${accessToken}; path=/; expires=${new Date(Date.now() +  60000 * 3)}` // 3분
+  document.cookie = `RefreshToken=${refreshToken}; path=/; expires=${new Date(Date.now() +  60000 * 60 * 24 * 7)}` // 일주일
 }
 
 export {useGetToken , useRemoveToken , useSetToken};
