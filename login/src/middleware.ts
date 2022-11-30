@@ -6,23 +6,22 @@ import removeToken from './utils/lib/removeToken';
 import { NextPageContext } from 'next';
 
 export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
-  // const allCookies = cookies(ctx);
-  // const Authorization = allCookies['Authorization'] || "";
-  // const RefreshToken = allCookies["RefreshToken"] || "";
+  const allCookies = cookies(ctx);
+  const Authorization = allCookies['Authorization'] || "";
+  const RefreshToken = allCookies["RefreshToken"] || "";
 
-  // console.log(req.url);
+  console.log(req.url);
   // const confirmedUrl = ['/', '/member/login', '/member/join']
-  // const { pathname } = req.nextUrl
+  const confirmedUrl = ['/member/me']
+  const { pathname } = req.nextUrl
 
-  // if (!confirmedUrl.includes(pathname) && !RefreshToken) {
-  //   const url = req.nextUrl.clone()
-  //   url.pathname = '/member/login'
-  //   return NextResponse.redirect(`${url}`)
-  // }
-
-
-
-
+  if (confirmedUrl.includes(pathname) && !RefreshToken) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/member/login'
+    // return NextResponse.redirect("http://localhost:3000/member/me");
+    return NextResponse.redirect(`${url}`)
+  }
+  
   // if (!req.url.includes("/member/login") && !RefreshToken) {
   //     // req.nextUrl.pathname = "/member/login";
   //     // return NextResponse.redirect(req.nextUrl);

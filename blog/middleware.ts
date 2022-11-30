@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse, userAgent } from 'next/server'
 import cookies from "next-cookies";
-import setToken from '../utils/lib/setToken';
-import getToken from '../utils/lib/getToken';
-import removeToken from '../utils/lib/removeToken';
+import setToken from './utils/lib/setToken';
+import getToken from './utils/lib/getToken';
+import removeToken from './utils/lib/removeToken';
 import { AppContext } from 'next/app';
 
 export const middleware = async (appContext:any) => {
