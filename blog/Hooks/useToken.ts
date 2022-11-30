@@ -1,6 +1,5 @@
 import CustomAxois from "../utils/lib/CustomAxois";
 import cookies from "next-cookies";
-import cookie from 'react-cookies'
 
 const useGetToken = async  (ctx : any) => {
  const allCookies = cookies(ctx);
@@ -14,18 +13,20 @@ const useGetToken = async  (ctx : any) => {
     accessToken = data.newAccessToken;
     refreshToken =  data.newRefreshToken;
   }
+  useSetToken(accessToken,refreshToken)
 
   return { accessToken , refreshToken };
 };
 
+const useSetToken = (accessToken:string, refreshToken:string) => {
+  CustomAxois.defaults.headers.common["Authorization"] = accessToken;
+  document.cookie = `Authorization=${accessToken}; path=/; expires=${new Date(Date.now() +  60000 * 3)}` // 3분
+  document.cookie = `RefreshToken=${refreshToken}; path=/; expires=${new Date(Date.now() +  60000 * 60 * 24 * 7)}` // 일주일
+}
+
 const useRemoveToken = () => {
   document.cookie = `Authorization=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
   document.cookie = `RefreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-}
-
-const useSetToken = (accessToken:string, refreshToken:string) => {
-  document.cookie = `Authorization=${accessToken}; path=/; expires=${new Date(Date.now() +  60000 * 3)}` // 3분
-  document.cookie = `RefreshToken=${refreshToken}; path=/; expires=${new Date(Date.now() +  60000 * 60 * 24 * 7)}` // 일주일
 }
 
 export {useGetToken , useRemoveToken , useSetToken};

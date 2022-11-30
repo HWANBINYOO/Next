@@ -2,19 +2,23 @@ import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
 import cookies from "next-cookies";
 import { NextPageContext } from 'next';
 
-export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
+export const middleware = async (req:NextRequest , ctx:any) => {
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
-  const RefreshToken = allCookies['RefreshToken'] || "";
-
-  console.log(ctx);
-  // const confirmedUrl = ['/', '/member/login', '/member/join']
+  const RefreshToken = allCookies['RefreshToken'] || "";  
   const confirmedUrl = ['/post' , '/profile' , '/about' , '/boardadd']
   const { pathname } = req.nextUrl
 
+  console.log(pathname);  
+  
   if (confirmedUrl.includes(pathname) && !RefreshToken) {
     const url = req.nextUrl.clone()
     url.pathname = '/auth/signin'
+    return NextResponse.redirect(`${url}`)
+  }
+  else if(Authorization){
+    const url = req.nextUrl.clone()
+    url.pathname = '/post'
     return NextResponse.redirect(`${url}`)
   }
   
