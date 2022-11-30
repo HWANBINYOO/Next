@@ -15,7 +15,6 @@ export default function  useUser(){
     useEffect(() => {
         if(data && !data.ok){
             router.push("/enter");
-
         }
     },[data , router]);
     return {user:data?.profile , isLoading: !data && !error}

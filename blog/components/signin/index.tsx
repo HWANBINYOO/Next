@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
-import setToken from "../../utils/lib/setToken";
+import {useSetToken} from "../../Hooks/useToken"
 
 export default function SignIn() {
   const router = useRouter();
@@ -19,9 +19,7 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    setToken(data.accessToken , data.refreshToken);
-    // ctx.res.setHeader("Blog_accessToken", `${Blog_accessToken}; maxAge=${AccessToKenTime};`);
-    // ctx.res.setHeader("Blog_refreshToken", `${Blog_refreshToken}; maxAge=${RefreshTokenTime};`);
+    useSetToken(data.accessToken , data.refreshToken);
       router.push("/post");
     } catch (e: any) {
       console.error(e.message);

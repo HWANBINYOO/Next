@@ -1,41 +1,43 @@
-import { NextRequest, NextResponse, userAgent } from 'next/server'
+import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
 import cookies from "next-cookies";
-import setToken from './utils/lib/setToken';
-import getToken from './utils/lib/getToken';
 import removeToken from './utils/lib/removeToken';
-import { AppContext } from 'next/app';
+import { NextPageContext } from 'next';
 
-export const middleware = async (appContext:any) => {
-  const {ctx , req} = appContext;
+export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
-  const RefreshToken = (allCookies["RefreshToken"] || "");
-  console.log(RefreshToken);
-  let res = NextResponse.next();
+  const RefreshToken = allCookies["RefreshToken"] || "";
 
-  const { origin, pathname } = req.nextUrl; // url 가져오기
+  console.log(req.url);
+  // const confirmedUrl = ['/', '/member/login', '/member/join']
+  const confirmedUrl = ['/post' , 'profile' , '/about' , 'boardadd']
+  const { pathname } = req.nextUrl
 
-  if (!pathname.includes("/auth/signin") && !pathname.includes("/auth/signup")) {
-  console.log(req.nextUrl);
-    if(!RefreshToken){
-      removeToken();
-      return NextResponse.redirect(`${origin}/auth/signin`);
-    }
-    else if(!(Authorization === "" || Authorization === undefined)) {
-      const { accessToken , refreshToken } = await getToken(appContext);
-      setToken(accessToken, refreshToken)
-    }
-
-  }
-
-  const ua = userAgent(req);
-  if (ua.isBot) {
-    req.nextUrl.searchParams.set('from', req.nextUrl.pathname)
-    req.nextUrl.pathname = '/'
-    return NextResponse.redirect(req.nextUrl)
+  if (confirmedUrl.includes(pathname) && !RefreshToken) {
+    const url = req.nextUrl.clone()
+    url.pathname = '/auth/signin'
+    return NextResponse.redirect(`${url}`)
   }
   
-  if (!req.nextUrl.pathname.startsWith("/auth/signin") && !req.cookies.get("carrotsession")) { // 만약 주소가 로그인페이지가 아니고 토큰이 없다면 로그인 페이지로 이동
-    return NextResponse.redirect(new URL("/enter", req.url));
-  }
+  // if (!req.url.includes("/member/login") && !RefreshToken) {
+  //     // req.nextUrl.pathname = "/member/login";
+  //     // return NextResponse.redirect(req.nextUrl);
+
+  //   // }
+  //   // else if(!(Authorization === "" || Authorization === undefined)) {
+  //   //   // const { accessToken , refreshToken } = await getToken(appContext);
+  //   //   // setToken(accessToken, refreshToken)
+  //   // }
+  // } 
+
+  // const ua = userAgent(req);
+  // if (ua.isBot) {
+  //   req.nextUrl.searchParams.set('from', req.nextUrl.pathname)
+  //   req.nextUrl.pathname = '/'
+  //   return NextResponse.redirect(req.nextUrl)
+  // }
+  
+  // if (!req.nextUrl.pathname.startsWith("/member/login") && !RefreshToken) { // 만약 주소가 로그인페이지가 아니고 토큰이 없다면 로그인 페이지로 이동
+  //   return NextResponse.redirect(new URL("/member/login", req.url));
+  // }
 }

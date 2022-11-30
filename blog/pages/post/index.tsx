@@ -18,6 +18,8 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
   const Authorization = allCookies['Authorization'] || "";
   
+  if(!Authorization){}
+
   try {
     const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});
     if (data) {

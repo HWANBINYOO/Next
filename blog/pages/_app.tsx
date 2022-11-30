@@ -1,10 +1,7 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import { RecoilRoot } from 'recoil';
-import cookies from "next-cookies";
-import setToken from "../utils/lib/setToken";
-import App, { AppContext, AppProps } from "next/app";
-import getToken from "../utils/lib/getToken";
+import { AppProps } from "next/app";
 
 const  MyApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -17,26 +14,26 @@ const  MyApp = ({ Component, pageProps }: AppProps) => {
   );
 }
 
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  const {ctx} = appContext;
-  const req = ctx.req;
-  const allCookies = cookies(ctx);
-  const accessTokenByCookie = allCookies['Authorization'] || "";
-  const refreshTokenByCookie = (allCookies["RefreshToken"] || "");
+// MyApp.getInitialProps = async (appContext: AppContext) => {
+//   const {ctx} = appContext;
+//   const req = ctx.req;
+//   const allCookies = cookies(ctx);
+//   const accessTokenByCookie = allCookies['Authorization'] || "";
+//   const refreshTokenByCookie = (allCookies["RefreshToken"] || "");
 
-  if (!(accessTokenByCookie === "" || accessTokenByCookie === undefined)) {
-      const { accessToken , refreshToken } = await getToken(appContext);
-      setToken(accessToken, refreshToken)
-  }
+//   if (!(accessTokenByCookie === "" || accessTokenByCookie === undefined)) {
+//       const { accessToken , refreshToken } = await getToken(appContext);
+//       setToken(accessToken, refreshToken)
+//   }
 
-  // if (req?.url?.startsWith('/_next')) {
-  //   // serverSideProps로 호출된 경우 URL이 /_next로 시작함.
-  //   // EX: /_next/data/development/index.json
-  // }
+//   // if (req?.url?.startsWith('/_next')) {
+//   //   // serverSideProps로 호출된 경우 URL이 /_next로 시작함.
+//   //   // EX: /_next/data/development/index.json
+//   // }
 
-  const appProps = await App.getInitialProps(appContext)
+//   const appProps = await App.getInitialProps(appContext)
 
-  return {...appProps}
-}
+//   return {...appProps}
+// }
 
 export default MyApp;
