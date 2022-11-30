@@ -1,26 +1,22 @@
-import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
-import cookies from "next-cookies";
-import { NextPageContext } from 'next';
+import {NextRequest,NextResponse} from "next/server";
 
-export const middleware = async (req:NextRequest , ctx:any) => {
-  const allCookies = cookies(ctx);
-  const Authorization = allCookies['Authorization'] || "";
-  const RefreshToken = allCookies['RefreshToken'] || "";  
+export const middleware = async (req:NextRequest) => {
+  const Authorization = req.cookies.get('Authorization')
+  const RefreshToken =  req.cookies.get('RefreshToken') 
   const confirmedUrl = ['/post' , '/profile' , '/about' , '/boardadd']
+  const joinURL = ['/auth/signup']
   const { pathname } = req.nextUrl
 
-  console.log(pathname);  
-  
-  if (confirmedUrl.includes(pathname) && !RefreshToken) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/auth/signin'
-    return NextResponse.redirect(`${url}`)
+  // console.log(RefreshToken);
+  // console.log(pathname.);
+
+  if(joinURL.includes(pathname) && Authorization){
+    return NextResponse.redirect(new URL('/post', req.url))
   }
-  else if(Authorization){
-    const url = req.nextUrl.clone()
-    url.pathname = '/post'
-    return NextResponse.redirect(`${url}`)
+  else if (confirmedUrl.includes(pathname) && !RefreshToken) {
+    return NextResponse.redirect(new URL('/auth/signin', req.url))
   }
+
   
   // if (!req.url.includes("/member/login") && !RefreshToken) {
   //     // req.nextUrl.pathname = "/member/login";
