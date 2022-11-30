@@ -1,13 +1,19 @@
 import CustomAxois from "./CustomAxois";
 import cookies from "next-cookies";
-import { AppContext } from "next/app";
+import { NextPageContext } from "next";
+import { useRouter } from "next/router";
 
-const getToken = async  (appContext: AppContext) => {
- const {ctx} = appContext;
- const allCookies = cookies(ctx);
+const useToken = async  (ctx : NextPageContext) => {
+const router = useRouter();
+const allCookies = cookies(ctx);
  const refreshTokenByCookie = (allCookies["refreshToken"] || "");
  let accessToken : string;
  let refreshToken : string;
+
+if(!refreshTokenByCookie){
+  router.push("/member/login");
+}
+
  const {data} = await CustomAxois.post("/refresh",{ headers: { 
    "RefreshToken": refreshTokenByCookie
  }
@@ -17,4 +23,4 @@ const getToken = async  (appContext: AppContext) => {
   return { accessToken , refreshToken };
 };
 
-export default getToken;
+export default useToken;

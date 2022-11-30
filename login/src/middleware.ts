@@ -1,7 +1,7 @@
 import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
 import cookies from "next-cookies";
 import setToken from './utils/lib/setToken';
-import getToken from './utils/lib/getToken';
+import getToken from './utils/lib/useToken';
 import removeToken from './utils/lib/removeToken';
 import { NextPageContext } from 'next';
 

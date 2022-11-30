@@ -3,7 +3,7 @@ import type { AppContext, AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil';
 import cookies from "next-cookies";
 import App from 'next/app';
-import getToken from '../utils/lib/getToken';
+import getToken from '../utils/lib/useToken';
 import setToken from '../utils/lib/setToken';
 import CustomAxois from '../utils/lib/CustomAxois';
 

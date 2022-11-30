@@ -18,8 +18,12 @@ export default function ProfilePage({userId , msg} : profileProp) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
-  const Authorization = allCookies['Authorization'] || "";
+  let Authorization = allCookies['Authorization'] || "";
   console.log(Authorization);
+
+  if(!Authorization){
+
+  }
   
   try {
     const {data} = await CustomAxois.get(`/member/me`, {headers: {Authorization}});
