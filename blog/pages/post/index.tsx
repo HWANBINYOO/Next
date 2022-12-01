@@ -3,9 +3,7 @@ import {BlogType } from "../../types/BlogType"
 import cookies from "next-cookies";
 import { GetServerSideProps, GetStaticProps } from "next";
 import { Board, Header } from "../../components";
-import { useGetToken } from "../../Hooks/useToken";
-import { useRecoilState } from "recoil";
-import { AuthorizationAtom } from "../../utils/recoil/state";
+import { UseGetToken } from "../../Hooks/useToken";
 
 export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 
@@ -18,16 +16,13 @@ export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const allCookies = cookies(ctx);
-  let Authorization = allCookies['Authorization'] || "";
-  let RefreshToken = allCookies['RefreshToken'] || "";
+  let Authorization = cookies(ctx)['Authorization'];
 
-  console.log(Authorization);
   if(!Authorization){
-    const { accessToken , refreshToken } = await useGetToken(ctx);
-    Authorization = accessToken;
-    RefreshToken = refreshToken;
+    const { accessToken } = await UseGetToken(ctx)
+    Authorization = accessToken
   }
+  console.log(Authorization);
 
   try {
     const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});

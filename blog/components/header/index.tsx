@@ -5,7 +5,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useEffect, useState } from "react";
-import { useRemoveToken } from "../../Hooks/useToken";
+import { UseRemoveToken } from "../../Hooks/useToken";
 
 export default function Header({ HeaderColor }: { HeaderColor: string }) {
   const [userId, setUserid] = useState("");
@@ -13,22 +13,22 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
 
-  useEffect(() => {
-    async function Getprofile() {
-      try {
-        const respone = await CustomAxois.get("/user_name");
-        console.log(respone.data.user_id);
-        setUserid(respone.data.user_id);
-        setprofileImg(respone.data.url);
-      } catch (e: any) {
-        console.error(e.message);
-      }
-    }
-    Getprofile();
-  }, [router.query]);
+  // useEffect(() => {
+  //   async function Getprofile() {
+  //     try {
+  //       const respone = await CustomAxois.get("/user_name");
+  //       console.log(respone.data.user_id);
+  //       setUserid(respone.data.user_id);
+  //       setprofileImg(respone.data.url);
+  //     } catch (e: any) {
+  //       console.error(e.message);
+  //     }
+  //   }
+  //   Getprofile();
+  // }, [router.query]);
 
   const Logout = () => {
-    useRemoveToken();
+    UseRemoveToken();
     router.push('/')
   };
 
