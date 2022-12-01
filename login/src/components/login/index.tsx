@@ -3,12 +3,13 @@ import Link from "next/link";
 import { useState } from "react";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useRouter } from "next/router";
-import setToken from "../../utils/lib/setToken";
+import { UseSetToken } from "../../../Hooks/useToken";
 
 export default function Login() {
+  const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");
   const [InputPassWord, setInputPassWord] = useState("");
-  const router = useRouter();
+  const redirect = (url: string) => router.push(url);
 
   const handleClick = async () => {
     try {
@@ -17,8 +18,11 @@ export default function Login() {
           password: InputPassWord,
         }
       );
-      setToken(data.data.accessToken , data.data.refreshToken)
-      router.push('/member/me');
+      console.log(data);
+      const accessToken = data.data.accessToken
+      const refreshToken = data.data.refreshTokene
+      UseSetToken(accessToken , refreshToken)
+      redirect("/member/me");
     } catch (e: any) {
       console.error(e.message);
     }
@@ -26,15 +30,16 @@ export default function Login() {
 
   return (
     <S.LoginWapper>
-      <Link href="/login">
+      <Link href="/member/login">
         <S.LoginTitle>로그인</S.LoginTitle>
       </Link>
-      <S.InputsWapper onSubmit={handleClick}>
+      <S.InputsWapper>
         <S.LoginInput>
           <p>Email</p>
           <input
             onChange={(e) => setInputEmail(e.target.value)}
             placeholder="Email을 입력하세요"
+            value={InputEmail}
           />
         </S.LoginInput>
         <S.LoginInput>
@@ -43,6 +48,7 @@ export default function Login() {
             type="password"
             onChange={(e) => setInputPassWord(e.target.value)}
             placeholder="PassWord을 입력하세요"
+            value={InputPassWord}
           />
         </S.LoginInput>
       </S.InputsWapper>
