@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import Profile from '../../components/Profile'
 import cookies from "next-cookies";
+import { UseGetToken } from "../../../Hooks/useToken";
 
 export interface profileProp {
   userId? : number,
@@ -18,8 +19,12 @@ export default function ProfilePage({userId , msg} : profileProp) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const allCookies = cookies(ctx);
-  let Authorization = allCookies['Authorization'] || "";
+  let Authorization = cookies(ctx)['Authorization'];
+  
+  if(!Authorization){
+     const { accessToken } = await UseGetToken(ctx)
+     Authorization = accessToken
+  }
   console.log(Authorization);
 
   try {
