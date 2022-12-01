@@ -1,14 +1,14 @@
 import {NextRequest,NextResponse} from "next/server";
+import { useGetToken } from "./Hooks/useToken";
 
-export const middleware = async (req:NextRequest) => {
+export const middleware = async (req:NextRequest , ctx:any) => {
   const Authorization = req.cookies.get('Authorization')
   const RefreshToken =  req.cookies.get('RefreshToken') 
   const confirmedUrl = ['/post' , '/profile' , '/about' , '/boardadd']
   const joinURL = ['/auth/signup']
   const { pathname } = req.nextUrl
 
-  // console.log(RefreshToken);
-  // console.log(pathname.);
+  console.log(pathname);
 
   if(joinURL.includes(pathname) && Authorization){
     return NextResponse.redirect(new URL('/post', req.url))
@@ -16,7 +16,6 @@ export const middleware = async (req:NextRequest) => {
   else if (confirmedUrl.includes(pathname) && !RefreshToken) {
     return NextResponse.redirect(new URL('/auth/signin', req.url))
   }
-
   
   // if (!req.url.includes("/member/login") && !RefreshToken) {
   //     // req.nextUrl.pathname = "/member/login";
@@ -40,3 +39,5 @@ export const middleware = async (req:NextRequest) => {
   //   return NextResponse.redirect(new URL("/member/login", req.url));
   // }
 }
+
+export const config = { matcher: "/((?!.*\\.).*)" };

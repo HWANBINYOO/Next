@@ -13,8 +13,8 @@ const useGetToken = async  (ctx : any) => {
     accessToken = data.newAccessToken;
     refreshToken =  data.newRefreshToken;
   }
+  
   useSetToken(accessToken,refreshToken)
-
   return { accessToken , refreshToken };
 };
 

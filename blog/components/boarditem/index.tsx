@@ -32,7 +32,7 @@ const BoardItem: NextPage<BlogType> = ({
   // }, [board_id, user_id]);
 
   return (
-    <S.BoardItem onClick={() => redirect(`/board/${postId}`)}>
+    <S.BoardItem onClick={() => redirect(`/post/${postId}`)}>
       {
         boardImg ? 
         <Image

@@ -3,7 +3,7 @@ function Error({ statusCode } : { statusCode : number }) {
   return (
     <p>
       {statusCode
-        ? `An error ${statusCode} occurred on server`
+        ? `${statusCode} 페이지 입니다`
         : 'An error occurred on client'}
     </p>
   )

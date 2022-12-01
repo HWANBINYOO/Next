@@ -18,11 +18,14 @@ export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
   let Authorization = allCookies['Authorization'] || "";
+  let RefreshToken = allCookies['RefreshToken'] || "";
 
-  // console.log(Authorization);
-  // if(!Authorization){
-  //   const { accessToken , refreshToken } = await useGetToken(ctx);
-  // }
+  console.log(Authorization);
+  if(!Authorization){
+    const { accessToken , refreshToken } = await useGetToken(ctx);
+    Authorization = accessToken;
+    RefreshToken = refreshToken;
+  }
 
   try {
     const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});

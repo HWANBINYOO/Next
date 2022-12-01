@@ -1,14 +1,15 @@
 import "../styles/globals.css";
-import Head from "next/head";
 import { RecoilRoot } from 'recoil';
 import { AppProps } from "next/app";
+import Layout from "../components/Layout";
 
 const  MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <RecoilRoot>
-        <Head>Devlog</Head>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </RecoilRoot>
     </>
   );
