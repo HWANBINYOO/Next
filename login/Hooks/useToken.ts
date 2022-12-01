@@ -20,13 +20,13 @@ const useGetToken = async  (ctx : any) => {
 
 const UseSetToken = (accessToken:string, refreshToken:string) => {
   CustomAxois.defaults.headers.common["Authorization"] = accessToken;
-  document.cookie = `Authorization=${accessToken}; path=/; expires=${new Date(Date.now() +  60000 * 3)}` // 3분
-  document.cookie = `RefreshToken=${refreshToken}; path=/; expires=${new Date(Date.now() +  60000 * 60 * 24 * 7)}` // 일주일
+  document.cookie = `Authorization=${accessToken}; path=/; max-age=180` // 3분
+  document.cookie = `RefreshToken=${refreshToken}; path=/; maxAge=${60000 * 60 * 24 * 7}` // 일주일
 }
 
 const useRemoveToken = () => {
-  document.cookie = `Authorization=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-  document.cookie = `RefreshToken=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+  document.cookie = `Authorization=; path=/; max-age=0`;
+  document.cookie = `RefreshToken=; path=/; max-age=0`;
 }
 
 export {useGetToken , useRemoveToken , UseSetToken};

@@ -9,6 +9,7 @@ export interface profileProp {
 }
 
 export default function ProfilePage({userId , msg} : profileProp) {
+  
   return (
     <>
       <Profile userId={userId} msg={msg} />
@@ -20,10 +21,9 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const allCookies = cookies(ctx);
   let Authorization = allCookies['Authorization'] || "";
   console.log(Authorization);
-  
+
   try {
     const {data} = await CustomAxois.get(`/member/me`, {headers: {Authorization}});
-    console.log(data);
       const userId = data.data.id;
       const msg = data.msg;
     return { props: { userId , msg } };

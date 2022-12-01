@@ -1,8 +1,5 @@
 import {NextFetchEvent,NextRequest,NextResponse,userAgent,} from "next/server";
 import cookies from "next-cookies";
-import setToken from './utils/lib/setToken';
-import getToken from './utils/lib/useToken';
-import removeToken from './utils/lib/removeToken';
 import { NextPageContext } from 'next';
 
 export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
@@ -14,9 +11,9 @@ export const middleware = async (req:NextRequest , ctx:NextPageContext) => {
 
   console.log(pathname);
 
-  // if(joinURL.includes(pathname) && Authorization){
-  //   return NextResponse.redirect(new URL('/member/me', req.url))
-  // }
+  if(joinURL.includes(pathname) && Authorization){
+    return NextResponse.redirect(new URL('/member/me', req.url))
+  }
    if (confirmedUrl.includes(pathname) && !RefreshToken) {
     return NextResponse.redirect(new URL('/member/login', req.url))
   }

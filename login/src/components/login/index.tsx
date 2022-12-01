@@ -19,9 +19,7 @@ export default function Login() {
         }
       );
       console.log(data);
-      const accessToken = data.data.accessToken
-      const refreshToken = data.data.refreshTokene
-      UseSetToken(accessToken , refreshToken)
+      UseSetToken(data.data.accessToken , data.data.refreshToken)
       redirect("/member/me");
     } catch (e: any) {
       console.error(e.message);
