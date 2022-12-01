@@ -5,7 +5,6 @@ import { BlogType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import cookies from "next-cookies";
 
-
 export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   
   return (
@@ -16,23 +15,23 @@ export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   );
 }
 
-// export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const { postid } = ctx.query;
-//   const allCookies = cookies(ctx);
-//   const Authorization = allCookies['Authorization'] || "";
+export const  getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { postid } = ctx.query;
+  const allCookies = cookies(ctx);
+  const Authorization = allCookies['Authorization'] || "";
 
-//   try {
-//     const { data } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
-//     if (data) {
-//       const blogIndata = data;
-//       return { props: { blogIndata } };
-//     }
-//     return { props: {} };
-//   } catch (error) {
-//     console.log(error);
-//     return { props: {} };
-//   }
-// }
+  try {
+    const { data } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
+    if (data) {
+      const blogIndata = data;
+      return { props: { blogIndata } };
+    }
+    return { props: {} };
+  } catch (error) {
+    console.log(error);
+    return { props: {} };
+  }
+}
 
 // export const getStaticPaths:GetStaticPaths = async () => {
 //   // const allCookies = cookies(ctx);

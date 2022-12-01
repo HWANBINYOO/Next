@@ -1,5 +1,7 @@
 import CustomAxois from "../utils/lib/CustomAxois";
 import cookies from "next-cookies";
+import { AuthorizationAtom } from "../utils/recoil/state";
+import { useRecoilState } from "recoil";
 
 const useGetToken = async  (ctx : any) => {
  const allCookies = cookies(ctx);
@@ -19,6 +21,8 @@ const useGetToken = async  (ctx : any) => {
 };
 
 const useSetToken = (accessToken:string, refreshToken:string) => {
+  // const [Authorization , setAuthorization] = useRecoilState(AuthorizationAtom)
+  // setAuthorization(accessToken)
   CustomAxois.defaults.headers.common["Authorization"] = accessToken;
   document.cookie = `Authorization=${accessToken}; path=/; expires=${new Date(Date.now() +  60000 * 3)}` // 3분
   document.cookie = `RefreshToken=${refreshToken}; path=/; expires=${new Date(Date.now() +  60000 * 60 * 24 * 7)}` // 일주일

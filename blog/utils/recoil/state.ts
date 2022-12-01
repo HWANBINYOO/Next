@@ -1,12 +1,13 @@
 import {atom} from "recoil";
 
-const emailState = atom<string>({
-    key: 'emailState',
+const AuthorizationAtom = atom<string>({
+    key: 'AuthorizationAtom',
     default : '',
 })
 
-const passwordState = atom<string>({
-    key: 'emailState',
+const RefreshTokenAtom = atom<string>({
+    key: 'RefreshTokenAtom',
     default : '',
 })
-export {emailState,passwordState};
+
+export {AuthorizationAtom,RefreshTokenAtom};

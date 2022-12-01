@@ -1,9 +1,11 @@
 import CustomAxois from "../../utils/lib/CustomAxois";
 import {BlogType } from "../../types/BlogType"
 import cookies from "next-cookies";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { Board, Header } from "../../components";
 import { useGetToken } from "../../Hooks/useToken";
+import { useRecoilState } from "recoil";
+import { AuthorizationAtom } from "../../utils/recoil/state";
 
 export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
 
@@ -39,3 +41,20 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     return { props: {} };
   }
 }
+
+// export const getStaticProps:GetStaticProps = async (ctx) => {
+//   console.log(ctx);
+//   // const [Authorization , setAuthorization] = useRecoilState(AuthorizationAtom)
+//   // console.log(Authorization);
+//   try {
+//     //   const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});
+//     // if (data) {
+//     //   const blogIndata = data;
+//     //   return { props: { blogIndata } };
+//     // }
+//     return { props: {} };
+//   } catch (error) {
+//     console.log(error);
+//     return { props: {} };
+//   }
+// }

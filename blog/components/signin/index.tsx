@@ -4,11 +4,14 @@ import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useState } from "react";
 import {useSetToken} from "../../Hooks/useToken"
+import { useRecoilState } from "recoil";
+import { AuthorizationAtom } from "../../utils/recoil/state";
 
 export default function SignIn() {
   const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");
   const [InputPassWord, setInputPassWord] = useState("");
+  const [Authorization , setAuthorization] = useRecoilState(AuthorizationAtom)
 
   const onLogin = async () => {
     try {
@@ -17,7 +20,7 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    
+    setAuthorization(data.accessToken)
     useSetToken(data.accessToken, data.refreshToken);
     router.push("/post");
     } catch (e: any) {
