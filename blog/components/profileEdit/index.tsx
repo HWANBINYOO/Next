@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import { useRouter } from "next/router";
@@ -153,7 +152,7 @@ export default function ProfileEdit() {
             type="text"
             value={Name}
             placeholder={"Name"}
-            onChange={(e) => {
+            onChange={(e:any) => {
               setName(e.target.value);
             }}
           />
@@ -163,7 +162,7 @@ export default function ProfileEdit() {
           <S.EditInputPW
             type="password"
             placeholder={"pwd"}
-            onChange={(e) => setPassWord(e.target.value)}
+            onChange={(e:any) => setPassWord(e.target.value)}
           />
         </S.EditI>
         <S.EditI method="patch">
@@ -171,7 +170,7 @@ export default function ProfileEdit() {
           <S.EditInputPW
             type="password"
             placeholder={"pwd"}
-            onChange={(e) => setChangePassWord(e.target.value)}
+            onChange={(e:any) => setChangePassWord(e.target.value)}
           />
         </S.EditI>
         <S.EditI method="patch">
@@ -179,7 +178,7 @@ export default function ProfileEdit() {
           <S.EditInputPW
             type="password"
             placeholder={"pwd"}
-            onChange={(e) => setPassWordAgain(e.target.value)}
+            onChange={(e:any) => setPassWordAgain(e.target.value)}
           />
         </S.EditI>
         <S.ButtonS>

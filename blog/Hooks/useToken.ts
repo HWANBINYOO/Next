@@ -27,10 +27,8 @@ const UseSetToken = (accessToken:string, refreshToken:string) => {
 }
 
 const UseRemoveToken = () => {
-  // const router = useRouter();
   document.cookie = `Authorization=; path=/; max-age=0`;
   document.cookie = `RefreshToken=; path=/; max-age=0`;
-  // router.push('/');
 }
 
 export {UseGetToken , UseRemoveToken , UseSetToken};

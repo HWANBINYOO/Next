@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react";
 import CustomAxois from "../../utils/lib/CustomAxois";
 import Boarditem from "../boarditem/index";
@@ -72,7 +71,7 @@ export default function Profile({ProfileData} : {ProfileData? : ProfileType}) {
         </S.ProfileImpormation>
         <S.Hr />
         <S.uploadBlogs>
-          {Blogs?.sort(sortObject).map((item, index) => (
+          {/* {Blogs?.sort(sortObject).map((item, index) => (
             <Boarditem
               key={index}
               board_id={item.board_id}
@@ -82,7 +81,7 @@ export default function Profile({ProfileData} : {ProfileData? : ProfileType}) {
               content={item.content}
               date={item.date}
             />
-          ))}
+          ))} */}
         </S.uploadBlogs>
       </S.Profile>
     </>
