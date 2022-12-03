@@ -5,7 +5,7 @@ import { GetServerSideProps, GetStaticProps } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 
-export default function BoardPage({blogs} :{blogs : BlogType[]} ) {
+export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 
   return (
     <>

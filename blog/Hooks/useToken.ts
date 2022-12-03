@@ -1,19 +1,15 @@
 import CustomAxois from "../utils/lib/CustomAxois";
 import cookies from "next-cookies";
-import { useRouter } from "next/router";
 
 const UseGetToken = async  (ctx : any) => {
- const allCookies = cookies(ctx);
+  const allCookies = cookies(ctx);
   let accessToken = allCookies['accessToken'] || "";
   let refreshToken = allCookies["refreshToken"] || "";
-  // CustomAxois.defaults.headers.common["Authorization"] = accessToken;
-
-  if (!accessToken) {
-    const {data} = await CustomAxois.patch("/auth/reissue",
-      { headers: { "RefreshToken": refreshToken} }
-    );
-    UseSetToken(data.newAccessToken,data.newRefreshToken)
-  }
+  
+  const {data} = await CustomAxois.patch("/auth/reissue",
+    { headers: { "RefreshToken": refreshToken} }
+  );
+  UseSetToken(data.newAccessToken,data.newRefreshToken)
   return { accessToken , refreshToken };
 };
 
@@ -28,4 +24,11 @@ const UseRemoveToken = () => {
   document.cookie = `RefreshToken=; path=/; max-age=0`;
 }
 
-export {UseGetToken , UseRemoveToken , UseSetToken};
+const UseIsToken = () => {
+  if(typeof window !== 'object') return;
+  let Authorization = document.cookie.match('(^|;) ?' + "Authorization" + '=([^;]*)(;|$)');
+  let RefreshToken = document.cookie.match('(^|;) ?' + "RefreshToken" + '=([^;]*)(;|$)');
+  return Authorization && RefreshToken && Authorization[2] && RefreshToken[2] ? true : false
+}
+
+export {UseGetToken , UseRemoveToken , UseSetToken , UseIsToken};

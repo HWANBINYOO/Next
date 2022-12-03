@@ -7,8 +7,12 @@ import songImg from "../../public/Img/song.png";
 import pianoImg from "../../public/Img/piano.jpg";
 import bolwingImg from "../../public/Img/bolwing.jpg";
 import carImg from "../../public/Img/car.webp";
+import { UseIsToken } from "../../Hooks/useToken";
+import { useEffect } from "react";
 
 export default function Home() {
+    console.log(UseIsToken());
+
   return (
     <S.HomeWapper>
       <S.Title>Devlog</S.Title>
