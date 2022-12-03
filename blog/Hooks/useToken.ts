@@ -8,9 +8,6 @@ const UseGetToken = async  (ctx : any) => {
   let refreshToken = allCookies["refreshToken"] || "";
   // CustomAxois.defaults.headers.common["Authorization"] = accessToken;
 
-  if(!refreshToken){
-    UseRemoveToken()
-  }
   if (!accessToken) {
     const {data} = await CustomAxois.patch("/auth/reissue",
       { headers: { "RefreshToken": refreshToken} }
