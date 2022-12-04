@@ -2,15 +2,20 @@ import * as S from "./styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxois";
-import { useState } from "react";
-import {UseSetToken} from "../../Hooks/useToken"
+import { useEffect, useState } from "react";
+import {UseIsToken, UseSetToken} from "../../Hooks/useToken"
 
 export default function SignIn() {
   const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");
   const [InputPassWord, setInputPassWord] = useState("");
+  useEffect(() => {
+    if(UseIsToken()){
+      router.push('/post');
+    }
+  },[])
 
-  const onLogin = async () => {
+  const handleClick = async () => {
     try {
     const { data } = await CustomAxois.post(`auth/signin`, {
         email: InputEmail,
@@ -48,7 +53,7 @@ export default function SignIn() {
           />
         </S.LoginInput>
       </S.InputsWapper>
-      <S.LoginButton onClick={onLogin}>Login</S.LoginButton>
+      <S.LoginButton onClick={handleClick}>Login</S.LoginButton>
       <Link href="/auth/signup">
         <p>회원가입하거가기</p>
       </Link>

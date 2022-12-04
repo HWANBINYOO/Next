@@ -9,9 +9,15 @@ import bolwingImg from "../../public/Img/bolwing.jpg";
 import carImg from "../../public/Img/car.webp";
 import { UseIsToken } from "../../Hooks/useToken";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
-    console.log(UseIsToken());
+  const router = useRouter();
+  useEffect(() => {
+    if(UseIsToken()){
+      router.push('/post');
+    }
+  },[])
 
   return (
     <S.HomeWapper>

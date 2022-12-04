@@ -29,7 +29,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
 
   const Logout = () => {
     UseRemoveToken();
-    router.push('/')
+    redirect('/')
   };
 
   return (
