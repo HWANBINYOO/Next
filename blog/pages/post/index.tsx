@@ -6,7 +6,7 @@ import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 
 export default function BoardPage({blogs} : {blogs : BlogType[]}) {
-
+  console.log(blogs);
   return (
     <>
       <Header HeaderColor={"skyblue"} />
@@ -16,21 +16,17 @@ export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  let Authorization = cookies(ctx)['Authorization'];
-
-  if(!Authorization){
-    const { accessToken } = await UseGetToken(ctx)
-    Authorization = accessToken
-  }
+  // let Authorization = cookies(ctx)['Authorization'];
+  // if(!Authorization){
+  const { Authorization } = await UseGetToken(ctx)
+    // Authorization = accessToken
+  // }
   console.log(Authorization);
 
   try {
-    const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});
-    if (data) {
-      const blogs = data.list;
-      return { props: { blogs } };
-    }
-    return { props: {} };
+    // const {data} = await CustomAxois.get(`/post`, {headers: {Authorization}});
+    // const blogs = data;
+    return { props: { } };
   } catch (error) {
     console.log(error);
     return { props: {} };

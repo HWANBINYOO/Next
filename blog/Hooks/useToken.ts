@@ -1,16 +1,22 @@
 import CustomAxois from "../utils/lib/CustomAxois";
 import cookies from "next-cookies";
 
-const UseGetToken = async  (ctx : any) => {
+const UseGetToken = async (ctx : any) => {
   const allCookies = cookies(ctx);
-  let accessToken = allCookies['accessToken'] || "";
-  let refreshToken = allCookies["refreshToken"] || "";
-  
-  const {data} = await CustomAxois.patch("/auth/reissue",
-    { headers: { "RefreshToken": refreshToken} }
-  );
-  UseSetToken(data.newAccessToken,data.newRefreshToken)
-  return { accessToken , refreshToken };
+  let Authorization = allCookies['Authorization'] || "";
+  let RefreshToken = allCookies["RefreshToken"] || "";
+
+  if(!Authorization){
+    const {data} = await CustomAxois.patch("/auth/reissue",
+      { headers: { "RefreshToken": RefreshToken} }
+     );
+     console.log("토큰 재발급");
+     console.log(data);
+     Authorization = data.newAccessToken;
+     RefreshToken = data.newRefreshToken;
+  }
+  // UseSetToken(data.newAccessToken,data.newRefreshToken)
+  return { Authorization , RefreshToken };
 };
 
 const UseSetToken = (accessToken:string, refreshToken:string) => {
