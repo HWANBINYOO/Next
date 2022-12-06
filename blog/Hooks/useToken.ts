@@ -23,8 +23,6 @@ const UseGetToken = async (ctx : GetServerSidePropsContext) => {
 };
 
 const UseSetToken = (Authorization:string, RefreshToken:string) => {
-  CustomAxois.defaults.headers.common["Authorization"] = Authorization;
-  if(typeof window !== 'object') return;
   document.cookie = `Authorization=${Authorization}; path=/; max-age=180` // 3분
   document.cookie = `RefreshToken=${RefreshToken}; path=/; max-age=604800` // 일주일
 }

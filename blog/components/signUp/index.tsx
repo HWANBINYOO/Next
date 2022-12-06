@@ -3,8 +3,6 @@ import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import CustomAxois from "../../utils/lib/CustomAxios";
-import axios from "axios";
-import { UseIsToken } from "../../Hooks/useToken";
 
 export default function SignUp() {
   const [Email, setEmail] = useState("");
@@ -12,11 +10,6 @@ export default function SignUp() {
   const [Name, setName] = useState("");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  useEffect(() => {
-    if(UseIsToken()){
-      router.push('/post');
-    }
-  },[])
 
   const handleClick = async () => {
     try {

@@ -2,18 +2,13 @@ import * as S from "./styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import CustomAxios from "../../utils/lib/CustomAxios";
-import { useEffect, useState } from "react";
-import {UseIsToken, UseSetToken} from "../../Hooks/useToken"
+import { useState } from "react";
+import { UseSetToken} from "../../Hooks/useToken"
 
 export default function SignIn() {
   const router = useRouter();
   const [InputEmail, setInputEmail] = useState("");
   const [InputPassWord, setInputPassWord] = useState("");
-  useEffect(() => {
-    if(UseIsToken()){
-      router.push('/post');
-    }
-  },[])
 
   const handleClick = async () => {
     try {
