@@ -3,7 +3,6 @@ import {BlogType } from "../../types/BlogType"
 import { GetServerSideProps } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
-import cookies from "next-cookies";
 
 export default function BoardPage({blogs} : {blogs : BlogType[]}) {
   return (
@@ -15,7 +14,6 @@ export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  // const Authorization = cookies(ctx)['Authorization'] || "";
   const { Authorization } = await UseGetToken(ctx)
   try {
     const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});

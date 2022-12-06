@@ -1,19 +1,18 @@
 import CustomAxois from "../utils/lib/CustomAxios";
 import cookies from "next-cookies";
 import { GetServerSidePropsContext } from "next";
+import { useState } from "react";
 
 const UseGetToken = async (ctx : GetServerSidePropsContext) => {
   const allCookies = cookies(ctx);
-  let Authorization = allCookies['Authorization']|| "";
-  let RefreshToken = allCookies['RefreshToken'] || "";
-  console.log(RefreshToken);
+  const [Authorization,setAuthorization] = useState(allCookies['Authorization'] || "");
+  const [RefreshToken,setRefreshToken] = useState(allCookies['RefreshToken'] || "");
 
   if(!Authorization){
     try{
       const {data} = await CustomAxois.patch(`/auth/reissue`,{},{headers: {RefreshToken}});
-      console.log(data);
-      Authorization = data.accessToken
-      RefreshToken = data.refreshToken
+      setAuthorization(data.accessToken)
+      setRefreshToken(data.refreshToken)
       allCookies['Authorization'] =  data.accessToken
       allCookies['RefreshToken'] = data.refreshToken
     } catch(e){

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import whiteImg from "../../public/Img/white.png";
 
-const BoardAdd = () => {
+const PostAdd = () => {
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getUTCMonth() + 1;
@@ -116,4 +116,4 @@ const BoardAdd = () => {
   );
 };
 
-export default BoardAdd;
+export default PostAdd;

@@ -4,6 +4,7 @@ import { BoardIn, Header } from "../../components";
 import { BlogType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import cookies from "next-cookies";
+import { UseGetToken } from "../../Hooks/useToken";
 
 export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
   
@@ -17,15 +18,12 @@ export default function BoardInPage({blogInData} : {blogInData:BlogType}) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
-  const Authorization = cookies(ctx)['Authorization'] || "";
+  const { Authorization } = await UseGetToken(ctx)
 
   try {
     const { data } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
-    if (data) {
-      const blogIndata = data;
-      return { props: { blogIndata } };
-    }
-    return { props: {} };
+    const blogIndata = data;
+    return { props: { blogIndata } };
   } catch (error) {
     console.log(error);
     return { props: {} };
