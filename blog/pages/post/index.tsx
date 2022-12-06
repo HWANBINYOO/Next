@@ -1,12 +1,11 @@
 import CustomAxios from "../../utils/lib/CustomAxios";
 import {BlogType } from "../../types/BlogType"
-import cookies from "next-cookies";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
+import cookies from "next-cookies";
 
 export default function BoardPage({blogs} : {blogs : BlogType[]}) {
-  console.log(blogs);
   return (
     <>
       <Header HeaderColor={"skyblue"} />
@@ -16,9 +15,8 @@ export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
+  // const Authorization = cookies(ctx)['Authorization'] || "";
   const { Authorization } = await UseGetToken(ctx)
-  console.log(Authorization);
-
   try {
     const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});
     const blogs = data.list

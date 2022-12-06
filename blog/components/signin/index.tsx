@@ -19,7 +19,6 @@ export default function SignIn() {
     );
     const Authorization = data.accessToken
     const RefreshToken = data.refreshToken
-    
     UseSetToken(Authorization, RefreshToken);
     router.push("/post");
     } catch (e) {

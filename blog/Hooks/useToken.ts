@@ -5,15 +5,17 @@ import { GetServerSidePropsContext } from "next";
 const UseGetToken = async (ctx : GetServerSidePropsContext) => {
   const allCookies = cookies(ctx);
   let Authorization = allCookies['Authorization']|| "";
-  let RefreshToken = allCookies["RefreshToken"] || "";
+  let RefreshToken = allCookies['RefreshToken'] || "";
+  console.log(RefreshToken);
 
   if(!Authorization){
     try{
-      const {data} = await CustomAxois.patch("/auth/reissue",{},{headers: {RefreshToken}});
+      const {data} = await CustomAxois.patch(`/auth/reissue`,{},{headers: {RefreshToken}});
       console.log(data);
-      Authorization = data.accessToken;
-      RefreshToken = data.refreshToken;
-      // UseSetToken(Authorization,RefreshToken)
+      Authorization = data.accessToken
+      RefreshToken = data.refreshToken
+      allCookies['Authorization'] =  data.accessToken
+      allCookies['RefreshToken'] = data.refreshToken
     } catch(e){
       console.log(e);
     }
@@ -45,6 +47,5 @@ const UseGeTokenDocument = () => {
   const RefreshToken = RefreshTokenCookie[2];
   return { Authorization , RefreshToken }
 }
-
 
 export {UseGetToken , UseRemoveToken , UseSetToken , UseIsToken , UseGeTokenDocument};
