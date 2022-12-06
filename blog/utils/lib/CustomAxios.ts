@@ -1,8 +1,9 @@
 import axios from "axios";
-import { getRefresh } from "./getRefresh";
+import { BASEURL } from "./BaseUrl";
+import { requestCheck } from "./requestCheck";
 
 const CustomAxios = axios.create({
-  baseURL: "http://10.82.20.18:8080",
+  baseURL: BASEURL,
   headers : {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,PATCH",
     "Access-Control-Allow-Origin": "*",
@@ -12,4 +13,4 @@ const CustomAxios = axios.create({
 
 export default CustomAxios
 
-CustomAxios.interceptors.request.use(getRefresh);
+CustomAxios.interceptors.request.use(requestCheck);

@@ -6,7 +6,6 @@ const UseGetToken = async (ctx : GetServerSidePropsContext) => {
   const allCookies = cookies(ctx);
   let Authorization = allCookies['Authorization']|| "";
   let RefreshToken = allCookies["RefreshToken"] || "";
-  CustomAxois.defaults.headers.common["Authorization"] = Authorization;
 
   if(!Authorization){
     try{

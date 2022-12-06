@@ -10,8 +10,10 @@ import fiveImg from "../../public/Img/bikeman.jpg";
 import sixImg from "../../public/Img/song.png";
 import sevenImg from "../../public/Img/bolwing.jpg";
 import eightImg from "../../public/Img/piano.jpg";
+import { UseGeTokenDocument } from "../../Hooks/useToken";
 
 export default function About() {
+
   return (
     <S.AboutWapper>
       <S.IntrudeceWapper>
