@@ -1,7 +1,7 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import {UseIsToken, UseSetToken} from "../../Hooks/useToken"
 
@@ -17,15 +17,18 @@ export default function SignIn() {
 
   const handleClick = async () => {
     try {
-    const { data } = await CustomAxois.post(`auth/signin`, {
+    const { data } = await CustomAxios.post(`auth/signin`, {
         email: InputEmail,
         password: InputPassWord,
       }
     );
-    UseSetToken(data.accessToken, data.refreshToken);
+    const Authorization = data.accessToken
+    const RefreshToken = data.refreshToken
+    
+    UseSetToken(Authorization, RefreshToken);
     router.push("/post");
-    } catch (e: any) {
-      console.error(e.message);
+    } catch (e) {
+      console.error(e);
     }
   };
 

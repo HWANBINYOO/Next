@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import { ProfileType } from "../../types";
 import { Header, Profile } from "../../components";
 import cookies from "next-cookies";

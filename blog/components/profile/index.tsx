@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import Boarditem from "../boarditem/index";
 import { useRouter } from "next/router";
 import * as S from "./styled";

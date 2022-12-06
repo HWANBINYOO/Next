@@ -2,7 +2,7 @@ import * as S from "./styled";
 import Link from "next/link";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import axios from "axios";
 import { UseIsToken } from "../../Hooks/useToken";
 

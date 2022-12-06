@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { BlogType } from "../../types";
 import whiteImg from "../../public/Img/white.png"

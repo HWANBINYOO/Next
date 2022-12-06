@@ -2,7 +2,7 @@ import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { BoardIn, Header } from "../../components";
 import { BlogType } from "../../types";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import cookies from "next-cookies";
 import { UseGetToken } from "../../Hooks/useToken";
 

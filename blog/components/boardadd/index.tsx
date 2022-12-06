@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as S from "./styled";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import whiteImg from "../../public/Img/white.png";
@@ -55,10 +55,10 @@ const BoardAdd = () => {
       //     "Content-Type": "multipart/form-data",
       //   },
       // });
-      await CustomAxois.post("/post",{
+      await CustomAxios.post("/post",{
         title,
         content : desc,
-        tages : ["벡엔드" , "프론트엔드"]
+        tags : ["벡엔드" , "프론트엔드"]
       }
       );
       console.log("추가됐습니다!");

@@ -1,4 +1,4 @@
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import {BlogType } from "../../types/BlogType"
 import cookies from "next-cookies";
 import { GetServerSideProps, GetStaticProps } from "next";
@@ -16,17 +16,13 @@ export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  // let Authorization = cookies(ctx)['Authorization'];
-  // if(!Authorization){
   const { Authorization } = await UseGetToken(ctx)
-    // Authorization = accessToken
-  // }
   console.log(Authorization);
 
   try {
-    // const {data} = await CustomAxois.get(`/post`, {headers: {Authorization}});
-    // const blogs = data;
-    return { props: { } };
+    const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});
+    const blogs = data.list
+    return { props: {blogs} };
   } catch (error) {
     console.log(error);
     return { props: {} };

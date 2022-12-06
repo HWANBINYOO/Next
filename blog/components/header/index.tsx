@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { UseRemoveToken } from "../../Hooks/useToken";
 

@@ -1,28 +1,32 @@
-import CustomAxois from "../utils/lib/CustomAxois";
+import CustomAxois from "../utils/lib/CustomAxios";
 import cookies from "next-cookies";
+import { GetServerSidePropsContext } from "next";
 
-const UseGetToken = async (ctx : any) => {
+const UseGetToken = async (ctx : GetServerSidePropsContext) => {
   const allCookies = cookies(ctx);
-  let Authorization = allCookies['Authorization'] || "";
+  let Authorization = allCookies['Authorization']|| "";
   let RefreshToken = allCookies["RefreshToken"] || "";
+  CustomAxois.defaults.headers.common["Authorization"] = Authorization;
 
   if(!Authorization){
-    const {data} = await CustomAxois.patch("/auth/reissue",
-      { headers: { "RefreshToken": RefreshToken} }
-     );
-     console.log("토큰 재발급");
-     console.log(data);
-     Authorization = data.newAccessToken;
-     RefreshToken = data.newRefreshToken;
+    try{
+      const {data} = await CustomAxois.patch("/auth/reissue",{},{headers: {RefreshToken}});
+      console.log(data);
+      Authorization = data.accessToken;
+      RefreshToken = data.refreshToken;
+      // UseSetToken(Authorization,RefreshToken)
+    } catch(e){
+      console.log(e);
+    }
   }
-  // UseSetToken(data.newAccessToken,data.newRefreshToken)
   return { Authorization , RefreshToken };
 };
 
-const UseSetToken = (accessToken:string, refreshToken:string) => {
-  CustomAxois.defaults.headers.common["Authorization"] = accessToken;
-  document.cookie = `Authorization=${accessToken}; path=/; max-age=180` // 3분
-  document.cookie = `RefreshToken=${refreshToken}; path=/; max-age=604800` // 일주일
+const UseSetToken = (Authorization:string, RefreshToken:string) => {
+  CustomAxois.defaults.headers.common["Authorization"] = Authorization;
+  if(typeof window !== 'object') return;
+  document.cookie = `Authorization=${Authorization}; path=/; max-age=180` // 3분
+  document.cookie = `RefreshToken=${RefreshToken}; path=/; max-age=604800` // 일주일
 }
 
 const UseRemoveToken = () => {
@@ -37,4 +41,13 @@ const UseIsToken = () => {
   return Authorization && RefreshToken && Authorization[2] && RefreshToken[2] ? true : false
 }
 
-export {UseGetToken , UseRemoveToken , UseSetToken , UseIsToken};
+const UseGeTokenDocument = () => {
+  let AuthorizationCookie = document.cookie.match('(^|;) ?' + "Authorization" + '=([^;]*)(;|$)') || "";
+  let RefreshTokenCookie = document.cookie.match('(^|;) ?' + "RefreshToken" + '=([^;]*)(;|$)') || "";
+  const Authorization = AuthorizationCookie[2];
+  const RefreshToken = RefreshTokenCookie[2];
+  return { Authorization , RefreshToken }
+}
+
+
+export {UseGetToken , UseRemoveToken , UseSetToken , UseIsToken , UseGeTokenDocument};
