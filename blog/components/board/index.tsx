@@ -9,10 +9,10 @@ interface PostProps {
 }
 
 export default function Board() {
-  const { data } = useSWR<PostProps>("/post");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const blogs = data?.list
+  const { data } = useSWR<PostProps>("/post");
+  const blogs = data?.list;
   console.log(blogs);
 
   return (

@@ -4,13 +4,13 @@ import Boarditem from "../boarditem/index";
 import { useRouter } from "next/router";
 import * as S from "./styled";
 import Image from "next/image";
-import { BlogType, ProfileType } from "../../types";
+import { PostIdType, ProfileType } from "../../types";
 import profilenoneImg from "../../public/Img/profile.png";
 
 
 export default function Profile({ProfileData} : {ProfileData? : ProfileType}) {
   const [profile, SetProfile] = useState(ProfileData);
-  const [Blogs, setBlogs] = useState<BlogType[]>();
+  const [Blogs, setBlogs] = useState<PostIdType[]>();
   const [my, setmy] = useState(false);
   const router = useRouter();
   const user_id = router.query.user_id;

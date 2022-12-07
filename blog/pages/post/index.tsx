@@ -1,13 +1,14 @@
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { PostIdType } from "../../types";
-import { GetServerSideProps, NextPage } from "next";
+import { GetServerSideProps, NextPage, NextPageContext } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from 'swr';
 
 const PostPage:NextPage<{blogs: PostIdType[]}> = ({blogs}) => {
+  
   return (
-  <SWRConfig value={{fallback: {"/post": {blogs}}}}>
+  <SWRConfig value={{fallback: {'/post':{blogs}}}}>
     <Header HeaderColor={"skyblue"} />
     <Board />
   </SWRConfig>

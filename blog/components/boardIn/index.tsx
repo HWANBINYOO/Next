@@ -4,16 +4,18 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
-import { BlogType } from "../../types";
+import { PostIdType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
-import { NextPage } from "next";
+import useSWR from 'swr';
 
-const BoardIn = ({boardIndata} : { boardIndata : BlogType} ) => {
+
+const BoardIn = () => {
+  const router = useRouter();
+  const redirect = (url: string) => router.push(url);
+  const { data:boardIndata } = useSWR<PostIdType>(`/post${router.query}`);
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
-  const router = useRouter();
-  const redirect = (url: string) => router.push(url);
 
   // useEffect(() => {
   //   async function GetBoardImg() {
@@ -33,7 +35,7 @@ const BoardIn = ({boardIndata} : { boardIndata : BlogType} ) => {
   // }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${boardIndata.postId}`);
+    await CustomAxois.delete(`/delete/${boardIndata?.postId}`);
   };
 
   return (

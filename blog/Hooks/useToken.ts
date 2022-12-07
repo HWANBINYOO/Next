@@ -30,16 +30,14 @@ const UseRemoveToken = () => {
 }
 
 const UseIsToken = () => {
-  const cookies = parseCookies()
-  const Authorization = cookies.Authorization
-  const RefreshToken = cookies.RefreshToken
+  const {Authorization,RefreshToken} = parseCookies()
   return Authorization && RefreshToken ? true : false
 }
 
 const UseGeTokenDocument = () => {
-  const cookies = parseCookies()
-  const Authorization = cookies.Authorization
-  const RefreshToken = cookies.RefreshToken
+  const {Authorization,RefreshToken} = parseCookies()
+  // const Authorization = cookies.Authorization
+  // const RefreshToken = cookies.RefreshToken
   return { Authorization , RefreshToken }
 }
 

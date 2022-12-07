@@ -1,21 +1,27 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
+import { SWRConfig } from 'swr';
+import { useRouter } from "next/router";
 
-export default function BoardInPage({blogInData} : {blogInData:PostIdType[]}) {
-  
+const BoardInPage:NextPage<{blogInData :PostIdType[]}> = ({blogInData}) => {
+  const router = useRouter();
+  const {postid} = router.query
+  const Url = `/post${postid}`
   return (
-    <>
+    <SWRConfig value={{fallback: {'/post' : blogInData}}}>
       <Header HeaderColor={"skyblue"} />
-      <BoardIn boardIndata={blogInData}/>
-    </>
+      <BoardIn />
+    </SWRConfig>
   );
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { postid } = ctx.query;
+  console.log(postid);
+  
   const { Authorization } = await UseGetToken(ctx)
 
   try {
@@ -27,6 +33,8 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
     return { props: {} };
   }
 }
+
+export default BoardInPage
 
 // export const getStaticPaths:GetStaticPaths = async () => {
 //   // const allCookies = cookies(ctx);

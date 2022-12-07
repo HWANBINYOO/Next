@@ -8,7 +8,7 @@ import CustomAxios from "../utils/lib/CustomAxios";
 const  MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
-     <SWRConfig 
+     <SWRConfig
       value={{
         fetcher :(url:string) => 
         CustomAxios.get(url).then((response) => response.data),
