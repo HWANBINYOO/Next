@@ -15,14 +15,20 @@ export default function Board({blogs} : {blogs : BlogType[]}) {
         </S.Button>
       </S.BlogButtonBox>
       <S.BLogWarpper>
-        {blogs.map((item, index) => (
-          <BoardItem
-            key={index}
-            postId={item.postId}
-            title={item.title}
-            content={item.content}
-          />
-        ))}
+        {blogs ? (
+          blogs.map((item, index) => (
+            <BoardItem
+              key={index}
+              postId={item.postId}
+              title={item.title}
+              content={item.content}
+            />
+          ))
+        ) : (
+          <S.loadingWapper>
+            불러오는중
+          </S.loadingWapper>
+        )}
       </S.BLogWarpper>
     </S.BlogWapper>
   );

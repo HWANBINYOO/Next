@@ -1,8 +1,8 @@
 import * as S from "./styled";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent , useState } from "react";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 
 export default function SignUp() {
   const [Email, setEmail] = useState("");
@@ -24,7 +24,7 @@ export default function SignUp() {
         return console.log("패스워드가 4자리 이상이려야해요!(숫자포함)");
       }
 
-      const { data } = await CustomAxois.post( `auth/signup`,{
+      const { data } = await CustomAxios.post(`auth/signup`, {
           name: Name,
           email: Email,
           password: PassWord,
@@ -32,9 +32,8 @@ export default function SignUp() {
       );
       console.log(data);
       redirect("/auth/signin");
-    } catch (e: any) {
-      const { data } = e.response;
-      console.error("data : ", data);
+    } catch (e) {
+      console.error(e);
     }
   };
 

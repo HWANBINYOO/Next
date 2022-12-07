@@ -11,8 +11,14 @@ import sixImg from "../../public/Img/song.png";
 import sevenImg from "../../public/Img/bolwing.jpg";
 import eightImg from "../../public/Img/piano.jpg";
 import { UseGeTokenDocument } from "../../Hooks/useToken";
+import { useEffect } from "react";
 
 export default function About() {
+  useEffect(() => {
+    const { Authorization , RefreshToken } =  UseGeTokenDocument()
+    console.log(Authorization , RefreshToken);
+    
+  },[])
 
   return (
     <S.AboutWapper>

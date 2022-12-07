@@ -5,6 +5,7 @@ import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 
 export default function BoardPage({blogs} : {blogs : BlogType[]}) {
+
   return (
     <>
       <Header HeaderColor={"skyblue"} />
@@ -15,6 +16,7 @@ export default function BoardPage({blogs} : {blogs : BlogType[]}) {
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { Authorization } = await UseGetToken(ctx)
+  
   try {
     const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});
     const blogs = data.list

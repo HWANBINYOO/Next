@@ -5,17 +5,17 @@ import { BASEURL } from "./BaseUrl";
 export const requestCheck = async (config: AxiosRequestConfig) => {
   if(typeof window !== 'object') return config;
   const { Authorization , RefreshToken } =  UseGeTokenDocument()
-
-if (config.headers && Authorization){
-  config.headers["Authorization"] = Authorization
-}
-else if (!Authorization && config.url !== "auth/signup" && config.url !== "auth/signin"){
+  
+  if (config.headers && Authorization){
+    config.headers["Authorization"] = Authorization
+  }
+  else if (!Authorization && config.url !== "auth/signup" && config.url !== "auth/signin"){
     try{
-      const {data} = await axios.patch(`${BASEURL}/auth/reissue`,{},{headers: {RefreshToken}});
-      if (config.headers) config.headers["Authorization"] = data.accessToken
-      UseSetToken(data.accessToken,data.refreshToken)
+        const {data} = await axios.patch(`${BASEURL}/auth/reissue`,{},{headers: {RefreshToken}});
+        if (config.headers) config.headers["Authorization"] = data.accessToken
+        UseSetToken(data.accessToken,data.refreshToken)
     } catch(e){ 
-      console.log(e);
+        console.log(e);
     }
   }
 
