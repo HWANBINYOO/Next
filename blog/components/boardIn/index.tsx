@@ -40,7 +40,7 @@ const BoardIn = ({boardIndata} : { boardIndata : BlogType} ) => {
     <S.BoardInWapper>
       <S.BoardButtonBox>
         <S.Button
-          onClick={(e) => redirect(`/boardadd`)}
+          onClick={() => redirect(`/boardadd`)}
           style={{ backgroundColor: "#aeddff" }}
         >
           +

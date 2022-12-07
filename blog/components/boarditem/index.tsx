@@ -3,13 +3,17 @@ import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import { useState } from "react";
-import { BlogType } from "../../types";
+import { PostIdType } from "../../types";
 import { NextPage } from "next";
 
-const BoardItem: NextPage<BlogType> = ({
+const BoardItem: NextPage<PostIdType> = ({
+  isMine,
   title,
   content,
   postId,
+  tags,
+  imageUrl,
+  comments,
 }) => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);

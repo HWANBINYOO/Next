@@ -1,10 +1,10 @@
 import CustomAxios from "../../utils/lib/CustomAxios";
-import {BlogType } from "../../types/BlogType"
+import { PostIdType } from "../../types";
 import { GetServerSideProps } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 
-export default function BoardPage({blogs} : {blogs : BlogType[]}) {
+export default function BoardPage({blogs} : {blogs : PostIdType[]}) {
 
   return (
     <>

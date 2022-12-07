@@ -1,9 +1,9 @@
 import * as S from "./styled";
 import { useRouter } from "next/router";
 import BoardItem from "../boarditem/index";
-import { BlogType } from "../../types";
+import { PostIdType } from "../../types/PostType";
 
-export default function Board({blogs} : {blogs : BlogType[]}) {
+export default function Board({blogs} : {blogs : PostIdType[]}) {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
 
@@ -20,8 +20,12 @@ export default function Board({blogs} : {blogs : BlogType[]}) {
             <BoardItem
               key={index}
               postId={item.postId}
+              isMine={item.isMine}
               title={item.title}
               content={item.content}
+              tags={item.tags}
+              imageUrl={item.imageUrl}
+              comments={item.comments}
             />
           ))
         ) : (
