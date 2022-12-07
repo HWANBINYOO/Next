@@ -1,18 +1,18 @@
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { PostIdType } from "../../types";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
+import { SWRConfig } from 'swr';
 
-export default function BoardPage({blogs} : {blogs : PostIdType[]}) {
-
+const PostPage:NextPage<{blogs: PostIdType[]}> = ({blogs}) => {
   return (
-    <>
-      <Header HeaderColor={"skyblue"} />
-      <Board blogs={blogs}/>
-    </>
+  <SWRConfig value={{fallback: {"/post": {blogs}}}}>
+    <Header HeaderColor={"skyblue"} />
+    <Board />
+  </SWRConfig>
   );
-}
+};
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { Authorization } = await UseGetToken(ctx)
@@ -27,19 +27,4 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   }
 }
 
-// export const getStaticProps:GetStaticProps = async (ctx) => {
-//   console.log(ctx);
-//   // const [Authorization , setAuthorization] = useRecoilState(AuthorizationAtom)
-//   // console.log(Authorization);
-//   try {
-//     //   const { data } = await CustomAxois.get(`/post`, {headers: {Authorization}});
-//     // if (data) {
-//     //   const blogIndata = data;
-//     //   return { props: { blogIndata } };
-//     // }
-//     return { props: {} };
-//   } catch (error) {
-//     console.log(error);
-//     return { props: {} };
-//   }
-// }
+export default PostPage;

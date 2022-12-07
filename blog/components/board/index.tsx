@@ -2,10 +2,18 @@ import * as S from "./styled";
 import { useRouter } from "next/router";
 import BoardItem from "../boarditem/index";
 import { PostIdType } from "../../types/PostType";
+import useSWR from 'swr';
 
-export default function Board({blogs} : {blogs : PostIdType[]}) {
+interface PostProps {
+  list : PostIdType[]
+}
+
+export default function Board() {
+  const { data } = useSWR<PostProps>("/post");
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
+  const blogs = data?.list
+  console.log(blogs);
 
   return (
     <S.BlogWapper>
