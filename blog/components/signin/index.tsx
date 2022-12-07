@@ -17,7 +17,7 @@ export default function SignIn() {
         password: InputPassWord,
       }
     );
-    UseSetToken(data.accessToken, data.refreshToken);
+    UseSetToken(data.accessToken, data.refreshToken , null);
     router.push("/post");
     } catch (e) {
       console.error(e);

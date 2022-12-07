@@ -13,7 +13,7 @@ export const requestCheck = async (config: AxiosRequestConfig) => {
     try{
         const {data} = await axios.patch(`${BASEURL}/auth/reissue`,{},{headers: {RefreshToken}});
         if (config.headers) config.headers["Authorization"] = data.accessToken
-        UseSetToken(data.accessToken,data.refreshToken)
+        UseSetToken(data.accessToken,data.refreshToken,null)
     } catch(e){ 
         console.log(e);
     }
