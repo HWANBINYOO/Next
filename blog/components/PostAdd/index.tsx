@@ -40,27 +40,21 @@ const PostAdd = () => {
     e.preventDefault();
     let formData = new FormData();
     formData.append("file", file);
-    let boardDto = {
+    let request = {
       title: title,
       content: desc,
-      date: `${year}-${month}-${day}`,
+      tags : ["벡엔드" , "프론트엔드"],
     };
     formData.append(
-      "boardDto",
-      new Blob([JSON.stringify(boardDto)], { type: "application/json" })
+      "request",
+      new Blob([JSON.stringify(request)], { type: "application/json" })
     );
     try {
-      // await CustomAxois.post("/board/write", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      await CustomAxios.post("/post",{
-        title,
-        content : desc,
-        tags : ["벡엔드" , "프론트엔드"]
-      }
-      );
+      await CustomAxios.post("/post", formData,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       console.log("추가됐습니다!");
       redirect("/post");
     } catch (e: any) {
@@ -88,11 +82,11 @@ const PostAdd = () => {
       </S.Box>
       <S.BoardAddImgWapper>
         <S.BoardImg>
-          {/* {file ? (
-            <Image src={imgBase64 ?? whiteImg} />
+          {file ? (
+            <Image  width={90} height={100} objectFit={"cover"} src={imgBase64 || whiteImg} alt="게시글 이미지" />
           ) : (
-            <Image width={90} height={100} src={whiteImg} alt="board 이미지" />
-          )} */}
+            <Image width={90} height={100} src={whiteImg} alt="흰색배경 이미지" />
+          )}
         </S.BoardImg>
         <form
           name="files"

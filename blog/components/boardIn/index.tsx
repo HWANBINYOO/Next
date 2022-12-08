@@ -4,11 +4,11 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
-import { commentType, PostIdType, userType } from "../../types";
+import { commentType, PostIdType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
 import useSWR from 'swr';
 import {Comment} from '../index'
-
+import CustomAxios from "../../utils/lib/CustomAxios";
 
 const BoardIn = () => {
   const router = useRouter();
@@ -16,9 +16,8 @@ const BoardIn = () => {
   const { data:boardIndata } = useSWR<PostIdType>(`/post/${router.query.postid}`);
   const [Boardrl, setBoardurl] = useState(boardIndata?.imageUrl);
   const [DelectDisplay, setDelectDisplay] = useState(false);
-  const [profileImg, setProfileImg] = useState("");
-  const [commentData , setCommentData] = useState<commentType[]>(boardIndata?.comments || []);
-  const [CommentValue , setCommentValue] = useState("");
+  const [profileImg, setProfileImg] = useState("");  
+  const [commentValue , setCommentValue] = useState("");
   // const {data:user} = useSWR<userType>(`/user/${boardIndata?.userId}`);
   console.log(boardIndata);
 
@@ -30,8 +29,13 @@ const BoardIn = () => {
       }
   }, []);
 
-  const handleClick = () => {
-    
+  const handleClick = async() => {
+    try{
+      const res = await CustomAxios.post(`/comment/${router.query.postid}`,{comment:commentValue})
+      console.log(res); 
+    }catch(e){
+      console.log(e);
+    }
   }
 
   const DelectBoard = async () => {
@@ -95,20 +99,18 @@ const BoardIn = () => {
         <S.ProfileName>{"유저이름"}</S.ProfileName>
       </S.ProfileWapper>
       <S.CommentCreateWapper>
-        <S.CommentInput onChange={(e) => setCommentValue(e.target.value)} value={CommentValue}/>
+        <S.CommentInput onChange={(e) => setCommentValue(e.target.value)} value={commentValue}/>
         <S.CreateBtn onClick={handleClick}>댓글작성</S.CreateBtn>
       </S.CommentCreateWapper>
 
       <S.CommentsWapper>
-        {/* {commentData ? ( 
-          commentData.map((item , index) => (
-            <Comment key={index} commentData={item} />
+        {boardIndata?.comments ? ( 
+          boardIndata?.comments.map((item,index) => (
+            <Comment key={index} name={item.name} contant={item.comment} />
         ))
         ) : (
           <p>loadding...</p>
-        )} */}
-        <Comment />
-
+        )}
       </S.CommentsWapper>
     </S.BoardInWapper>
   );

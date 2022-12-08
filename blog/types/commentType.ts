@@ -1,6 +1,6 @@
 export interface commentType {
+    comment: string,
     id: number,
     isMine: boolean,
-    comment: string,
-    user: {name: string, imageUrl: string, id: number}
+    name:string,
 }

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const CommentWapper = styled.div`
   width: 700px;
-  height: 130px;
+  height: 110px;
   border: 1px solid black;
   display: flex;
   justify-content: space-around;

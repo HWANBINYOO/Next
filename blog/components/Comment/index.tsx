@@ -4,27 +4,23 @@ import * as S from "./styled";
 
 
 
-const Comment: NextPage = () => {
-// const Comment: NextPage<{commentData:commentType}> = ({commentData}) => {
-
+// const Comment: NextPage = () => {
+const Comment = ({name,contant}: {name:string,contant:string}) => {
     return(
         <S.CommentWapper>
             <S.Profile>
                 <S.ProfileBox>
                     <S.ProfileImg></S.ProfileImg>
-                    <S.UserName>{"환빈"}</S.UserName>
+                    <S.UserName>{name || "익명"}</S.UserName>
                 </S.ProfileBox>
                 <S.ControlBox>
                     <div>수정</div>
                     <div>삭제</div>
                 </S.ControlBox>
             </S.Profile>
-            <S.Content>{"댓글달기댓글달기댓글달기"}</S.Content>
+            <S.Content>{contant}</S.Content>
         </S.CommentWapper>
     )
 }
-
-
-
 
 export default Comment;

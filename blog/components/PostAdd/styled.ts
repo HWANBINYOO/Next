@@ -65,13 +65,6 @@ export const BoardImg = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  img {
-    transition: all ease 0.2s 0s;
-    width: 90px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid black;
-  }
 `;
 export const BoardAddImgWapper = styled.div`
   display: flex;
