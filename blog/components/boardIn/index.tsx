@@ -4,7 +4,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
-import { commentType, PostIdType } from "../../types";
+import { PostIdType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
 import useSWR from 'swr';
 import {Comment} from '../index'
@@ -13,13 +13,12 @@ import CustomAxios from "../../utils/lib/CustomAxios";
 const BoardIn = () => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const { data:boardIndata } = useSWR<PostIdType>(`/post/${router.query.postid}`);
+  const { data:boardIndata , mutate } = useSWR<PostIdType>(`/post/${router.query.postid}`);
   const [Boardrl, setBoardurl] = useState(boardIndata?.imageUrl);
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");  
   const [commentValue , setCommentValue] = useState("");
   // const {data:user} = useSWR<userType>(`/user/${boardIndata?.userId}`);
-  console.log(boardIndata);
 
   useEffect(() => {
       if (boardIndata?.isMine) {
@@ -27,21 +26,26 @@ const BoardIn = () => {
       } else {
         setDelectDisplay(false);
       }
+    console.log(boardIndata);
   }, [boardIndata]);
 
   const handleClick = async() => {
     if(!commentValue) return console.log("글을 작성하셈");
     try{
       const res = await CustomAxios.post(`/comment/${router.query.postid}`,{comment:commentValue})
-      console.log(res); 
+      mutate()
+      setCommentValue("")
+      console.log(res);
     }catch(e){
       console.log(e);
     }
   }
 
   const DelectBoard = async () => {
+    try{
     await CustomAxois.delete(`/post/${boardIndata?.postId}`);
     redirect('/post')
+    }catch(e){console.log(e)}
   };
 
   return (
@@ -100,12 +104,15 @@ const BoardIn = () => {
         <S.ProfileName>{"유저이름"}</S.ProfileName>
       </S.ProfileWapper>
       <S.CommentCreateWapper>
-        <S.CommentInput onChange={(e) => setCommentValue(e.target.value)} value={commentValue}/>
+        <S.CommentInput onChange={(e) => setCommentValue(e.target.value)} value={commentValue} onKeyDown={(e) => {
+						if (e.key === 'Enter')
+            handleClick()
+					}}/>
         <S.CreateBtn onClick={handleClick}>댓글작성</S.CreateBtn>
       </S.CommentCreateWapper>
 
       <S.CommentsWapper>
-        {boardIndata?.comments ? ( 
+        {boardIndata?.comments ? (
           boardIndata?.comments.map((item,index) => (
             <Comment key={index} name={item.user.name} contant={item.comment} isMine={item.isMine} commentId={item.id} />
         ))

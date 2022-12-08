@@ -1,18 +1,22 @@
+import { useRouter } from "next/router";
+import { useSWRConfig } from "swr";
 import { commentType } from "../../types";
 import CustomAxios from "../../utils/lib/CustomAxios";
 import * as S from "./styled";
 
 const Comment = ({name,contant,isMine,commentId}: commentType) => {
-
-    const handleDelectClick = async () => {
+    const router = useRouter();
+    const {mutate}= useSWRConfig();
+    const handleDelectClick = async() => {
         if(!isMine) return;
         try{
             const res = await CustomAxios.delete(`/comment/${commentId}`)
+            mutate(`/post/${router.query.postid}`);
             console.log(res);
         }catch(e){
             console.log(e);
         }
-    } 
+    }
     return(
         <S.CommentWapper>
             <S.Profile>

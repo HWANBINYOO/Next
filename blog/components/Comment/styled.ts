@@ -9,7 +9,8 @@ export const CommentWapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 10px 10px;
-  border-radius: 10px;
+  border: none;
+  border-bottom: 0.1px solid #EAEAEA;
 `;
 export const Profile = styled.div`
     width: 100%;

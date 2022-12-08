@@ -20,8 +20,8 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
 
   try {
     const { data:blogIndata } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
-    return { 
-      props: { 
+    return {
+      props: {
         fallback: {
           '/post/1':blogIndata
         }

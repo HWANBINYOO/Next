@@ -9,6 +9,7 @@ export const BoardInWapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   gap: 20px;
+  padding-bottom: 50px;
 `;
 
 export const TextBox = styled.div`
@@ -129,14 +130,19 @@ export const CommentCreateWapper = styled.div`
 export const CommentInput = styled.input`
   width: 100%;
   height: 100px;
-  font-size: 20px;
+  font-size: 30px;
   display: flex;
   align-items:flex-start;
   justify-content: flex-start;
   outline: none;
   border: none;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 1px solid #B2B2B2;
+  transition: all ease-in 0.1s;
+
+  &:focus{
+    border: 1px solid #3C4048;
+  }
 `;
 
 export const CreateBtn = styled.button`
@@ -145,7 +151,7 @@ export const CreateBtn = styled.button`
   font-size: 25px;
   background-color: #f1dcff;
   color: black;
-  border: 1px solid black;
+  border: none;
   border-radius: 10px;
   cursor: pointer;
 `;
