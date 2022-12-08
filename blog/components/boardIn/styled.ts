@@ -114,3 +114,15 @@ export const ProfileImg = styled.img`
 export const ProfileName = styled.span`
   font-size: 2rem;
 `;
+
+export const CommentsWapper = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const CommentBox = styled.div`
+  
+`

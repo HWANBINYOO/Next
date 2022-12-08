@@ -1,5 +1,6 @@
 export interface PostIdType {
-    id: number,
+    postId: number,
+    userId:number
 	isMine : boolean,
     title: string,
     content: string,

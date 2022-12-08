@@ -1,6 +1,6 @@
 import CustomAxios from "../../utils/lib/CustomAxios";
 import { PostIdType } from "../../types";
-import { GetServerSideProps, NextPage, NextPageContext } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from 'swr';
@@ -27,8 +27,8 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
         },
       },
     };
-  } catch (error) {
-    console.log(error);
+  } catch (e) {
+    console.log(e);
     return { props: {} };
   }
 }

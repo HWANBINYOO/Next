@@ -13,7 +13,6 @@ export default function Board() {
   const redirect = (url: string) => router.push(url);
   const { data } = useSWR<PostProps>("/post");
   const blogs = data?.list;
-  console.log(blogs);
 
   return (
     <S.BlogWapper>
@@ -27,13 +26,14 @@ export default function Board() {
           blogs.map((item, index) => (
             <BoardItem
               key={index}
-              id={item.id}
+              postId={item.postId}
               isMine={item.isMine}
               title={item.title}
               content={item.content}
               tags={item.tags}
               imageUrl={item.imageUrl}
               comments={item.comments}
+              userId={item.userId}
             />
           ))
         ) : (

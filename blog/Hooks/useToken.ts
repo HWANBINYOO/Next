@@ -19,12 +19,12 @@ const UseGetToken = async (ctx : GetServerSidePropsContext) => {
   return { Authorization };
 };
 
-const UseSetToken = (Authorization:string, RefreshToken:string , ctx:GetServerSidePropsContext|null) => {
+const UseSetToken = (Authorization:string, RefreshToken:string , ctx:GetServerSidePropsContext|null): void => {
   setCookie(ctx, 'Authorization', Authorization, {maxAge: 180,path: '/',}) // 3분
   setCookie(ctx, 'RefreshToken', RefreshToken, {maxAge: 604800,path: '/',}) // 일주일
 }
 
-const UseRemoveToken = () => {
+const UseRemoveToken = (): void => {
   destroyCookie(null, 'Authorization')
   destroyCookie(null, 'RefreshToken')
 }
@@ -36,8 +36,6 @@ const UseIsToken = () => {
 
 const UseGeTokenDocument = () => {
   const {Authorization,RefreshToken} = parseCookies()
-  // const Authorization = cookies.Authorization
-  // const RefreshToken = cookies.RefreshToken
   return { Authorization , RefreshToken }
 }
 

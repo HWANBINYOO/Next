@@ -4,7 +4,7 @@ import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
-import { PostIdType } from "../../types";
+import { PostIdType, userType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
 import useSWR from 'swr';
 
@@ -16,6 +16,8 @@ const BoardIn = () => {
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
+  const {data:user} = useSWR<userType>(`/user/${boardIndata?.userId}`);
+  console.log(boardIndata);
 
   useEffect(() => {
       if (boardIndata?.isMine) {
@@ -26,7 +28,8 @@ const BoardIn = () => {
   }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${boardIndata?.id}`);
+    await CustomAxois.delete(`/post/${boardIndata?.postId}`);
+    redirect('/post')
   };
 
   return (
@@ -87,6 +90,11 @@ const BoardIn = () => {
       }
         <S.ProfileName>{"유저이름"}</S.ProfileName>
       </S.ProfileWapper>
+      <S.CommentsWapper>
+          <S.CommentBox>
+
+          </S.CommentBox>
+      </S.CommentsWapper>
     </S.BoardInWapper>
   );
 };
