@@ -120,9 +120,6 @@ export const CommentsWapper = styled.div`
   height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
 `;
-
-export const CommentBox = styled.div`
-  
-`

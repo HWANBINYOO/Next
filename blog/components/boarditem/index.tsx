@@ -18,7 +18,7 @@ const BoardItem: NextPage<PostIdType> = ({
 }) => {
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
-  const [boardImg, setboardImg] = useState("");
+  const [boardImg, setboardImg] = useState(imageUrl);
   const [profileImg, setProfileImg] = useState("");  
 
   return (
