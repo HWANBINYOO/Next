@@ -19,7 +19,7 @@ const Comment: NextPage = () => {
                     <div>삭제</div>
                 </S.ControlBox>
             </S.Profile>
-            <S.Content>{"굳ㅁㅈ더라ㅣㅁㄴㅣㅏ너달"}</S.Content>
+            <S.Content>{"댓글달기댓글달기댓글달기"}</S.Content>
         </S.CommentWapper>
     )
 }

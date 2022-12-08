@@ -115,11 +115,45 @@ export const ProfileName = styled.span`
   font-size: 2rem;
 `;
 
+// 댓글
+export const CommentCreateWapper = styled.div`
+  width: 700px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;  
+  justify-content: center;
+  gap: 30px;
+`;
+
+export const CommentInput = styled.input`
+  width: 100%;
+  height: 100px;
+  font-size: 20px;
+  display: flex;
+  align-items:flex-start;
+  justify-content: flex-start;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  border: 1px solid black;
+`;
+
+export const CreateBtn = styled.button`
+  width: 120px;
+  height: 50px;
+  font-size: 25px;
+  background-color: #f1dcff;
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+`;
+
 export const CommentsWapper = styled.div`
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
 `;

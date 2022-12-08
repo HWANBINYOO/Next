@@ -18,6 +18,7 @@ const BoardIn = () => {
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState("");
   const [commentData , setCommentData] = useState<commentType[]>(boardIndata?.comments || []);
+  const [CommentValue , setCommentValue] = useState("");
   // const {data:user} = useSWR<userType>(`/user/${boardIndata?.userId}`);
   console.log(boardIndata);
 
@@ -28,6 +29,10 @@ const BoardIn = () => {
         setDelectDisplay(false);
       }
   }, []);
+
+  const handleClick = () => {
+    
+  }
 
   const DelectBoard = async () => {
     await CustomAxois.delete(`/post/${boardIndata?.postId}`);
@@ -89,6 +94,11 @@ const BoardIn = () => {
       }
         <S.ProfileName>{"유저이름"}</S.ProfileName>
       </S.ProfileWapper>
+      <S.CommentCreateWapper>
+        <S.CommentInput onChange={(e) => setCommentValue(e.target.value)} value={CommentValue}/>
+        <S.CreateBtn onClick={handleClick}>댓글작성</S.CreateBtn>
+      </S.CommentCreateWapper>
+
       <S.CommentsWapper>
         {/* {commentData ? ( 
           commentData.map((item , index) => (

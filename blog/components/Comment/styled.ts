@@ -2,12 +2,14 @@ import styled from "@emotion/styled";
 
 export const CommentWapper = styled.div`
   width: 700px;
-  height: 120px;
+  height: 130px;
   border: 1px solid black;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   align-items: flex-start;
+  padding: 10px 10px;
+  border-radius: 10px;
 `;
 export const Profile = styled.div`
     width: 100%;
@@ -29,8 +31,8 @@ export const ControlBox = styled.div`
 `;
 
 export const ProfileImg = styled.div`
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,5 +52,6 @@ export const Content = styled.div`
     height: 50%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
+    padding-bottom: 10px;
 `;
