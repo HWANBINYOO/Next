@@ -141,7 +141,7 @@ export const CommentInput = styled.input`
 
 export const CreateBtn = styled.button`
   width: 120px;
-  height: 50px;
+  height: 40px;
   font-size: 25px;
   background-color: #f1dcff;
   color: black;

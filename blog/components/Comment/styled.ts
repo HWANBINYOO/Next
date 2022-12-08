@@ -28,11 +28,15 @@ export const ControlBox = styled.div`
     align-items: flex-start;
     justify-content: space-between;
     gap: 10px;
+
+    div{
+        cursor: pointer;
+    }
 `;
 
 export const ProfileImg = styled.div`
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,7 +49,7 @@ export const UserName = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 35px;
+    font-size: 30px;
 `;
 export const Content = styled.div`
     width: 100%;
@@ -53,5 +57,5 @@ export const Content = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
-    padding-bottom: 10px;
+    font-size: 25px;
 `;

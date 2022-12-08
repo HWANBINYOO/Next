@@ -27,9 +27,10 @@ const BoardIn = () => {
       } else {
         setDelectDisplay(false);
       }
-  }, []);
+  }, [boardIndata]);
 
   const handleClick = async() => {
+    if(!commentValue) return console.log("글을 작성하셈");
     try{
       const res = await CustomAxios.post(`/comment/${router.query.postid}`,{comment:commentValue})
       console.log(res); 
@@ -106,7 +107,7 @@ const BoardIn = () => {
       <S.CommentsWapper>
         {boardIndata?.comments ? ( 
           boardIndata?.comments.map((item,index) => (
-            <Comment key={index} name={item.name} contant={item.comment} />
+            <Comment key={index} name={item.user.name} contant={item.comment} isMine={item.isMine} commentId={item.id} />
         ))
         ) : (
           <p>loadding...</p>

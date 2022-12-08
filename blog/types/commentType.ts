@@ -1,6 +1,6 @@
 export interface commentType {
-    comment: string,
-    id: number,
+    commentId: number,
+    contant: string,
     isMine: boolean,
     name:string,
 }

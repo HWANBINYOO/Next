@@ -8,11 +8,10 @@ export interface PostIdType {
 	imageUrl: string,
 	comments: [
         {
-            name: string
             id: number,
             isMine: boolean,
             comment: string,
-            // user: {name: string, imageUrl: string, id: number}
+            user: {name: string, imageUrl: string, id: number}
         }
       ]
   }
