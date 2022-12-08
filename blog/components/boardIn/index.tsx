@@ -11,31 +11,22 @@ import useSWR from 'swr';
 
 const BoardIn = () => {
   const router = useRouter();
-  const redirect = (url: string) => router.push(url);
-  const { data:boardIndata } = useSWR<PostIdType>(`/post${router.query}`);
+  const redirect = (url: string) => router.push(url);  
+  const { data:boardIndata } = useSWR<PostIdType>(`/post/${router.query.postid}`);
   const [Boardrl, setBoardurl] = useState();
   const [DelectDisplay, setDelectDisplay] = useState(false);
   const [profileImg, setProfileImg] = useState();
 
-  // useEffect(() => {
-  //   async function GetBoardImg() {
-  //     const res = await CustomAxois.get(`/board_image/${board_id}`);
-  //     setBoardurl(res.data);
-  //     const res2 = await CustomAxois.get(`/user_image/${boardIndata?.user_id}`);
-  //     setProfileImg(res2.data);
-  //     const respone2 = await CustomAxois.get(`/user_name`);
-
-  //     if (respone2.data.user_id === boardIndata?.user_id) {
-  //       setDelectDisplay(true);
-  //     } else {
-  //       setDelectDisplay(false);
-  //     }
-  //   }
-  //   GetBoardImg();
-  // }, []);
+  useEffect(() => {
+      if (boardIndata?.isMine) {
+        setDelectDisplay(true);
+      } else {
+        setDelectDisplay(false);
+      }
+  }, []);
 
   const DelectBoard = async () => {
-    await CustomAxois.delete(`/delete/${boardIndata?.postId}`);
+    await CustomAxois.delete(`/delete/${boardIndata?.id}`);
   };
 
   return (

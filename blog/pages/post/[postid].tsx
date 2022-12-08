@@ -1,17 +1,13 @@
-import { GetServerSideProps, GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { GetServerSideProps,NextPage } from "next";
 import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
 import CustomAxois from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from 'swr';
-import { useRouter } from "next/router";
 
-const BoardInPage:NextPage<{blogInData :PostIdType[]}> = ({blogInData}) => {
-  const router = useRouter();
-  const {postid} = router.query
-  const Url = `/post${postid}`
+const BoardInPage:NextPage<{fallback : Record<string,PostIdType[]>}> = ({fallback}) => {
   return (
-    <SWRConfig value={{fallback: {'/post' : blogInData}}}>
+    <SWRConfig value={fallback}>
       <Header HeaderColor={"skyblue"} />
       <BoardIn />
     </SWRConfig>
@@ -19,15 +15,18 @@ const BoardInPage:NextPage<{blogInData :PostIdType[]}> = ({blogInData}) => {
 }
 
 export const  getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { postid } = ctx.query;
-  console.log(postid);
-  
-  const { Authorization } = await UseGetToken(ctx)
+  const { postid } = ctx.query;  
+  const { Authorization } = await UseGetToken(ctx)  
 
   try {
-    const { data } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
-    const blogIndata = data;
-    return { props: { blogIndata } };
+    const { data:blogIndata } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
+    return { 
+      props: { 
+        fallback: {
+          '/post/1':blogIndata
+        }
+      } 
+    };
   } catch (error) {
     console.log(error);
     return { props: {} };

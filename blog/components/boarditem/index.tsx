@@ -10,7 +10,7 @@ const BoardItem: NextPage<PostIdType> = ({
   isMine,
   title,
   content,
-  postId,
+  id,
   tags,
   imageUrl,
   comments,
@@ -18,25 +18,10 @@ const BoardItem: NextPage<PostIdType> = ({
   const router = useRouter();
   const redirect = (url: string) => router.push(url);
   const [boardImg, setboardImg] = useState("");
-  const [profileImg, setProfileImg] = useState("");
-
-  // useEffect(() => {
-  //   async function getboard() {
-  //     try {
-  //       const respone = await CustomAxois.get(`board_image/${postId}`);
-  //       console.log(respone.data);
-  //       setboardImg(respone.data);
-  //       const respone2 = await CustomAxois.get(`user_image/${user_id}`);
-  //       setProfileImg(respone2.data);
-  //     } catch (e: any) {
-  //       console.error(e.message);
-  //     }
-  //   }
-  //   getboard();
-  // }, [board_id, user_id]);
+  const [profileImg, setProfileImg] = useState("");  
 
   return (
-    <S.BoardItem onClick={() => redirect(`/post/${postId}`)}>
+    <S.BoardItem onClick={() => redirect(`/post/${id}`)}>
       {
         boardImg ? 
         <Image

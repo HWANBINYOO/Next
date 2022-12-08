@@ -12,6 +12,9 @@ const  MyApp = ({ Component, pageProps }: AppProps) => {
       value={{
         fetcher :(url:string) => 
         CustomAxios.get(url).then((response) => response.data),
+        revalidateOnMount:true,
+        revalidateOnFocus:true,
+        revalidateOnReconnect:true,
       }}
     >
       <RecoilRoot>

@@ -27,7 +27,7 @@ export default function Board() {
           blogs.map((item, index) => (
             <BoardItem
               key={index}
-              postId={item.postId}
+              id={item.id}
               isMine={item.isMine}
               title={item.title}
               content={item.content}

@@ -1,5 +1,5 @@
 export interface PostIdType {
-    postId: number,
+    id: number,
 	isMine : boolean,
     title: string,
     content: string,

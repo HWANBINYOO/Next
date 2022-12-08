@@ -5,10 +5,9 @@ import { Board, Header } from "../../components";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from 'swr';
 
-const PostPage:NextPage<{blogs: PostIdType[]}> = ({blogs}) => {
-  
+const PostPage:NextPage<{fallback: Record<string,PostIdType[]> }> = ({fallback}) => {
   return (
-  <SWRConfig value={{fallback: {'/post':{blogs}}}}>
+  <SWRConfig value={fallback}>
     <Header HeaderColor={"skyblue"} />
     <Board />
   </SWRConfig>
@@ -21,7 +20,13 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const {data} = await CustomAxios.get(`/post`,{headers: {Authorization}});
     const blogs = data.list
-    return { props: {blogs} };
+    return { 
+      props: {
+        fallback: {
+          '/post' : blogs,
+        },
+      },
+    };
   } catch (error) {
     console.log(error);
     return { props: {} };
