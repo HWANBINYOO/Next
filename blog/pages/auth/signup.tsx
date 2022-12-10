@@ -1,12 +1,13 @@
 import { SignUp } from "../../components";
 import { useEffect } from "react";
-import { UseIsToken } from "../../Hooks/useToken";
+import { UseGeTokenDocument } from "../../Hooks/useToken";
 import { useRouter } from "next/router";
 
 export default function ResisterPage() {
   const router = useRouter();
   useEffect(() => {
-    if(UseIsToken()){
+    const {RefreshToken} = UseGeTokenDocument();
+    if(RefreshToken){
       router.push('/post');
     }
   },[])

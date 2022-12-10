@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { Home } from "../components";
-import { UseIsToken } from "../Hooks/useToken";
+import { UseGeTokenDocument } from "../Hooks/useToken";
 
 function HomePage() {
   const router = useRouter();
   useEffect(() => {
-    if(UseIsToken()){
+    const {RefreshToken} = UseGeTokenDocument();
+    if(RefreshToken){
       router.push('/post');
     }
   },[])

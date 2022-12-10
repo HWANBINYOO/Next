@@ -29,14 +29,9 @@ const UseRemoveToken = (): void => {
   destroyCookie(null, 'RefreshToken')
 }
 
-const UseIsToken = () => {
-  const {Authorization,RefreshToken} = parseCookies()
-  return Authorization && RefreshToken ? true : false
-}
-
 const UseGeTokenDocument = () => {
   const {Authorization,RefreshToken} = parseCookies()
   return { Authorization , RefreshToken }
 }
 
-export {UseGetToken , UseRemoveToken , UseSetToken , UseIsToken , UseGeTokenDocument};
+export {UseGetToken , UseRemoveToken , UseSetToken , UseGeTokenDocument};
