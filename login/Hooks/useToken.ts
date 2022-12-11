@@ -1,36 +1,33 @@
 import CustomAxois from "../src/utils/lib/CustomAxois";
 import cookies from "next-cookies";
-import { useRouter } from "next/router";
+import { GetServerSidePropsContext } from "next";
+import { destroyCookie, setCookie } from "nookies";
 
-const UseGetToken = async  (ctx : any) => {
- const allCookies = cookies(ctx);
-  let accessToken = allCookies['accessToken'];
-  let refreshToken = allCookies["refreshToken"];
-  // CustomAxois.defaults.headers.common["Authorization"] = accessToken;
+const UseGetToken = async  (ctx : GetServerSidePropsContext) => {
+  let Authorization = ctx.req.cookies['Authorization'] || "";
+  let RefreshToken =  ctx.req.cookies['RefreshToken'] || "";
 
-  if(!refreshToken){
-    UseRemoveToken()
+  if (!Authorization) {
+    try{
+    const {data} = await CustomAxois.patch("/auth/reissue",{},{ headers: {RefreshToken }});
+    Authorization = data.Authorization
+    RefreshToken = data.refreshToken
+    UseSetToken(Authorization,RefreshToken,ctx)
+  } catch(e){
+    console.log(e);
   }
-  if (!accessToken) {
-    const {data} = await CustomAxois.patch("/auth/reissue",
-      { headers: { "RefreshToken": refreshToken} }
-    );
-    UseSetToken(data.newAccessToken,data.newRefreshToken)
-  }
-  return { accessToken , refreshToken };
+}
+  return { Authorization };
 };
 
-const UseSetToken = (accessToken:string, refreshToken:string) => {
-  CustomAxois.defaults.headers.common["Authorization"] = accessToken;
-  document.cookie = `Authorization=${accessToken}; path=/; max-age=180` // 3분
-  document.cookie = `RefreshToken=${refreshToken}; path=/; max-age=604800` // 일주일
+const UseSetToken = (Authorization:string, RefreshToken:string , ctx:GetServerSidePropsContext|null):void => {
+  setCookie(ctx, 'Authorization', Authorization, {maxAge: 180,path: '/',}) // 3분
+  setCookie(ctx, 'RefreshToken', RefreshToken, {maxAge: 604800,path: '/',}) // 일주일
 }
 
-const UseRemoveToken = () => {
-  // const router = useRouter();
-  document.cookie = `Authorization=; path=/; max-age=0`;
-  document.cookie = `RefreshToken=; path=/; max-age=0`;
-  // router.push('/');
+const UseRemoveToken = (): void => {
+  destroyCookie(null, 'Authorization')
+  destroyCookie(null, 'RefreshToken')
 }
 
 export {UseGetToken , UseRemoveToken , UseSetToken};
