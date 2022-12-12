@@ -2,7 +2,7 @@ import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxios from "../../utils/lib/CustomAxios";
 
 export default function Signup() {
   const router = useRouter();
@@ -12,7 +12,7 @@ export default function Signup() {
 
   const onSignup = async () => {
     try {
-      const { data } = await CustomAxois.post(`/member/join`, {
+      const { data } = await CustomAxios.post(`/member/join`, {
           email: Email,
           password: PassWord,
         }

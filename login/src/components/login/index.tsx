@@ -1,9 +1,9 @@
 import * as S from "./styled";
 import Link from "next/link";
 import { useState } from "react";
-import CustomAxois from "../../utils/lib/CustomAxois";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { useRouter } from "next/router";
-import { UseSetToken } from "../../../Hooks/useToken";
+import { UseSetToken } from "../../Hooks/useToken";
 
 export default function Login() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function Login() {
 
   const handleClick = async () => {
     try {
-      const { data } = await CustomAxois.post(`/member/login`,{
+      const { data } = await CustomAxios.post(`/member/login`,{
           email: InputEmail,
           password: InputPassWord,
         }

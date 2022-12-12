@@ -1,6 +1,7 @@
 import axios from "axios";
+import { requestCheck } from "./requestCheck";
 
-const CustomAxois = axios.create({
+const CustomAxios = axios.create({
   baseURL: "http://10.82.17.149:8080/v1",
   headers : {
     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,OPTIONS,PATCH",
@@ -9,4 +10,6 @@ const CustomAxois = axios.create({
   }
 });
 
-export default CustomAxois;
+export default CustomAxios;
+
+CustomAxios.interceptors.request.use(requestCheck);

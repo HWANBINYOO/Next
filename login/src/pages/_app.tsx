@@ -3,7 +3,7 @@ import type { AppContext, AppProps } from 'next/app'
 import { RecoilRoot } from 'recoil';
 import cookies from "next-cookies";
 import App from 'next/app';
-import CustomAxois from '../utils/lib/CustomAxois';
+import CustomAxios from '../utils/lib/CustomAxios';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   const allCookies = cookies(ctx);
 //   const accessTokenByCookie = allCookies['Authorization'] || "";
 //   const refreshTokenByCookie = allCookies["RefreshToken"] || "";
-//   CustomAxois.defaults.headers.common["Authorization"] = accessTokenByCookie;
+//   CustomAxios.defaults.headers.common["Authorization"] = accessTokenByCookie;
 
 //   const confirmedUrl = ['/', '/member/login', '/member/join']
 //   const pathname = appContext.router.pathname
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 //   if ((accessTokenByCookie === "" || accessTokenByCookie === undefined) && !confirmedUrl.includes(pathname)) {
 //     const { accessToken , refreshToken } = await getToken(appContext);
 //     setToken(accessToken, refreshToken)
-//     CustomAxois.defaults.headers.common["Authorization"] = accessToken;
+//     CustomAxios.defaults.headers.common["Authorization"] = accessToken;
 //   }
 //   if(!refreshTokenByCookie && !confirmedUrl.includes(pathname)){
     

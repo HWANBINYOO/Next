@@ -1,7 +1,7 @@
-import CustomAxois from "../src/utils/lib/CustomAxois";
+import CustomAxios from "../utils/lib/CustomAxios";
 import cookies from "next-cookies";
 import { GetServerSidePropsContext } from "next";
-import { destroyCookie, setCookie } from "nookies";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 
 const UseGetToken = async  (ctx : GetServerSidePropsContext) => {
   let Authorization = ctx.req.cookies['Authorization'] || "";
@@ -9,7 +9,7 @@ const UseGetToken = async  (ctx : GetServerSidePropsContext) => {
 
   if (!Authorization) {
     try{
-    const {data} = await CustomAxois.patch("/auth/reissue",{},{ headers: {RefreshToken }});
+    const {data} = await CustomAxios.patch("/auth/reissue",{},{ headers: {RefreshToken }});
     Authorization = data.Authorization
     RefreshToken = data.refreshToken
     UseSetToken(Authorization,RefreshToken,ctx)
@@ -30,4 +30,9 @@ const UseRemoveToken = (): void => {
   destroyCookie(null, 'RefreshToken')
 }
 
-export {UseGetToken , UseRemoveToken , UseSetToken};
+const UseGeTokenDoc = () => {
+  const {Authorization,RefreshToken} = parseCookies()
+  return { Authorization , RefreshToken }
+}
+
+export {UseGetToken , UseRemoveToken , UseSetToken , UseGeTokenDoc};
