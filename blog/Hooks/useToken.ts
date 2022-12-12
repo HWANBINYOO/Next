@@ -1,4 +1,4 @@
-import CustomAxois from "../utils/lib/CustomAxios";
+import CustomAxios from "../utils/lib/CustomAxios";
 import { GetServerSidePropsContext } from "next";
 import { parseCookies, setCookie, destroyCookie } from 'nookies'
 
@@ -8,7 +8,7 @@ const UseGetToken = async (ctx : GetServerSidePropsContext) => {
 
   if(!Authorization){
     try{
-      const {data} = await CustomAxois.patch(`/auth/reissue`,{},{headers: {RefreshToken}});
+      const {data} = await CustomAxios.patch(`/auth/reissue`,{},{headers: {RefreshToken}});
       Authorization = data.accessToken
       RefreshToken = data.refreshToken
       UseSetToken(Authorization,RefreshToken,ctx)

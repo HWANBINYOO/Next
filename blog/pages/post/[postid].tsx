@@ -1,7 +1,7 @@
 import { GetServerSideProps,NextPage } from "next";
 import { BoardIn, Header } from "../../components";
 import { PostIdType } from "../../types";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { UseGetToken } from "../../Hooks/useToken";
 import { SWRConfig } from 'swr';
 
@@ -19,7 +19,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const { Authorization } = await UseGetToken(ctx)  
 
   try {
-    const { data:blogIndata } = await CustomAxois.get(`/post/${postid}`, {headers: {Authorization}});
+    const { data:blogIndata } = await CustomAxios.get(`/post/${postid}`, {headers: {Authorization}});
     return {
       props: {
         fallback: {
@@ -39,7 +39,7 @@ export default BoardInPage
 //   // const allCookies = cookies(ctx);
 //   // const accessTokenByCookie = allCookies['Authorization'] || "";
 
-//   // const { data } = await CustomAxois.get(`/post`, {
+//   // const { data } = await CustomAxios.get(`/post`, {
 //   //   headers: {
 //   //     Authorization: accessTokenByCookie,
 //   //   },
@@ -60,7 +60,7 @@ export default BoardInPage
 //   // const accessTokenByCookie = allCookies['Authorization'] || "";
 
 //   try {
-//     const { data } = await CustomAxois.get(`/post/${board_id}`, {
+//     const { data } = await CustomAxios.get(`/post/${board_id}`, {
 //       headers: {
 //           Authorization: accessTokenByCookie,
 //       },

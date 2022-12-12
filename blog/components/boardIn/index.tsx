@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import * as S from "./styled";
-import CustomAxois from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { PostIdType } from "../../types";
 import whiteImg from "../../public/Img/white.png"
@@ -43,7 +42,7 @@ const BoardIn = () => {
 
   const DelectBoard = async () => {
     try{
-    await CustomAxois.delete(`/post/${boardIndata?.postId}`);
+    await CustomAxios.delete(`/post/${boardIndata?.postId}`);
     redirect('/post')
     }catch(e){console.log(e)}
   };

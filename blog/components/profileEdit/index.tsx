@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import * as S from "./styled";
@@ -19,10 +19,10 @@ export default function ProfileEdit() {
 
   useEffect(() => {
     async function Getprofile() {
-      const { data } = await CustomAxois.get("user_name");
+      const { data } = await CustomAxios.get("user_name");
       setName(data.name);
       setUserId(data.user_id);
-      const res = await CustomAxois.get(`user_image/${data.user_id}`);
+      const res = await CustomAxios.get(`user_image/${data.user_id}`);
       setimgurl(res?.data);
     }
     Getprofile();
@@ -52,7 +52,7 @@ export default function ProfileEdit() {
     let formData = new FormData();
     formData.append("file", file);
     try {
-      await CustomAxois.patch(`/user/update`, formData, {
+      await CustomAxios.patch(`/user/update`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

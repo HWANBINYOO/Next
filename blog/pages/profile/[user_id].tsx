@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { ProfileType } from "../../types";
 import { Header, Profile } from "../../components";
 import cookies from "next-cookies";
@@ -20,7 +20,7 @@ export const  getServerSideProps: GetServerSideProps = async (ctx) => {
   const Authorization = allCookies['Authorization'] || "";
   
   try {
-    const { data } = await CustomAxois.get(`/user_profile/${user_id}`, {headers: {Authorization}});
+    const { data } = await CustomAxios.get(`/user_profile/${user_id}`, {headers: {Authorization}});
     if (data) {
       const ProfileData = data;
       return { props: { ProfileData } };

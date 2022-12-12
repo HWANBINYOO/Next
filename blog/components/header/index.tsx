@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import profilenoneImg from "../../public/Img/profile.png";
 import { useRouter } from "next/router";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import { useEffect, useState } from "react";
 import { UseRemoveToken } from "../../Hooks/useToken";
 
@@ -16,7 +16,7 @@ export default function Header({ HeaderColor }: { HeaderColor: string }) {
   // useEffect(() => {
   //   async function Getprofile() {
   //     try {
-  //       const respone = await CustomAxois.get("/user_name");
+  //       const respone = await CustomAxios.get("/user_name");
   //       console.log(respone.data.user_id);
   //       setUserid(respone.data.user_id);
   //       setprofileImg(respone.data.url);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CustomAxois from "../../utils/lib/CustomAxios";
+import CustomAxios from "../../utils/lib/CustomAxios";
 import Boarditem from "../boarditem/index";
 import { useRouter } from "next/router";
 import * as S from "./styled";
@@ -18,9 +18,9 @@ export default function Profile({ProfileData} : {ProfileData? : ProfileType}) {
 
   useEffect(() => {
     async function Getprofile() {
-      // const res = await CustomAxois.get(`user_profile/${user_id}`);
-      const res2 = await CustomAxois.get(`boards/${user_id}`);
-      const { data } = await CustomAxois.get("user_name");
+      // const res = await CustomAxios.get(`user_profile/${user_id}`);
+      const res2 = await CustomAxios.get(`boards/${user_id}`);
+      const { data } = await CustomAxios.get("user_name");
       if (data.user_id == user_id) setmy(true);
       // SetProfile(res?.data);
       setBlogs(res2?.data.blogs); 
